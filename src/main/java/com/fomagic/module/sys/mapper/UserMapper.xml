@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fomagic.module.sys.dao.UserDao">
+	<resultMap type="com.fomagic.module.sys.entity.User" id="UserResult">
+		<result property="id" column="id" />
+		<result property="userName" column="username" />
+		<result property="password" column="password" />
+		<result property="roleId" column="roleid"/>
+	</resultMap>
+	
+	<select id="getByUserName" parameterType="String" resultMap="UserResult">
+	    SELECT
+			* 
+		FROM
+			t_user 
+		WHERE
+			username = #{userName}
+	</select>
+	
+	<select id="getRoles" parameterType="String" resultType="String">
+	    SELECT
+			r.rolename 
+		FROM
+			t_user u,
+			t_role r 
+		WHERE
+			u.roleid = r.id 
+			AND u.username = #{userName}
+	</select>
+	
+	<select id="getPermissions" parameterType="String" resultType="String">
+	    SELECT
+			p.permname 
+		FROM
+			t_user u,
+			t_role r,
+			t_perm p 
+		WHERE
+			u.roleid = r.id 
+			AND p.roleid = r.id 
+			AND u.username = #{userName}
+	</select>
+</mapper>
