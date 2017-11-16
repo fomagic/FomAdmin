@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50635
 File Encoding         : 65001
 
-Date: 2017-11-16 16:48:06
+Date: 2017-11-16 17:00:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -86,6 +86,21 @@ CREATE TABLE `sys_user` (
 
 -- ----------------------------
 -- Records of sys_user
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_user_role
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_role`;
+CREATE TABLE `sys_user_role` (
+  `id` bigint(20) NOT NULL,
+  `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
+  `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户与角色的对应关系';
+
+-- ----------------------------
+-- Records of sys_user_role
 -- ----------------------------
 
 -- ----------------------------
