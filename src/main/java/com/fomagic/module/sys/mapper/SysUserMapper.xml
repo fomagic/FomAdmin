@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fomagic.module.sys.dao.SysUserDao">
+	<resultMap type="com.fomagic.module.sys.entity.SysUser" id="SysUserMap">
+		<result property="userId" column="user_id" />
+		<result property="userName" column="username" />
+		<result property="password" column="password" />
+		<result property="salt" column="salt"/>
+		<result property="email" column="email" />
+		<result property="mobile" column="mobile" />
+		<result property="status" column="status"/>
+		<result property="createUserId" column="create_user_id" />
+		<result property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<select id="getByUserName" resultMap="SysUserMap">
+		SELECT
+			*
+		FROM
+			sys_user
+		WHERE
+			username = #{username}
+	</select>
+	
+	<update id="updatePassword" parameterType="map">
+		UPDATE sys_user
+		SET `password` = #{password} 
+		WHERE
+			user_id = #{userId} 
+		AND password = #{password}
+	</update>
+	
+	<select id="listAllperms" resultType="string">
+		SELECT
+			m.perms
+		FROM
+			sys_user_role ur
+		LEFT JOIN sys_role_menu rm ON ur.role_id = rm.role_id
+		LEFT JOIN sys_menu m ON rm.menu_id = m.menu_id
+		WHERE
+			user_id = #{userId}
+	</select>
+	
+	<select id="listAllMenuId" resultType="long">
+		SELECT
+			rm.menu_id
+		FROM
+			sys_user_role ur
+		LEFT JOIN sys_role_menu rm ON ur.role_id = rm.role_id
+		WHERE
+			ur.user_id = #{userId}
+	</select>
+	
+	
+	<insert id="save"></insert>
+	
+	<delete id="deleteBatch"></delete>
+	
+	<update id="update"></update>
+	
+	<select id="getByObject"></select>
+	
+	<select id="listObject"></select>
+	
+	<select id="countTotal"></select>
+	
+</mapper>

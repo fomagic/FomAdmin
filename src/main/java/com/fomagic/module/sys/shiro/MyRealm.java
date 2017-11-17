@@ -14,14 +14,14 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.fomagic.module.sys.entity.User;
-import com.fomagic.module.sys.service.UserService;
+import com.fomagic.module.sys.entity.SysUser;
+import com.fomagic.module.sys.service.SysUserService;
 
 
 public class MyRealm extends AuthorizingRealm {
 
 	@Autowired
-	private UserService userService;
+	private SysUserService userService;
 	
 	
 	/**
@@ -31,8 +31,8 @@ public class MyRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		String username = (String) principals.getPrimaryPrincipal();
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-		authorizationInfo.setRoles(userService.getRoles(username));
-		authorizationInfo.setStringPermissions(userService.getPermissions(username));
+		//authorizationInfo.setRoles(userService.getRoles(username));
+		//authorizationInfo.setStringPermissions(userService.getPermissions(username));
 				
 		return authorizationInfo;
 	}
@@ -44,7 +44,7 @@ public class MyRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		String username = (String) token.getPrincipal();
-		User user = userService.getByUserName(username);
+		SysUser user = userService.getByUserName(username);
 		if (user==null) {
 			throw new UnknownAccountException("No account found for user [" + username + "]");
 		}

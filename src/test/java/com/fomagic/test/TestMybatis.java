@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.fomagic.module.sys.entity.User;
-import com.fomagic.module.sys.service.UserService;
+import com.fomagic.module.sys.entity.SysUser;
+import com.fomagic.module.sys.service.SysUserService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -15,12 +15,12 @@ import com.fomagic.module.sys.service.UserService;
 public class TestMybatis {
 	
 	@Autowired
-	private UserService userService;
+	private SysUserService sysUserService;
 	
 	@Test
 	public void test1(){
-		User user = userService.getByUserName("magic");
-		System.out.println("user: " + user);
+		SysUser user = sysUserService.getByUserName("magic");
+		System.out.println("user: " + user.getEmail());
 	}
 
 }

@@ -16,7 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fomagic.common.controller.BaseController;
-import com.fomagic.module.sys.entity.User;
+import com.fomagic.module.sys.entity.SysUser;
 
 /**
  * 登录视图控制器
@@ -33,7 +33,7 @@ public class LoginController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/login")
-	public String getLogin(User user, boolean rememberMe, HttpServletRequest request) {
+	public String getLogin(SysUser user, boolean rememberMe, HttpServletRequest request) {
 		
 		Subject curUser = SecurityUtils.getSubject();
 		
