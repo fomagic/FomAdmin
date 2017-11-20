@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fomagic.module.sys.dao.SysRoleDao">
+	<resultMap type="com.fomagic.module.sys.entity.SysRole" id="SysRoleMap">
+		<result property="roleId" column="role_id" />
+		<result property="roleName" column="role_name" />
+		<result property="remark" column="remark"/>
+		<result property="createUserId" column="create_user_id" />
+		<result property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<select id="listRoleId" resultType="long">
+		SELECT
+			role_id
+		FROM
+			sys_role
+		WHERE
+			create_user_id = #{createUserId} 
+	</select>
+	
+	<select id="getByObject" resultMap="SysRoleMap">
+		select * from sys_role where role_id = #{value}
+	</select>
+	
+	<select id="listObject" resultMap="SysRoleMap">
+		
+	</select>
+	
+	<select id="countTotal" resultType="int">
+		
+	</select>
+	
+	
+	<insert id="save"></insert>
+	
+	<update id="update"></update>
+	
+	<delete id="deleteBatch"></delete>
+	
+</mapper>
