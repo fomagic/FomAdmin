@@ -95,9 +95,6 @@ public class SysRole implements Serializable{
 		this.createTime = createTime;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
 
 	

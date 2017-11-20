@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fomagic.module.sys.dao.SysMenuDao">
+	<resultMap type="com.fomagic.module.sys.entity.SysMenu" id="SysMenuMap">
+		<result property="menuId" column="menu_id" />
+		<result property="parentId" column="parent_id" />
+		<result property="name" column="name"/>
+		<result property="url" column="url" />
+		<result property="perms" column="perms"/>
+		<result property="type" column="type"/>
+		<result property="icon" column="icon" />
+		<result property="orderNum" column="order_num"/>
+	</resultMap>
+	
+	<select id="listMenuIdByParentId" resultMap="SysMenuMap">
+		SELECT
+			*
+		FROM
+			sys_menu
+		WHERE
+			parent_id = #{parentId} order by order_num asc
+	</select>
+	
+	<select id="listNotButton" resultMap="SysMenuMap">
+		SELECT
+			*
+		FROM
+			sys_menu
+		WHERE
+			type != 2
+		ORDER BY
+			order_num ASC
+	</select>
+	
+	<select id="listUser" resultMap="SysMenuMap">
+		SELECT DISTINCT
+			m.*, (
+				SELECT
+					p. NAME
+				FROM
+					sys_menu p
+				WHERE
+					p.menu_id = m.parent_id
+			) AS parentName
+		FROM
+			sys_user_role ur
+		LEFT JOIN sys_role_menu rm ON ur.role_id = rm.role_id
+		LEFT JOIN sys_menu m ON rm.menu_id = m.menu_id
+		WHERE
+			ur.user_id = #{userId} order by m.order_num asc
+	</select>
+	
+	<select id="countTotal" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			sys_menu
+	</select>
+	
+	
+	<insert id="save" parameterType="com.fomagic.module.sys.entity.SysMenu">
+		INSERT INTO sys_menu (
+			`menu_id`,
+			`parent_id`,
+			`name`,
+			`url`,
+			`perms`,
+			`type`,
+			`icon`,
+			`order_num`
+		)
+		VALUES
+			(
+				#{menuId}, 
+				#{parentId}, 
+				#{name}, 
+				#{url}, 
+				#{perms}, 
+				#{type}, 
+				#{icon}, 
+				#{orderNum}
+			)
+	</insert>
+	
+	<select id="listObject"></select>
+	
+	<update id="update"></update>
+	
+	<delete id="deleteBatch"></delete>
+	
+</mapper>
