@@ -14,6 +14,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.fomagic.common.controller.BaseController;
 import com.fomagic.module.sys.entity.SysUser;
@@ -25,7 +26,8 @@ import com.fomagic.module.sys.entity.SysUser;
  *
  */
 @Controller
-public class LoginController extends BaseController {
+@RequestMapping("/sys")
+public class SysLoginController extends BaseController {
 
 	/**
 	 * 登录页面
@@ -33,7 +35,7 @@ public class LoginController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/login")
-	public String getLogin(SysUser user, boolean rememberMe, HttpServletRequest request) {
+	public String login(SysUser user, boolean rememberMe,RedirectAttributesModelMap modelMap, HttpServletRequest request) {
 		
 		Subject curUser = SecurityUtils.getSubject();
 		
@@ -52,7 +54,7 @@ public class LoginController extends BaseController {
 			Session session = curUser.getSession();
 			logger.info("sessionId:" + session.getId());
 			logger.info("sessionHost:" + session.getHost());
-			logger.info("sessionTimeout:" + session.getTimeout());
+			logger.info("sessionTimeout:" + session.getTimeout()); 
 
 		} catch ( UnknownAccountException uae ) {
 			//System.out.println(uae.getMessage());
@@ -95,7 +97,7 @@ public class LoginController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/logout")
-	public String getLogout(){
+	public String logout(){
 		SecurityUtils.getSubject().logout();
 		return redirect("/login");
 	}
