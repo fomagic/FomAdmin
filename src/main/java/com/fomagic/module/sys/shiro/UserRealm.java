@@ -18,7 +18,7 @@ import com.fomagic.module.sys.entity.SysUser;
 import com.fomagic.module.sys.service.SysUserService;
 
 
-public class MyRealm extends AuthorizingRealm {
+public class UserRealm extends AuthorizingRealm {
 
 	@Autowired
 	private SysUserService userService;

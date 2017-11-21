@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.fomagic.common.controller.BaseController;
-import com.fomagic.module.sys.entity.SysUser;
 
 /**
  * 登录视图控制器
@@ -35,7 +34,7 @@ public class SysLoginController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/login")
-	public String login(SysUser user, boolean rememberMe,RedirectAttributesModelMap modelMap, HttpServletRequest request) {
+	public String login(String username, String password,String captcha, boolean rememberMe,RedirectAttributesModelMap modelMap, HttpServletRequest request) {
 		
 		Subject curUser = SecurityUtils.getSubject();
 		
@@ -45,12 +44,12 @@ public class SysLoginController extends BaseController {
 		}
 		
 		
-		UsernamePasswordToken passwordToken = new UsernamePasswordToken(user.getUserName(), user.getPassword(),rememberMe);
+		UsernamePasswordToken passwordToken = new UsernamePasswordToken(username, password,rememberMe);
 
 		try {
 			curUser.login(passwordToken);
 			request.removeAttribute("errMsg");
-			logger.info("登录成功:" + user.getUserName());
+			logger.info("登录成功:" + username);
 			Session session = curUser.getSession();
 			logger.info("sessionId:" + session.getId());
 			logger.info("sessionHost:" + session.getHost());
@@ -58,16 +57,13 @@ public class SysLoginController extends BaseController {
 
 		} catch ( UnknownAccountException uae ) {
 			//System.out.println(uae.getMessage());
-			logger.info("账户不存在" + user.getUserName());
-			request.setAttribute("user", user);
+			logger.info("账户不存在" + username);
 			request.setAttribute("errMsg", "邮箱/密码不匹配！");
 		} catch (IncorrectCredentialsException ice) {
-        	logger.info("密码不匹配！" + user.getUserName());
-			request.setAttribute("user", user);
+        	logger.info("密码不匹配！" + username);
 			request.setAttribute("errMsg", "邮箱/密码不匹配！");
         } catch (LockedAccountException lae) {
-        	logger.info("账户已被冻结！ " + user.getUserName());
-			request.setAttribute("user", user);
+        	logger.info("账户已被冻结！ " + username);
 			request.setAttribute("errMsg", "账户已被冻结！");
         } catch(ExcessiveAttemptsException eae){
             logger.info("账户验证未通过,错误次数大于5次,账户已锁定");
@@ -76,8 +72,7 @@ public class SysLoginController extends BaseController {
             logger.info("账户验证未通过,帐号已经禁止登录");
 			request.setAttribute("errMsg", "账户验证未通过,帐号已经禁止登录");
         } catch (AuthenticationException ae) {
-        	logger.info("登录失败:" + user.getUserName());
-			request.setAttribute("user", user);
+        	logger.info("登录失败:" + username);
 			request.setAttribute("errMsg", "登录失败");
         }
 		
