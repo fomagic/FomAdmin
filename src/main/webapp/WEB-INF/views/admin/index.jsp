@@ -73,7 +73,7 @@
 										<a href="#" class="btn btn-default btn-flat">简介</a>
 									</div>
 									<div class="pull-right">
-										<a href="logout" class="btn btn-default btn-flat">退出</a>
+										<a href="sys/logout" class="btn btn-default btn-flat">退出</a>
 									</div>
 								</li>
 							</ul></li>

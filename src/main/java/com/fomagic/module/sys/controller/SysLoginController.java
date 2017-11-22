@@ -13,10 +13,13 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.fomagic.common.controller.BaseController;
+import com.fomagic.module.sys.entity.SysUser;
 
 /**
  * 登录视图控制器
@@ -33,22 +36,26 @@ public class SysLoginController extends BaseController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/login")
-	public String login(String username, String password,String captcha, boolean rememberMe,RedirectAttributesModelMap modelMap, HttpServletRequest request) {
+	@RequestMapping(value = "/login",method = RequestMethod.POST)
+	public String login(String username, String password,String captcha, boolean rememberMe,RedirectAttributesModelMap modelMap) {
+		
+
+		logger.info("login username ============ " +username);
 		
 		Subject curUser = SecurityUtils.getSubject();
 		
 		if (curUser.isRemembered()) {
 			logger.info("rememberMe:" + "用户已经记住");
-			return redirect("admin/index");
+			return redirect("/sys/index");
 		}
-		
 		
 		UsernamePasswordToken passwordToken = new UsernamePasswordToken(username, password,rememberMe);
 
+		logger.info("login username == " +username);
+		
 		try {
 			curUser.login(passwordToken);
-			request.removeAttribute("errMsg");
+			modelMap.remove("errMsg");
 			logger.info("登录成功:" + username);
 			Session session = curUser.getSession();
 			logger.info("sessionId:" + session.getId());
@@ -58,33 +65,53 @@ public class SysLoginController extends BaseController {
 		} catch ( UnknownAccountException uae ) {
 			//System.out.println(uae.getMessage());
 			logger.info("账户不存在" + username);
-			request.setAttribute("errMsg", "邮箱/密码不匹配！");
+			modelMap.addAttribute("errMsg", "账户/密码不匹配！");
 		} catch (IncorrectCredentialsException ice) {
         	logger.info("密码不匹配！" + username);
-			request.setAttribute("errMsg", "邮箱/密码不匹配！");
+        	modelMap.addAttribute("errMsg", "账户/密码不匹配！");
         } catch (LockedAccountException lae) {
         	logger.info("账户已被冻结！ " + username);
-			request.setAttribute("errMsg", "账户已被冻结！");
+        	modelMap.addAttribute("errMsg", "账户已被冻结！");
         } catch(ExcessiveAttemptsException eae){
             logger.info("账户验证未通过,错误次数大于5次,账户已锁定");
-			request.setAttribute("errMsg", "账户验证未通过,错误次数大于5次,账户已锁定");
+            modelMap.addAttribute("errMsg", "账户验证未通过,错误次数大于5次,账户已锁定");
         }catch (DisabledAccountException sae){
             logger.info("账户验证未通过,帐号已经禁止登录");
-			request.setAttribute("errMsg", "账户验证未通过,帐号已经禁止登录");
+            modelMap.addAttribute("errMsg", "账户验证未通过,帐号已经禁止登录");
         } catch (AuthenticationException ae) {
         	logger.info("登录失败:" + username);
-			request.setAttribute("errMsg", "登录失败");
+        	modelMap.addAttribute("errMsg", "登录失败");
         }
+		
+
+		 SysUser sysUser = (SysUser) curUser.getPrincipal();
+		 logger.info("登录成功: curUser.isAuthenticated : " + sysUser.getUserName());
 		
 		//验证是否登录成功
         if(curUser.isAuthenticated()){
-			return redirect("admin/index");
+			return redirect("/sys/index");
         }else{
         	passwordToken.clear();
+        	modelMap.addAttribute("user", sysUser);
             return "login";
         }
 		
 		
+	}
+	
+	/**
+	 * 登录
+	 * @return
+	 */
+	@RequestMapping(value = "/login",method = RequestMethod.GET)
+	public String login(Model model){
+		
+		Subject curUser = SecurityUtils.getSubject();
+		if (curUser.isAuthenticated()||curUser.isRemembered()) {
+			return redirect("/sys/index");
+		}
+		
+		return "login";
 	}
 
 	/**
@@ -94,9 +121,17 @@ public class SysLoginController extends BaseController {
 	@RequestMapping(value = "/logout")
 	public String logout(){
 		SecurityUtils.getSubject().logout();
-		return redirect("/login");
+		return redirect("sys/login");
 	}
 	
-	
+	/**
+	 * 后台首页
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = {"","/","/index"})
+	public String sysIndex() {
+		return "admin/index";
+	}
 
 }

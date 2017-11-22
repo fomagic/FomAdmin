@@ -16,6 +16,8 @@
 		<jdk.version>1.7</jdk.version>
 
 		<junit.version>4.12</junit.version>
+		
+		<commons.lang.version>2.6</commons.lang.version>
 
 		<spring.version>4.2.0.RELEASE</spring.version>
 		<mysql.version>5.1.9</mysql.version>
@@ -57,6 +59,15 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+		
+		<!-- =======================Apache commonss================================= -->
+		
+		<dependency>
+		    <groupId>commons-lang</groupId>
+		    <artifactId>commons-lang</artifactId>
+		    <version>${commons.lang.version}</version>
+		</dependency>
+		
 
 		<!-- =======================Spring================================= -->
 

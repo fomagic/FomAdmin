@@ -25,6 +25,8 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="static/css/AdminLTE.min.css">
 <link rel="stylesheet" href="static/css/_all-skins.min.css">
+<!-- iCheck for checkboxes and radio inputs -->
+<link rel="stylesheet" href="static/plugins/iCheck/all.css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,25 +40,26 @@
 <body class="hold-transition login-page">
 	<div class="login-box">
 		<div class="login-logo">
-			<a href="login"><b>FOM</b>管理系统</a>
+			<a href="sys/login"><b>FOM</b>管理系统</a>
 		</div>
 		<!-- /.login-logo -->
 		<div class="login-box-body">
 			<p class="login-box-msg">登录后台</p>
 
-			<form action="login" method="post">
+			<form action="sys/login" method="post">
 				<div class="form-group has-feedback">
-					<input type="text" class="form-control" placeholder="账号" name="userName"  value="${user.userName}">
+					<input type="text" class="form-control" placeholder="账号" name="username"  value="${user.password}">
 					<span class="glyphicon glyphicon-envelope form-control-feedback" ></span>
 				</div>
 				<div class="form-group has-feedback">
-					<input type="password" class="form-control" placeholder="密码"  name="password"  value="${user.password}">
+					<input type="password" class="form-control" placeholder="密码"  name="password" >
 					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
 				<div class="row">
 					<div class="col-xs-8">
 						<div class="checkbox icheck">
-							<label> <input type="checkbox" name="rememberMe"> 记住我
+							<label>
+								<input type="checkbox" class="minimal" name="rememberMe" > 记住我
 							</label>
 						</div>
 					</div>
@@ -84,7 +87,14 @@
 	<script src="static/js/jquery.min.js"></script>
 	<!-- Bootstrap 3.3.7 -->
 	<script src="static/js/bootstrap.min.js"></script>
-
-
+	<!-- iCheck -->
+	<script src="static/plugins/iCheck/icheck.min.js"></script>
+	<script>
+    //iCheck for checkbox and radio inputs
+	    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+	      checkboxClass: 'icheckbox_minimal-blue',
+	      radioClass   : 'iradio_minimal-blue'
+	    })
+	</script>
 </body>
 </html>

@@ -19,13 +19,9 @@ public class SysPageController extends BaseController  {
 		return "modules/" + module + "/" + url;
 	}
 
-	@RequestMapping("{url}")
-	public String url(@PathVariable("url") String url){
-		return url;
-	}
+//	@RequestMapping("{url}")
+//	public String url(@PathVariable("url") String url){
+//		return url;
+//	}
 
-	@RequestMapping("/")
-	public String index(){
-		return "index";
-	}
 }
