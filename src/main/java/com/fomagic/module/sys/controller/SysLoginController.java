@@ -1,6 +1,5 @@
 package com.fomagic.module.sys.controller;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -85,10 +84,10 @@ public class SysLoginController extends BaseController {
 		
 
 		 SysUser sysUser = (SysUser) curUser.getPrincipal();
-		 logger.info("登录成功: curUser.isAuthenticated : " + sysUser.getUserName());
 		
 		//验证是否登录成功
         if(curUser.isAuthenticated()){
+        	logger.info("登录成功: curUser.isAuthenticated : " + sysUser.getUserName());
 			return redirect("/sys/index");
         }else{
         	passwordToken.clear();
