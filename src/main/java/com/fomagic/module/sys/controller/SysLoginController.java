@@ -1,6 +1,5 @@
 package com.fomagic.module.sys.controller;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
