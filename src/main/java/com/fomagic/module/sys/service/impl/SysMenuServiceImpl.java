@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.fomagic.module.sys.dao.SysMenuDao;
 import com.fomagic.module.sys.entity.SysMenu;
 import com.fomagic.module.sys.service.SysMenuService;
-import com.fomagic.module.sys.service.SysUserService;
 
 
 
@@ -25,8 +24,6 @@ public class SysMenuServiceImpl implements SysMenuService {
 	
 	@Autowired
 	private SysMenuDao sysMenuDao;
-	@Autowired
-	private SysUserService sysUserService;
 
 	@Override
 	public List<SysMenu> listMenuIdByParentId(Long parentId, List<Long> menuIdList) {
@@ -54,36 +51,32 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 
 	@Override
-	public SysMenu getByObject(Long menuId) {
-		return sysMenuDao.getByObject(menuId);
+	public SysMenu getByMenuId(Long menuId) {
+		return sysMenuDao.getByMenuId(menuId);
 	}
 
 	@Override
-	public List<SysMenu> listObject(Map<String, Object> map) {
-		return sysMenuDao.listObject(map);
+	public List<SysMenu> listMenu(Map<String, Object> map) {
+		return sysMenuDao.listMenu(map);
 	}
 
 	@Override
-	public int countTotal(Map<String, Object> map) {
-		return sysMenuDao.countTotal(map);
+	public int countMenu(Map<String, Object> map) {
+		return sysMenuDao.countMenu(map);
 	}
 
 	@Override
-	public void save(SysMenu menu) {
-		sysMenuDao.save(menu);
+	public void saveMenu(SysMenu menu) {
+		sysMenuDao.saveMenu(menu);
 	}
 
 	@Override
-	public void update(SysMenu menu) {
-		sysMenuDao.update(menu);
+	public void updateMenu(SysMenu menu) {
+		sysMenuDao.updateMenu(menu);
 	}
 
 	@Override
-	public void deleteBatch(Long[] menuIds) {
-		sysMenuDao.deleteBatch(menuIds);
+	public void deleteBatchByMenuIds(Long[] menuIds) {
+		sysMenuDao.deleteBatchByMenuIds(menuIds);
 	}
-
-	
-	
-
 }

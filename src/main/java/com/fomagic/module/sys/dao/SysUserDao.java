@@ -4,11 +4,10 @@ package com.fomagic.module.sys.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.fomagic.common.dao.BaseDao;
 import com.fomagic.module.sys.entity.SysUser;
 
 
-public interface SysUserDao extends BaseDao<SysUser> {
+public interface SysUserDao {
 	
 	
 	/**
@@ -38,6 +37,46 @@ public interface SysUserDao extends BaseDao<SysUser> {
 	 * @return
 	 */
 	List<Long> listAllMenuId(Long userId);
+
+	
+	/**
+	 * 保存用户
+	 * @param sysUser
+	 */
+	void saveUser(SysUser sysUser);
+
+	/**
+	 * 批量删除用户
+	 * @param userIds
+	 */
+	void deleteBatchByUserIds(Long[] userIds);
+
+	/**
+	 * 更新用户信息
+	 * @param sysUser
+	 */
+	void updateUser(SysUser sysUser);
+
+	/**
+	 * 根据用户ID获取用户信息
+	 * @param userId
+	 * @return
+	 */
+	SysUser getByUserId(Long userId);
+
+	/**
+	 * 获取用户列表
+	 * @param map
+	 * @return
+	 */
+	List<SysUser> listUser(Map<String, Object> map);
+
+	/**
+	 * 获取总用户数
+	 * @param map
+	 * @return
+	 */
+	int countUser(Map<String, Object> map);
 	
 	
 

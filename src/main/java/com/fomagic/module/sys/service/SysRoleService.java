@@ -26,42 +26,42 @@ public interface SysRoleService {
 	
 	
 	/**
-	 * 根据角色ID获取角色列表
+	 * 根据角色ID获取角色
 	 * @param roleId
 	 * @return
 	 */
-	SysRole getByObject(Long roleId);
+	SysRole getByRoleId(Long roleId);
 	
 	/**
 	 * 查询角色列表
 	 * @param map
 	 * @return
 	 */
-	List<SysRole> listObject(Map<String, Object> map);
+	List<SysRole> listRole(Map<String, Object> map);
 	
 	/**
 	 * 查询角色总数
 	 * @param map
 	 * @return
 	 */
-	int countTotal(Map<String, Object> map);
+	int countRole(Map<String, Object> map);
 	
 	/**
 	 * 保存角色
 	 * @param role
 	 */
-	void save(SysRole role);
+	void saveRole(SysRole role);
 	
 	/**
 	 * 更新角色
 	 * @param role
 	 */
-	void update(SysRole role);
+	void updateRole(SysRole role);
 	
 	/**
 	 * 批量删除角色
 	 * @param roleIds
 	 */
-	void deleteBatch(Long[] roleIds);
+	void deleteBatchByRoleIds(Long[] roleIds);
 	
 }

@@ -44,32 +44,32 @@ public interface SysMenuService {
 	/**
 	 * 查询菜单
 	 */
-	SysMenu getByObject(Long menuId);
+	SysMenu getByMenuId(Long menuId);
 	
 	/**
 	 * 查询菜单列表
 	 */
-	List<SysMenu> listObject(Map<String, Object> map);
+	List<SysMenu> listMenu(Map<String, Object> map);
 	
 	/**
 	 * 查询总数
 	 */
-	int countTotal(Map<String, Object> map);
+	int countMenu(Map<String, Object> map);
 	
 	/**
 	 * 保存菜单
 	 */
-	void save(SysMenu menu);
+	void saveMenu(SysMenu menu);
 	
 	/**
 	 * 修改
 	 */
-	void update(SysMenu menu);
+	void updateMenu(SysMenu menu);
 	
 	/**
 	 * 删除
 	 */
-	void deleteBatch(Long[] menuIds);
+	void deleteBatchByMenuIds(Long[] menuIds);
 	
 
 	

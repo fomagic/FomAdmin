@@ -57,7 +57,7 @@ public class UserRealm extends AuthorizingRealm {
 		List<String> permsList = null;
 		
 		if (userId == 1) {
-			List<SysMenu> menuList = sysMenuService.listObject(new HashMap<String, Object>());
+			List<SysMenu> menuList = sysMenuService.listMenu(new HashMap<String, Object>());
 			permsList = new ArrayList<>(menuList.size());
 			for (SysMenu sysMenu : menuList) {
 				permsList.add(sysMenu.getPerms());

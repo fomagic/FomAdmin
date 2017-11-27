@@ -51,7 +51,7 @@
 			ur.user_id = #{userId} order by m.order_num asc
 	</select>
 	
-	<select id="countTotal" resultType="int">
+	<select id="countMenu" resultType="int">
 		SELECT
 			count(*)
 		FROM
@@ -59,7 +59,7 @@
 	</select>
 	
 	
-	<insert id="save" parameterType="com.fomagic.module.sys.entity.SysMenu">
+	<insert id="saveMenu" parameterMap="SysMenuMap">
 		INSERT INTO sys_menu (
 			`menu_id`,
 			`parent_id`,
@@ -83,10 +83,10 @@
 			)
 	</insert>
 	
-	<select id="listObject"></select>
+	<select id="listMenu"></select>
 	
-	<update id="update"></update>
+	<update id="updateMenu"></update>
 	
-	<delete id="deleteBatch"></delete>
+	<delete id="deleteBatchByMenuIds"></delete>
 	
 </mapper>

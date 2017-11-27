@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.fomagic.module.sys.dao.SysRoleDao;
 import com.fomagic.module.sys.entity.SysRole;
 import com.fomagic.module.sys.service.SysRoleService;
-import com.fomagic.module.sys.service.SysUserService;
 
 /**
  * 角色
@@ -22,8 +21,6 @@ public class SysRoleServiceImpl implements SysRoleService {
 
 	@Autowired
 	private SysRoleDao sysRoleDao;
-	@Autowired
-	private SysUserService sysUserService;
 	
 	
 	
@@ -32,28 +29,28 @@ public class SysRoleServiceImpl implements SysRoleService {
 		return sysRoleDao.listRoleId(createUserId);
 	}
 	@Override
-	public SysRole getByObject(Long roleId) {
-		return sysRoleDao.getByObject(roleId);
+	public SysRole getByRoleId(Long roleId) {
+		return sysRoleDao.getByRoleId(roleId);
 	}
 	@Override
-	public List<SysRole> listObject(Map<String, Object> map) {
-		return null;
+	public List<SysRole> listRole(Map<String, Object> map) {
+		return sysRoleDao.listRole(map);
 	}
 	@Override
-	public int countTotal(Map<String, Object> map) {
-		return sysRoleDao.countTotal(map);
+	public int countRole(Map<String, Object> map) {
+		return sysRoleDao.countRole(map);
 	}
 	@Override
-	public void save(SysRole role) {
-		
+	public void saveRole(SysRole role) {
+		sysRoleDao.saveRole(role);
 	}
 	@Override
-	public void update(SysRole role) {
-		
+	public void updateRole(SysRole role) {
+		sysRoleDao.updateRole(role);
 	}
 	@Override
-	public void deleteBatch(Long[] roleIds) {
-		sysRoleDao.deleteBatch(roleIds);
+	public void deleteBatchByRoleIds(Long[] roleIds) {
+		sysRoleDao.deleteBatchByRoleIds(roleIds);
 	}
 	
 

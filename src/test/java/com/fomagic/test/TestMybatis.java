@@ -37,7 +37,7 @@ public class TestMybatis {
 	
 	@Test
 	public void testRole(){
-		SysRole role = sysRoleService.getByObject((long) 1);
+		SysRole role = sysRoleService.getByRoleId((long) 1);
 		System.out.println("role: " + role.getRoleName());
 	}
 	

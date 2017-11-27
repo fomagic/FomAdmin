@@ -46,39 +46,33 @@ public class SysUserServiceImpl implements SysUserService {
 	//---
 	
 	@Override
-	public void save(SysUser sysUser) {
-		
-		
+	public void saveUser(SysUser sysUser) {
+		sysUserDao.saveUser(sysUser);
 	}
 
 	@Override
-	public void deleteBatch(Long[] userIds) {
-		// TODO Auto-generated method stub
-		
+	public void deleteBatchByUserIds(Long[] userIds) {
+		sysUserDao.deleteBatchByUserIds(userIds);
 	}
 
 	@Override
-	public void update(SysUser sysUser) {
-		// TODO Auto-generated method stub
-		
+	public void updateUser(SysUser sysUser) {
+		sysUserDao.updateUser(sysUser);
 	}
 
 	@Override
-	public SysUser getByObject(Long userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public SysUser getByUserId(Long userId) {
+		return sysUserDao.getByUserId(userId);
 	}
 
 	@Override
-	public List<SysUser> listObject(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<SysUser> listUser(Map<String, Object> map) {
+		return sysUserDao.listUser(map);
 	}
 
 	@Override
-	public int countTotal(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int countUser(Map<String, Object> map) {
+		return sysUserDao.countUser(map);
 	}
 
 }

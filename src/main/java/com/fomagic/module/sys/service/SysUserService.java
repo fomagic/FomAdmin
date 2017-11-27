@@ -53,39 +53,39 @@ public interface SysUserService {
 	 * 保存用户
 	 * @param sysUser
 	 */
-	void save(SysUser sysUser);
+	void saveUser(SysUser sysUser);
 	
 	/**
 	 * 删除用户
 	 * @param userIds
 	 */
-	void deleteBatch(Long[] userIds);
+	void deleteBatchByUserIds(Long[] userIds);
 	
 	/**
 	 * 修改用户
 	 * @param sysUser
 	 */
-	void update(SysUser sysUser);
+	void updateUser(SysUser sysUser);
 	
 	/**
 	 * 根据用户ID查询用户
 	 * @param userId
 	 * @return
 	 */
-	SysUser getByObject(Long userId);
+	SysUser getByUserId(Long userId);
 	
 	/**
 	 * 查询用户列表
 	 * @param map
 	 * @return
 	 */
-	List<SysUser> listObject(Map<String, Object> map);
+	List<SysUser> listUser(Map<String, Object> map);
 	
 	/**
 	 * 查询总数
 	 * @param map
 	 * @return
 	 */
-	int countTotal(Map<String, Object> map);
+	int countUser(Map<String, Object> map);
 	
 }
