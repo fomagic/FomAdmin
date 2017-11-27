@@ -48,7 +48,7 @@
 
 			<form action="sys/login" method="post">
 				<div class="form-group has-feedback">
-					<input type="text" class="form-control" placeholder="账号" name="username"  value="${user.password}">
+					<input type="text" class="form-control" placeholder="账号" name="username"  value="${user.username}">
 					<span class="glyphicon glyphicon-envelope form-control-feedback" ></span>
 				</div>
 				<div class="form-group has-feedback">

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.fomagic.common.controller.BaseController;
@@ -54,7 +55,6 @@ public class SysLoginController extends BaseController {
 		
 		try {
 			curUser.login(passwordToken);
-			modelMap.remove("errMsg");
 			logger.info("登录成功:" + username);
 			Session session = curUser.getSession();
 			logger.info("sessionId:" + session.getId());
@@ -88,11 +88,14 @@ public class SysLoginController extends BaseController {
 		//验证是否登录成功
         if(curUser.isAuthenticated()){
         	logger.info("登录成功: curUser.isAuthenticated : " + sysUser.getUserName());
+        	
 			return redirect("/sys/index");
         }else{
         	passwordToken.clear();
         	modelMap.addAttribute("user", sysUser);
             return "login";
+        	modelMap.addAttribute("username", username);
+            return redirect("/sys/login");
         }
 		
 		
