@@ -1,6 +1,7 @@
 package com.fomagic.common.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -12,20 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class PageController {
-	
+
 	/**
 	 * 首页
 	 * @return
 	 */
-	@RequestMapping("")
-	public String indexi(){
-		return "redirect:/index";
-	}
-	/**
-	 * 首页
-	 * @return
-	 */
-	@RequestMapping("/index")
+	@RequestMapping({"","/index"})
 	public String index(){
 		return "index";
 	}
@@ -54,6 +47,17 @@ public class PageController {
 	@RequestMapping("/500")
 	public String error500() {
 		return "500";
+	}
+	
+	/**
+	 * 自动匹配	测试
+	 * @param module
+	 * @param url
+	 * @return
+	 */
+	@RequestMapping("modules/{module}/{url}")
+	public String module(@PathVariable("module") String module, @PathVariable("url") String url){
+		return "modules/" + module + "/" + url;
 	}
 
 }

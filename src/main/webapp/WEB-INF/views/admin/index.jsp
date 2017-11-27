@@ -64,7 +64,7 @@
 						<!-- User Account: style can be found in dropdown.less -->
 						<li class="dropdown user user-menu"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown"> <span
-								class="hidden-xs">我的</span>
+								class="hidden-xs">${sysUser.userName}</span>
 						</a>
 							<ul class="dropdown-menu">
 								<!-- Menu Footer-->
