@@ -12,7 +12,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
@@ -37,7 +37,6 @@ public class SysLoginController extends BaseController {
 	 */
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
 	public String login(String username, String password,String captcha, boolean rememberMe,RedirectAttributesModelMap modelMap) {
-		
 
 		logger.info("login username ============ " +username);
 		
@@ -49,13 +48,13 @@ public class SysLoginController extends BaseController {
 		}
 		
 		UsernamePasswordToken passwordToken = new UsernamePasswordToken(username, password,rememberMe);
-
-		logger.info("login username == " +username);
+		String errMsg = "";
+		String logMsg = "";
 		
 		try {
 			curUser.login(passwordToken);
 			modelMap.remove("errMsg");
-			logger.info("登录成功:" + username);
+			logMsg = "登录成功: ";
 			Session session = curUser.getSession();
 			logger.info("sessionId:" + session.getId());
 			logger.info("sessionHost:" + session.getHost());
@@ -63,39 +62,37 @@ public class SysLoginController extends BaseController {
 
 		} catch ( UnknownAccountException uae ) {
 			//System.out.println(uae.getMessage());
-			logger.info("账户不存在" + username);
-			modelMap.addAttribute("errMsg", "账户/密码不匹配！");
+			logMsg = "账户不存在";
+			errMsg = "账户/密码不匹配！";
 		} catch (IncorrectCredentialsException ice) {
-        	logger.info("密码不匹配！" + username);
-        	modelMap.addAttribute("errMsg", "账户/密码不匹配！");
+			logMsg = "密码不匹配！";
+        	modelMap.addFlashAttribute("errMsg", "账户/密码不匹配！");
         } catch (LockedAccountException lae) {
-        	logger.info("账户已被冻结！ " + username);
-        	modelMap.addAttribute("errMsg", "账户已被冻结！");
+        	logMsg = "账户已被冻结！ ";
+        	errMsg = "账户已被冻结！";
         } catch(ExcessiveAttemptsException eae){
-            logger.info("账户验证未通过,错误次数大于5次,账户已锁定");
-            modelMap.addAttribute("errMsg", "账户验证未通过,错误次数大于5次,账户已锁定");
+        	logMsg = "账户验证未通过,错误次数大于5次,账户已锁定";
+        	errMsg = "账户验证未通过,错误次数大于5次,账户已锁定";
         }catch (DisabledAccountException sae){
-            logger.info("账户验证未通过,帐号已经禁止登录");
-            modelMap.addAttribute("errMsg", "账户验证未通过,帐号已经禁止登录");
+        	logMsg = "账户验证未通过,帐号已经禁止登录";
+        	errMsg = "账户验证未通过,帐号已经禁止登录";
         } catch (AuthenticationException ae) {
-        	logger.info("登录失败:" + username);
-        	modelMap.addAttribute("errMsg", "登录失败");
+        	logMsg = "登录失败:" + username;
+        	errMsg = "登录失败";
         }
 		
+		logger.info(logMsg + username);
 
-		 SysUser sysUser = (SysUser) curUser.getPrincipal();
 		
 		//验证是否登录成功
         if(curUser.isAuthenticated()){
-        	logger.info("登录成功: curUser.isAuthenticated : " + sysUser.getUserName());
 			return redirect("/sys/index");
         }else{
         	passwordToken.clear();
-        	modelMap.addAttribute("user", sysUser);
-            return "login";
+        	modelMap.addFlashAttribute("errMsg", errMsg);
+        	modelMap.addFlashAttribute("username", username);
+            return redirect("/sys/login");
         }
-		
-		
 	}
 	
 	/**
@@ -103,7 +100,7 @@ public class SysLoginController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/login",method = RequestMethod.GET)
-	public String login(Model model){
+	public String login(){
 		
 		Subject curUser = SecurityUtils.getSubject();
 		if (curUser.isAuthenticated()||curUser.isRemembered()) {
@@ -118,9 +115,10 @@ public class SysLoginController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/logout")
-	public String logout(){
+	public String logout(RedirectAttributesModelMap modelMap){
 		SecurityUtils.getSubject().logout();
-		return redirect("sys/login");
+    	modelMap.addFlashAttribute("errMsg", "您已安全退出");
+		return redirect("/sys/login");
 	}
 	
 	/**
@@ -129,7 +127,11 @@ public class SysLoginController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = {"","/","/index"})
-	public String sysIndex() {
+	public String sysIndex(ModelMap modelMap) {
+		Subject curUser = SecurityUtils.getSubject();
+		SysUser sysUser = (SysUser) curUser.getPrincipal();
+    	modelMap.addAttribute(sysUser);
+        logger.info("跳转到后台首页");
 		return "admin/index";
 	}
 
