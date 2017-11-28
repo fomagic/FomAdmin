@@ -36,6 +36,7 @@ public class UserRealm extends AuthorizingRealm {
 	@Autowired
 	private SysUserService sysUserService;
 	
+	@Autowired
 	private SysMenuService sysMenuService;
 
 

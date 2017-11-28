@@ -1,6 +1,9 @@
 package com.fomagic.module.sys.controller;
 
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.DisabledAccountException;
@@ -11,6 +14,7 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.fomagic.common.controller.BaseController;
+import com.fomagic.module.sys.entity.SysMenu;
 import com.fomagic.module.sys.entity.SysUser;
+import com.fomagic.module.sys.service.SysMenuService;
 
 /**
  * 登录视图控制器
@@ -30,6 +36,11 @@ import com.fomagic.module.sys.entity.SysUser;
 @RequestMapping("/sys")
 public class SysLoginController extends BaseController {
 
+	
+	@Autowired
+	private SysMenuService sysMenuService;
+	
+	
 	/**
 	 * 登录页面
 	 * 
@@ -66,7 +77,7 @@ public class SysLoginController extends BaseController {
 			errMsg = "账户/密码不匹配！";
 		} catch (IncorrectCredentialsException ice) {
 			logMsg = "密码不匹配！";
-        	modelMap.addFlashAttribute("errMsg", "账户/密码不匹配！");
+			errMsg = "账户/密码不匹配！";
         } catch (LockedAccountException lae) {
         	logMsg = "账户已被冻结！ ";
         	errMsg = "账户已被冻结！";
@@ -130,7 +141,20 @@ public class SysLoginController extends BaseController {
 	public String sysIndex(ModelMap modelMap) {
 		Subject curUser = SecurityUtils.getSubject();
 		SysUser sysUser = (SysUser) curUser.getPrincipal();
-    	modelMap.addAttribute(sysUser);
+		
+		
+		if (sysUser == null) {
+			return "login";
+		}
+		Long userId = sysUser.getUserId();
+		List<SysMenu> menuList = null;
+		if (userId == 1) {
+			menuList = sysMenuService.listMenu(new HashMap<String, Object>());
+		} else {
+			menuList = sysMenuService.listUserMenu(userId);
+		}
+		modelMap.addAttribute("menuList",menuList);
+    	modelMap.addAttribute("sysUser",sysUser);
         logger.info("跳转到后台首页");
 		return "sys/index";
 	}

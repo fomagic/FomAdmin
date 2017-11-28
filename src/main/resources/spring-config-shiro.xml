@@ -17,7 +17,7 @@
 		<!-- 登录成功后跳转的地址 -->
 		<!-- <property name="successUrl" value="/sys/index" /> -->
 		<!-- 用户访问未对其授权的资源时，显示的链接 -->
-		<property name="unauthorizedUrl" value="/unauthor" />
+		<property name="unauthorizedUrl" value="/error/unauthor" />
 		<!-- 'filters'属性不是必需的，因为任何声明javax.servlet.Filter的bean都将通过其链接定义的beanName自动获取并可用，但是可以在此处执行实例覆盖或定义别名-->
 		<!-- 
 			<property name="filters">
