@@ -59,7 +59,7 @@
 	</select>
 	
 	
-	<insert id="saveMenu" parameterMap="SysMenuMap">
+	<insert id="saveMenu" parameterType="com.fomagic.module.sys.entity.SysMenu">
 		INSERT INTO sys_menu (
 			`menu_id`,
 			`parent_id`,

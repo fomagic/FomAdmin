@@ -49,7 +49,7 @@
 	</select>
 	
 	
-	<insert id="saveRole" parameterMap="SysRoleMap">
+	<insert id="saveRole" parameterType="com.fomagic.module.sys.entity.SysRole">
 		insert into sys_role
 		(
 			`role_id`, 
@@ -68,7 +68,7 @@
 		)
 	</insert>
 	
-	<update id="updateRole" parameterMap="SysRoleMap">
+	<update id="updateRole" parameterType="com.fomagic.module.sys.entity.SysRole">
 		update sys_role 
 		<set> 
 			<if test="roleName != null">`role_name` = #{roleName}, </if>

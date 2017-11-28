@@ -55,7 +55,7 @@
 	</select>
 
 
-	<insert id="saveUser" parameterMap="SysUserMap">
+	<insert id="saveUser" parameterType="com.fomagic.module.sys.entity.SysUser">
 		insert into sys_user
 		(
 			`user_id`, 
@@ -89,7 +89,7 @@
 		</foreach>
 	</delete>
 
-	<update id="updateUser" parameterType="SysUserMap">
+	<update id="updateUser" parameterType="com.fomagic.module.sys.entity.SysUser">
 		update sys_user
 		<set>
 			<if test="userName != null">`username` = #{userName}</if>
