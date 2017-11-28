@@ -142,7 +142,6 @@ public class SysLoginController extends BaseController {
 		Subject curUser = SecurityUtils.getSubject();
 		SysUser sysUser = (SysUser) curUser.getPrincipal();
 		
-		
 		if (sysUser == null) {
 			return "login";
 		}

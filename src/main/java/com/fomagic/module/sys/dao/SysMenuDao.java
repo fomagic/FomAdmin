@@ -24,7 +24,7 @@ public interface SysMenuDao{
 	/**
 	 * 查询用户的权限列表
 	 */
-	List<SysMenu> listUser(Long userId);
+	List<SysMenu> listUserPerm(Long userId);
 
 	/**
 	 * 根据菜单ID获取菜单信息

@@ -32,11 +32,6 @@ public interface SysMenuService {
 	List<SysMenu> listNotButton();
 	
 	/**
-	 * 查询用户的权限列表
-	 */
-	List<SysMenu> listUser(Long userId);
-	
-	/**
 	 * 获取用户菜单列表
 	 */
 	List<SysMenu> listUserMenu(Long userId);
@@ -71,7 +66,10 @@ public interface SysMenuService {
 	 */
 	void deleteBatchByMenuIds(Long[] menuIds);
 	
-
+	/**
+	 * 查询用户的权限列表
+	 */
+	List<SysMenu> listUserPerm(Long userId);
 	
 	
 }

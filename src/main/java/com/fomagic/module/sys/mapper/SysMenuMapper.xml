@@ -33,7 +33,7 @@
 			order_num ASC
 	</select>
 	
-	<select id="listUser" resultMap="SysMenuMap">
+	<select id="listUserPerm" resultMap="SysMenuMap">
 		SELECT DISTINCT
 			m.*, (
 				SELECT
@@ -83,7 +83,9 @@
 			)
 	</insert>
 	
-	<select id="listMenu"></select>
+	<select id="listMenu" resultMap="SysMenuMap">
+		select * from sys_menu where menu_id = #{value}
+	</select>
 	
 	<update id="updateMenu"></update>
 	

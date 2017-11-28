@@ -41,8 +41,8 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 
 	@Override
-	public List<SysMenu> listUser(Long userId) {
-		return sysMenuDao.listUser(userId);
+	public List<SysMenu> listUserPerm(Long userId) {
+		return sysMenuDao.listUserPerm(userId);
 	}
 
 	@Override
