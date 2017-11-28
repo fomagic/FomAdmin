@@ -28,7 +28,7 @@ public class PageController {
 	 */
 	@RequestMapping("/404")
 	public String error404() {    
-		return "404";
+		return "error/404";
 	}
 	
 	/**
@@ -37,7 +37,7 @@ public class PageController {
 	 */
 	@RequestMapping("/405")
 	public String error405() {
-		return "405";
+		return "error/405";
 	}
 	
 	/** 
@@ -46,7 +46,7 @@ public class PageController {
 	 */
 	@RequestMapping("/500")
 	public String error500() {
-		return "500";
+		return "error/500";
 	}
 	
 	/**

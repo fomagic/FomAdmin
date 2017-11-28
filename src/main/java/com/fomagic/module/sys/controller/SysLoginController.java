@@ -132,7 +132,7 @@ public class SysLoginController extends BaseController {
 		SysUser sysUser = (SysUser) curUser.getPrincipal();
     	modelMap.addAttribute(sysUser);
         logger.info("跳转到后台首页");
-		return "admin/index";
+		return "sys/index";
 	}
 
 }

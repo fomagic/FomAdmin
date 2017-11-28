@@ -15,7 +15,7 @@
 		<!-- 要求登录时的链接，非必须的属性，默认会自动寻找Web工程根目录下的"/login.jsp"页面 -->
 		<property name="loginUrl" value="/sys/login" />
 		<!-- 登录成功后跳转的地址 -->
-		<!-- <property name="successUrl" value="/admin/index" /> -->
+		<!-- <property name="successUrl" value="/sys/index" /> -->
 		<!-- 用户访问未对其授权的资源时，显示的链接 -->
 		<property name="unauthorizedUrl" value="/unauthor" />
 		<!-- 'filters'属性不是必需的，因为任何声明javax.servlet.Filter的bean都将通过其链接定义的beanName自动获取并可用，但是可以在此处执行实例覆盖或定义别名-->
