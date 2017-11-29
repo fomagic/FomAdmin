@@ -1,6 +1,7 @@
 package com.fomagic.module.sys.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 /**
@@ -60,6 +61,11 @@ public class SysMenu implements Serializable{
 	 * 排序
 	 */
 	private Integer orderNum;
+	
+	/**
+	 * 子菜单
+	 */
+	private List<?> list;
 
 	public Long getMenuId() {
 		return menuId;
@@ -131,6 +137,14 @@ public class SysMenu implements Serializable{
 
 	public void setOrderNum(Integer orderNum) {
 		this.orderNum = orderNum;
+	}
+
+	public List<?> getList() {
+		return list;
+	}
+
+	public void setList(List<?> list) {
+		this.list = list;
 	}
 	
 	

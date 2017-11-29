@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%-- <%@ page trimDirectiveWhitespaces="true" %>  --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -106,6 +107,29 @@
 							<li><a href="#">二级菜单 2</a></li>
 						</ul>
 					</li>
+					
+					
+					<c:set var="index" value="0" scope="request" /><!-- 自增序号，注意scope-->  
+					<c:set var="level" value="0" scope="request" /><!-- 记录树的层次，注意scope-->
+					
+					<%-- <c:forEach items="${menuList }" var="menuItem"> 
+						<li class="treeview">
+							<c:if test="${menuItem.type == 0 }">
+								<a href="javascript:;">
+									<c:if test="${empty menuItem.icon}">
+										<i class="${menuItem.icon }"></i>
+									</c:if>
+									<span>${menuItem.name }</span>
+								</a>
+								<ul class="treeview-menu">
+									<li><a href="#">二级菜单 1</a></li>
+									<li><a href="#">二级菜单 2</a></li>
+								</ul>
+							</c:if>
+						</li>
+					</c:forEach> --%>
+					
+					
 				</ul>
 				<!-- /.sidebar-menu -->
 			</section>
@@ -162,5 +186,7 @@
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the
      fixed layout. -->
+     
+     
 </body>
 </html>
