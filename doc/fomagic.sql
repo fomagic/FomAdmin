@@ -1,19 +1,21 @@
 /*
-Navicat MySQL Data Transfer
+ Navicat Premium Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50635
-Source Host           : 127.0.0.1:3306
-Source Database       : fomagic
+ Source Server         : mysql_localhost
+ Source Server Type    : MySQL
+ Source Server Version : 50638
+ Source Host           : localhost:3306
+ Source Schema         : fomagic
 
-Target Server Type    : MYSQL
-Target Server Version : 50635
-File Encoding         : 65001
+ Target Server Type    : MySQL
+ Target Server Version : 50638
+ File Encoding         : 65001
 
-Date: 2017-11-16 17:00:58
+ Date: 30/11/2017 10:24:46
 */
 
-SET FOREIGN_KEY_CHECKS=0;
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -29,11 +31,42 @@ CREATE TABLE `sys_menu` (
   `icon` varchar(50) DEFAULT NULL COMMENT '菜单图标',
   `order_num` int(11) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
+BEGIN;
+INSERT INTO `sys_menu` VALUES (1, 0, '系统管理', NULL, NULL, 0, 'fa fa-cog', 0);
+INSERT INTO `sys_menu` VALUES (2, 1, '管理员列表', 'modules/sys/user.html', NULL, 1, 'fa fa-user', 1);
+INSERT INTO `sys_menu` VALUES (3, 1, '角色管理', 'modules/sys/role.html', NULL, 1, 'fa fa-user-secret', 2);
+INSERT INTO `sys_menu` VALUES (4, 1, '菜单管理', 'modules/sys/menu.html', NULL, 1, 'fa fa-th-list', 3);
+INSERT INTO `sys_menu` VALUES (5, 1, 'SQL监控', 'druid/sql.html', NULL, 1, 'fa fa-bug', 4);
+INSERT INTO `sys_menu` VALUES (6, 1, '定时任务', 'modules/job/schedule.html', NULL, 1, 'fa fa-tasks', 5);
+INSERT INTO `sys_menu` VALUES (7, 6, '查看', NULL, 'sys:schedule:list,sys:schedule:info', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (8, 6, '新增', NULL, 'sys:schedule:save', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (9, 6, '修改', NULL, 'sys:schedule:update', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (10, 6, '删除', NULL, 'sys:schedule:delete', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (11, 6, '暂停', NULL, 'sys:schedule:pause', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (12, 6, '恢复', NULL, 'sys:schedule:resume', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (13, 6, '立即执行', NULL, 'sys:schedule:run', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (14, 6, '日志列表', NULL, 'sys:schedule:log', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (15, 2, '查看', NULL, 'sys:user:list,sys:user:info', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (16, 2, '新增', NULL, 'sys:user:save,sys:role:select', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (17, 2, '修改', NULL, 'sys:user:update,sys:role:select', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (18, 2, '删除', NULL, 'sys:user:delete', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (19, 3, '查看', NULL, 'sys:role:list,sys:role:info', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (20, 3, '新增', NULL, 'sys:role:save,sys:menu:list', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (21, 3, '修改', NULL, 'sys:role:update,sys:menu:list', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (22, 3, '删除', NULL, 'sys:role:delete', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (23, 4, '查看', NULL, 'sys:menu:list,sys:menu:info', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (24, 4, '新增', NULL, 'sys:menu:save,sys:menu:select', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (25, 4, '修改', NULL, 'sys:menu:update,sys:menu:select', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (26, 4, '删除', NULL, 'sys:menu:delete', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (27, 1, '参数管理', 'modules/sys/config.html', 'sys:config:list,sys:config:info,sys:config:save,sys:config:update,sys:config:delete', 1, 'fa fa-sun-o', 6);
+INSERT INTO `sys_menu` VALUES (29, 1, '系统日志', 'modules/sys/log.html', 'sys:log:list', 1, 'fa fa-file-text-o', 7);
+INSERT INTO `sys_menu` VALUES (30, 1, '文件上传', 'modules/oss/oss.html', 'sys:oss:all', 1, 'fa fa-file-image-o', 6);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -49,10 +82,6 @@ CREATE TABLE `sys_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of sys_role
--- ----------------------------
-
--- ----------------------------
 -- Table structure for sys_role_menu
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role_menu`;
@@ -62,10 +91,6 @@ CREATE TABLE `sys_role_menu` (
   `menu_id` int(20) DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
-
--- ----------------------------
--- Records of sys_role_menu
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -82,11 +107,14 @@ CREATE TABLE `sys_user` (
   `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建者ID',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
+BEGIN;
+INSERT INTO `sys_user` VALUES (1, 'magic', '3d19491d6fc5645c243b8fa78b770444', 'magic', 'magic@qqq.com', '1234', '1', 1, '2017-11-11 11:11:11');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -99,62 +127,4 @@ CREATE TABLE `sys_user_role` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户与角色的对应关系';
 
--- ----------------------------
--- Records of sys_user_role
--- ----------------------------
-
--- ----------------------------
--- Table structure for t_perm
--- ----------------------------
-DROP TABLE IF EXISTS `t_perm`;
-CREATE TABLE `t_perm` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `permname` varchar(50) DEFAULT NULL,
-  `roleid` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `roleid` (`roleid`),
-  CONSTRAINT `t_perm_ibfk_1` FOREIGN KEY (`roleid`) REFERENCES `t_role` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_perm
--- ----------------------------
-INSERT INTO `t_perm` VALUES ('1', 'user:*', '1');
-INSERT INTO `t_perm` VALUES ('2', 'menu:*', '1');
-INSERT INTO `t_perm` VALUES ('3', 'select:*', '2');
-
--- ----------------------------
--- Table structure for t_role
--- ----------------------------
-DROP TABLE IF EXISTS `t_role`;
-CREATE TABLE `t_role` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `rolename` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_role
--- ----------------------------
-INSERT INTO `t_role` VALUES ('1', 'developer');
-INSERT INTO `t_role` VALUES ('2', 'admin');
-
--- ----------------------------
--- Table structure for t_user
--- ----------------------------
-DROP TABLE IF EXISTS `t_user`;
-CREATE TABLE `t_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(20) DEFAULT NULL,
-  `password` varchar(32) DEFAULT NULL,
-  `roleid` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `roleid` (`roleid`),
-  CONSTRAINT `t_user_ibfk_1` FOREIGN KEY (`roleid`) REFERENCES `t_role` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_user
--- ----------------------------
-INSERT INTO `t_user` VALUES ('1', 'magic', '3d19491d6fc5645c243b8fa78b770444', '1');
-INSERT INTO `t_user` VALUES ('2', 'jack', '123', '2');
+SET FOREIGN_KEY_CHECKS = 1;
