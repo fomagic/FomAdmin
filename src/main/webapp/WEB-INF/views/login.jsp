@@ -84,9 +84,9 @@
 	<!-- /.login-box -->
 
 	<!-- jQuery 3 -->
-	<script src="static/js/jquery.min.js"></script>
+	<script src="static/libs/jquery.min.js"></script>
 	<!-- Bootstrap 3.3.7 -->
-	<script src="static/js/bootstrap.min.js"></script>
+	<script src="static/libs/bootstrap.min.js"></script>
 	<!-- iCheck -->
 	<script src="static/plugins/iCheck/icheck.min.js"></script>
 	<script>

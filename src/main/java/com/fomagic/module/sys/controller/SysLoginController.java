@@ -1,7 +1,6 @@
 package com.fomagic.module.sys.controller;
 
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
@@ -147,11 +146,10 @@ public class SysLoginController extends BaseController {
 		}
 		Long userId = sysUser.getUserId();
 		List<SysMenu> menuList = null;
-		if (userId == 1) {
-			menuList = sysMenuService.listMenu(new HashMap<String, Object>());
-		} else {
-			menuList = sysMenuService.listUserMenu(userId);
-		}
+		
+		menuList = sysMenuService.listUserMenu(userId);
+		
+        logger.info("menuList-----" + menuList.size());
 		modelMap.addAttribute("menuList",menuList);
     	modelMap.addAttribute("sysUser",sysUser);
         logger.info("跳转到后台首页");

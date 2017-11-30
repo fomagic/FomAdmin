@@ -39,6 +39,12 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+
+<!-- 避免页面嵌套 -->
+<script>  
+	if(self!=top){top.location.href=self.location.href;}   
+</script>  
+  
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -92,42 +98,39 @@
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu" data-widget="tree">
 					<li class="header">菜单</li>
-					<li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-        			<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        			<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-					
-					<li class="treeview">
-						<a href="#">
-							<i class="fa fa-link"></i>
-							<span>多级菜单</span> 
-							<span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> 
-						</a>
-						<ul class="treeview-menu">
-							<li><a href="#">二级菜单 1</a></li>
-							<li><a href="#">二级菜单 2</a></li>
-						</ul>
-					</li>
 					
 					
-					<c:set var="index" value="0" scope="request" /><!-- 自增序号，注意scope-->  
-					<c:set var="level" value="0" scope="request" /><!-- 记录树的层次，注意scope-->
-					
-					<%-- <c:forEach items="${menuList }" var="menuItem"> 
+					<c:forEach items="${menuList }" var="menuItem"> 
 						<li class="treeview">
 							<c:if test="${menuItem.type == 0 }">
 								<a href="javascript:;">
-									<c:if test="${empty menuItem.icon}">
+									<c:if test="${not empty menuItem.icon}">
 										<i class="${menuItem.icon }"></i>
 									</c:if>
 									<span>${menuItem.name }</span>
+									<span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span>
 								</a>
 								<ul class="treeview-menu">
-									<li><a href="#">二级菜单 1</a></li>
-									<li><a href="#">二级菜单 2</a></li>
+									
+									<c:forEach items="${menuItem.list }" var="item"> 
+										<li>
+											<c:if test="${item.type == 1 }">
+												<a href="${item.url }" target="contentFrame">
+													<c:if test="${ not empty item.icon}">
+														<i class="${item.icon }"></i>
+													</c:if>
+													<span>${item.name }</span>
+												</a>
+											</c:if>
+										</li>
+									</c:forEach>
+									
+									
 								</ul>
 							</c:if>
 						</li>
-					</c:forEach> --%>
+					</c:forEach>
+					
 					
 					
 				</ul>
@@ -152,7 +155,7 @@
 
 			<!-- Main content -->
 		    <section class="content" style="background:#fff; margin-top: 16px">
-		      <iframe id="contentFrame" frameborder="0" style="width:100%;min-height:200px;" src="index"></iframe>
+		      <iframe id="contentFrame" name="contentFrame" frameborder="0" style="width:100%;min-height:200px;" src="index"></iframe>
 		    </section>
 		    <!-- /.content --> 
 
@@ -175,11 +178,13 @@
 	<!-- REQUIRED JS SCRIPTS -->
 
 	<!-- jQuery 3 -->
-	<script src="static/js/jquery.min.js"></script>
+	<script src="static/libs/jquery.min.js"></script>
+	<!-- Vue2 -->
+	<script src="static/libs/vue.min.js"></script>
 	<!-- Bootstrap 3.3.7 -->
-	<script src="static/js/bootstrap.min.js"></script>
+	<script src="static/libs/bootstrap.min.js"></script>
 	<!-- AdminLTE App -->
-	<script src="static/js/adminlte.min.js"></script>
+	<script src="static/libs/adminlte.min.js"></script>
 	<script src="static/js/index.js"></script>
 
 	<!-- Optionally, you can add Slimscroll and FastClick plugins.
