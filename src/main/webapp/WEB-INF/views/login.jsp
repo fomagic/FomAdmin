@@ -35,6 +35,11 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- 避免页面嵌套 -->
+<script>  
+	if(self!=top){top.location.href=self.location.href;}   
+</script>  
 </head>
 
 <body class="hold-transition login-page">
