@@ -9,10 +9,13 @@ $(window).on('resize', function() {
 
 
 //显示点击状态
-function changeClick(obj) {
-	var url = $(obj).attr("href");
-
+function loadFrame(obj) {
+	var url = obj.contentWindow.location.href;
+	var index = url.lastIndexOf("\/");
+	var str = url.substring(index + 1, url.length);
 	//导航菜单展开
-    $(".treeview-menu li").removeClass("active");
-    $("a[href='"+url+"']").parents("li").addClass("active");
+	$(".treeview").removeClass("active");
+	$(".treeview-menu li").removeClass("active");
+    $("a[href$='"+str+"']").parents("li").addClass("active");
 }
+

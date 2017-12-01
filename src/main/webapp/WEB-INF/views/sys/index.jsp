@@ -123,7 +123,7 @@
 
 			<!-- Main content -->
 		    <section class="content" style="background:#fff; margin-top: 16px">
-		      <iframe id="contentFrame" name="contentFrame" frameborder="0" style="width:100%;min-height:200px;" src="index"></iframe>
+		      <iframe id="contentFrame" name="contentFrame" frameborder="0" style="width:100%;min-height:200px;" src="index" onload="loadFrame(this)"></iframe>
 		    </section>
 		    <!-- /.content --> 
 

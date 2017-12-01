@@ -23,7 +23,7 @@
 		</c:if>
 		<c:if test="${menuItem.type == 1 }">
 		<li>
-			<a href="${menuItem.url }" target="contentFrame" onclick="changeClick(this)">
+			<a href="${menuItem.url }" target="contentFrame">
 				<c:if test="${ not empty menuItem.icon}">
 					<i class="${menuItem.icon }"></i>
 				</c:if>
