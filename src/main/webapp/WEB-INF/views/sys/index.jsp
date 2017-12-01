@@ -99,39 +99,7 @@
 				<ul class="sidebar-menu" data-widget="tree">
 					<li class="header">菜单</li>
 					
-					
-					<c:forEach items="${menuList }" var="menuItem"> 
-						<li class="treeview">
-							<c:if test="${menuItem.type == 0 }">
-								<a href="javascript:;">
-									<c:if test="${not empty menuItem.icon}">
-										<i class="${menuItem.icon }"></i>
-									</c:if>
-									<span>${menuItem.name }</span>
-									<span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span>
-								</a>
-								<ul class="treeview-menu">
-									
-									<c:forEach items="${menuItem.list }" var="item"> 
-										<li>
-											<c:if test="${item.type == 1 }">
-												<a href="${item.url }" target="contentFrame">
-													<c:if test="${ not empty item.icon}">
-														<i class="${item.icon }"></i>
-													</c:if>
-													<span>${item.name }</span>
-												</a>
-											</c:if>
-										</li>
-									</c:forEach>
-									
-									
-								</ul>
-							</c:if>
-						</li>
-					</c:forEach>
-					
-					
+					<c:import url="menutree.jsp" />
 					
 				</ul>
 				<!-- /.sidebar-menu -->
@@ -179,8 +147,6 @@
 
 	<!-- jQuery 3 -->
 	<script src="static/libs/jquery.min.js"></script>
-	<!-- Vue2 -->
-	<script src="static/libs/vue.min.js"></script>
 	<!-- Bootstrap 3.3.7 -->
 	<script src="static/libs/bootstrap.min.js"></script>
 	<!-- AdminLTE App -->
