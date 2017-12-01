@@ -9,19 +9,19 @@ public interface SysUserRoleDao {
 	 * @param userId
 	 * @param roleIdList
 	 */
-	void saveRole(Long userId,List<Long> roleIdList);
+	void saveUserRole(Long userId,List<Long> roleIdList);
 
 	/**
 	 * 根据用户ID获取角色列表
 	 * @param userId
 	 * @return
 	 */
-	List<Long> listRoleId(Long userId);
+	List<Long> listUserRoleId(Long userId);
 	
 	/**
 	 * 根据用户ID删除用户与角色对应关系
 	 * @param userId
 	 */
-	void deleteRole(Long userId);
+	void deleteUserRole(Long userId);
 
 }
