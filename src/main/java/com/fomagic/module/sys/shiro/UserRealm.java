@@ -110,14 +110,14 @@ public class UserRealm extends AuthorizingRealm {
 	public static void main(String[] args) {
 		System.out.println();
 		int hashInterations = 1024;
-		Object salt = "magic";
+		Object salt = "soul";
 		Object credentials = "123456";
 		String hashAlgorithmName = "MD5";
 
-		long begin = System.currentTimeMillis();
+		//long begin = System.currentTimeMillis();
 		Object simpleHash = new SimpleHash(hashAlgorithmName, credentials, salt,hashInterations);
-		long end = System.currentTimeMillis();
-		System.out.println("加密花费时间： " + (end-begin));
+		//long end = System.currentTimeMillis();
+		//System.out.println("加密花费时间： " + (end-begin));
 		System.out.println("加密后的值： "+simpleHash);
 		
 		System.out.println(Base64.decode("4AvVhmFLUs0KTA3Kprsdag=="));

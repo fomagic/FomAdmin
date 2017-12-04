@@ -17,5 +17,8 @@ function loadFrame(obj) {
 	$(".treeview").removeClass("active");
 	$(".treeview-menu li").removeClass("active");
     $("a[href$='"+str+"']").parents("li").addClass("active");
+    
+    var nav = $("a[href$='"+str+"'] span").text();
+    $("#navTitle").text(nav.length==0?"Welcome.":nav);
 }
 

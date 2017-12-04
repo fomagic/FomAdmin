@@ -26,7 +26,7 @@
 	<update id="updatePassword" parameterType="map">
 		UPDATE sys_user
 		SET
-		`password` = #{password}
+		`password` = #{newPassword}
 		WHERE
 		user_id = #{userId}
 		AND password = #{password}
