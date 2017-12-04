@@ -160,7 +160,7 @@
 									<label class="col-sm-2 control-label">账号</label>
 
 									<div class="col-sm-10">
-										<label>${sysUser.userName}</label>
+										<span class="label label-danger">${sysUser.userName}</span>
 									</div>
 								</div>
 
