@@ -1,31 +1,3 @@
-//生成菜单
-var menuItem = Vue.extend({
-	name: 'menu-item',
-	props:{item:{}},
-	template:[
-		'<li>',
-		'	<a v-if="item.type === 0" href="javascript:;">',
-		'		<i v-if="item.icon != null" :class="item.icon"></i>',
-		'		<span>{{item.name}}</span>',
-		'		<i class="fa fa-angle-left pull-right"></i>',
-		'	</a>',
-		'	<ul v-if="item.type === 0" class="treeview-menu">',
-		'		<menu-item :item="item" v-for="item in item.list"></menu-item>',
-		'	</ul>',
-		
-		'	<a v-if="item.type === 1 && item.parentId === 0" :href="\'#\'+item.url">',
-        '		<i v-if="item.icon != null" :class="item.icon"></i>',
-        '		<span>{{item.name}}</span>',
-        '	</a>',
-
-		'	<a v-if="item.type === 1 && item.parentId != 0" :href="\'#\'+item.url"><i v-if="item.icon != null" :class="item.icon"></i><i v-else class="fa fa-circle-o"></i> {{item.name}}</a>',
-		'</li>'
-	].join('')
-});
-
-//注册菜单组件
-Vue.component('menuItem',menuItem);
-
 //iframe自适应
 $(window).on('resize', function() {
 	var $content = $('.content');
@@ -35,4 +7,18 @@ $(window).on('resize', function() {
 	});
 }).resize();
 
+
+//显示点击状态
+function loadFrame(obj) {
+	var url = obj.contentWindow.location.href;
+	var index = url.lastIndexOf("\/");
+	var str = url.substring(index + 1, url.length);
+	//导航菜单展开
+	$(".treeview").removeClass("active");
+	$(".treeview-menu li").removeClass("active");
+    $("a[href$='"+str+"']").parents("li").addClass("active");
+    
+    var nav = $("a[href$='"+str+"'] span").text();
+    $("#navTitle").text(nav.length==0?"Welcome.":nav);
+}
 
