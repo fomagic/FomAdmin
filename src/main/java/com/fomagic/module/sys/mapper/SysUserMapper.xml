@@ -116,7 +116,15 @@
 				AND `username` LIKE concat('%',#{username},'%')
 			</if>
 		</where>
-		ORDER BY user_id DESC
+		<choose>
+			<when test="sidx != null and sidx.trim() != ''">
+				ORDER BY ${sidx} ${order}
+			</when>
+			<otherwise>
+				ORDER BY user_id DESC
+			</otherwise>
+		</choose>
+		
 	</select>
 
 	<select id="countUser" resultType="int">
