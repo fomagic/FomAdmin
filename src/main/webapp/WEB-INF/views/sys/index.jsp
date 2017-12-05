@@ -16,9 +16,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- Tell the browser to be responsive to screen width -->
-<meta
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-	name="viewport">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
 
 <base href="<%=basePath%>">
@@ -69,9 +67,9 @@
 					<ul class="nav navbar-nav">
 
 						<!-- User Account: style can be found in dropdown.less -->
-						<li class="dropdown user user-menu"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"> <span
-								class="hidden-xs">${sysUser.userName}</span>
+						<li class="dropdown user user-menu">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<span class="hidden-xs">${sysUser.userName}</span>
 						</a>
 							<ul class="dropdown-menu">
 								<!-- Menu Footer-->
