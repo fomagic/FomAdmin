@@ -68,22 +68,17 @@
 					</a>
 					<div class="navbar-custom-menu">
 						<ul class="nav navbar-nav">
-
-							<!-- User Account: style can be found in dropdown.less -->
-							<li>
+							<li class="dropdown setting-menu">
 								<a class="dropdown-toggle" data-toggle="dropdown">
-									<span class="glyphicon glyphicon-user">&nbsp;${sysUser.userName}</span>
+									<i class="fa fa-user">&nbsp;${sysUser.userName}</i>
 									<span class="caret"></span>
-									<span class="sr-only">Toggle Dropdown</span>
 								</a>
-								<ul class="dropdown-menu" role="menu">
-									<!-- Menu Footer-->
+								<ul class="dropdown-menu">
 									<li>
-										<a href="#" data-toggle="modal" data-target="#modal-password">修改密码</a>
-									</li>
-									<li class="divider"></li>
-									<li>
-										<a href="sys/logout" >退出</a>
+										<ul class="menu">
+											<li><a href="#" data-toggle="modal" data-target="#modal-password">修改密码</a></li>
+											<li><a href="sys/logout" >退出</a></li>
+										</ul>
 									</li>
 								</ul>
 							</li>
@@ -180,7 +175,6 @@
 								</div>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-default pull-left  btn-flat" data-dismiss="modal">取消</button>
 								<button type="submit" class="btn btn-primary btn-flat">修改</button>
 							</div>
 						</form>

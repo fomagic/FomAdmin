@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -9,14 +9,13 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- Tell the browser to be responsive to screen width -->
-<meta
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-	name="viewport">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
 
 <base href="<%=basePath%>">
@@ -27,9 +26,16 @@
 
 <!-- Font Awesome -->
 <link rel="stylesheet" href="static/css/font-awesome.min.css">
+
+<!-- Theme style -->
+<link rel="stylesheet" href="static/css/AdminLTE.min.css">
+<!-- AdminLTE Skins. Choose a skin from the css/skins
+     folder instead of downloading all of them to reduce the load. -->
+<link rel="stylesheet" href="static/css/_all-skins.min.css">
 <!-- jqGrid -->
 <link rel="stylesheet" href="static/plugins/jqGrid/css/ui.jqgrid-bootstrap.css">
-<link rel="stylesheet" href="static/plugins/jqGrid/css/ui.jqgrid-bootstrap-ui.css">
+<!-- Owner -->
+<link rel="stylesheet" href="static/css/main.css">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -44,17 +50,17 @@
 	<div>
 		<div class="grid-btn">
 			<div class="form-group col-sm-3">
-				<input type="text" class="form-control" placeholder="用户名">
+				<input type="text" class="form-control" id="searchName" placeholder="用户名">
 			</div>
-			<a class="btn btn-default btn-flat" onclick="query">查询</a>
+			<a class="btn btn-default btn-flat" id="queryUser">查询</a>
 			<shiro:hasPermission name="sys:user:save">
-				<a class="btn btn-primary btn-flat" onclick="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+				<a class="btn btn-primary btn-flat" id="addUser"><i class="fa fa-plus"></i>&nbsp;新增</a>
 			</shiro:hasPermission>
 			<shiro:hasPermission name="sys:user:update">
-				<a class="btn btn-primary btn-flat" onclick="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+				<a class="btn btn-primary btn-flat" id="updateUser"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
 			</shiro:hasPermission>
 			<shiro:hasPermission name="sys:user:delete">
-				<a class="btn btn-primary btn-flat" onclick="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+				<a class="btn btn-primary btn-flat" id="deleteUser"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
 			</shiro:hasPermission>
 		</div>
 		<table id="jqGrid"></table>
@@ -62,16 +68,6 @@
     </div>
 
 	
-
-
-
-
-
-
-
-
-
-
 
 	<!-- REQUIRED JS SCRIPTS -->
 	  
@@ -88,13 +84,11 @@
 	
 	<!-- Owner  -->
 	<script src="static/js/user.js"></script>
-		<script>
-		$.jgrid.defaults.width = 780;
+	<script>
+		$.jgrid.defaults.width = 1000;
 		$.jgrid.defaults.responsive = true;
 		$.jgrid.defaults.styleUI = 'Bootstrap';
+		
 	</script>
-
-
-
 </body>
 </html>

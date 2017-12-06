@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
+import com.alibaba.fastjson.JSON;
 import com.fomagic.common.controller.BaseController;
 import com.fomagic.common.util.PageQuery;
 import com.fomagic.common.util.PageUtil;
@@ -45,12 +46,12 @@ public class SysUserController extends BaseController {
 		return "sys/user";
 	}
 
-	
+
+	@RequiresPermissions("sys:user:list")
 	@RequestMapping("/list")
 	@ResponseBody
-	@RequiresPermissions("sys:user:list")
 	public Map<String, Object> userList(@RequestParam(required = true) Map<String, Object> params) {
-
+		
 		
 		
 		if (params.isEmpty()) {
@@ -61,7 +62,7 @@ public class SysUserController extends BaseController {
 		List<SysUser> sysUserList = sysUserService.listUser(query);
 		int total = sysUserService.countUser(query);
 		PageUtil pageUtil = new PageUtil(sysUserList, total, query.getLimit(), query.getPage());
-
+		
 		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("page", pageUtil);
 		return map;
