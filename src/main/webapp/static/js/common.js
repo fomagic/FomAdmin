@@ -25,3 +25,14 @@ function getSelectedRow() {
 	
 	return selectedIDs[0];
 }
+//多选提示
+function getSelectedRows() {
+	var grid = $("#jqGrid");
+	var rowKey = grid.getGridParam("selrow");
+	if (!rowKey) {
+		alert("至少选择一条记录");
+		return;
+	}
+	return grid.getGridParam("selarrrow");
+}
+

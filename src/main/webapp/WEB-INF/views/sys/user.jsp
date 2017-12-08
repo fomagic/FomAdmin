@@ -58,7 +58,7 @@
 			</div>
 			<a class="btn btn-default btn-flat" id="getUser">查询</a>
 			<shiro:hasPermission name="sys:user:save">
-				<a class="btn btn-primary btn-flat" id="insertUser"><i
+				<a class="btn btn-primary btn-flat" id="saveUser"><i
 					class="fa fa-plus"></i>&nbsp;新增</a>
 			</shiro:hasPermission>
 			<shiro:hasPermission name="sys:user:update">

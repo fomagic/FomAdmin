@@ -1,14 +1,18 @@
 package com.fomagic.module.sys.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fomagic.module.sys.dao.SysUserDao;
 import com.fomagic.module.sys.entity.SysUser;
+import com.fomagic.module.sys.service.SysUserRoleService;
 import com.fomagic.module.sys.service.SysUserService;
 
 @Service
@@ -16,6 +20,9 @@ public class SysUserServiceImpl implements SysUserService {
 
 	@Autowired
 	private SysUserDao sysUserDao;
+	
+	@Autowired
+	private SysUserRoleService sysUserRoleService;
 
 	@Override
 	public SysUser getByUserName(String userName) {
@@ -47,7 +54,13 @@ public class SysUserServiceImpl implements SysUserService {
 	
 	@Override
 	public void saveUser(SysUser sysUser) {
+		
+		sysUser.setCreateTime(new Date());
+		Object simpleHash = new SimpleHash("MD5", sysUser.getPassword(), sysUser.getUserName(),1024);
+		sysUser.setPassword(simpleHash.toString());
+		sysUser.setSalt(sysUser.getUserName());
 		sysUserDao.saveUser(sysUser);
+		sysUserRoleService.saveUserRole(sysUser.getUserId(), sysUser.getRoleIdList());
 	}
 
 	@Override
@@ -57,7 +70,16 @@ public class SysUserServiceImpl implements SysUserService {
 
 	@Override
 	public void updateUser(SysUser sysUser) {
+		
+		if (StringUtils.isBlank(sysUser.getPassword())) {
+			sysUser.setPassword(null);
+		} else {
+			Object simpleHash = new SimpleHash("MD5", sysUser.getPassword(), sysUser.getUserName(),1024);
+			sysUser.setPassword(simpleHash.toString());
+		}
+		
 		sysUserDao.updateUser(sysUser);
+		sysUserRoleService.saveUserRole(sysUser.getUserId(), sysUser.getRoleIdList());
 	}
 
 	@Override

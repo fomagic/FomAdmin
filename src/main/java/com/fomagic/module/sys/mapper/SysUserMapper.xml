@@ -55,7 +55,7 @@
 	</select>
 
 
-	<insert id="saveUser" parameterType="com.fomagic.module.sys.entity.SysUser">
+	<insert id="saveUser" parameterType="com.fomagic.module.sys.entity.SysUser"  useGeneratedKeys="true" keyProperty="userId">
 		insert into sys_user
 		(
 			`user_id`, 
@@ -92,10 +92,10 @@
 	<update id="updateUser" parameterType="com.fomagic.module.sys.entity.SysUser">
 		update sys_user
 		<set>
-			<if test="userName != null">`username` = #{userName}</if>
-			<if test="password != null">`password` = #{password}</if>
-			<if test="email != null">`email` = #{email}</if>
-			<if test="mobile != null">`mobile` = #{mobile}</if>
+			<if test="userName != null">`username` = #{userName},</if>
+			<if test="password != null">`password` = #{password},</if>
+			<if test="email != null">`email` = #{email},</if>
+			<if test="mobile != null">`mobile` = #{mobile},</if>
 			<if test="status != null">`status` = #{status}</if>
 		</set>
 		where user_id = #{userId}

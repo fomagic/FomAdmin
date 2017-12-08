@@ -11,13 +11,13 @@
 	<insert id="saveUserRole">
 		insert into sys_user_role
 		(
-		`user_id`,role_id
+		`user_id`,`role_id`
 		)
 		values
-		<foreach collection="roleIdList" item="item" separator=",">
-		(
-			#{userId},#{item}
-		)
+		<foreach collection="roleIdList" item="item" index="index" separator=",">
+			(
+				#{userId},#{item}
+			)
 		</foreach>
 	</insert>
 

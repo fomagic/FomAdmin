@@ -28,7 +28,7 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
 		Map<String, Object> map = new HashMap<>();
 		map.put("userId", userId);
 		map.put("roleIdList", roleIdList);
-		sysUserRoleDao.saveUserRole(userId, roleIdList);
+		sysUserRoleDao.saveUserRole(map);
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.fomagic.module.sys.dao;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SysUserRoleDao {
 
@@ -9,7 +10,7 @@ public interface SysUserRoleDao {
 	 * @param userId
 	 * @param roleIdList
 	 */
-	void saveUserRole(Long userId,List<Long> roleIdList);
+	void saveUserRole(Map<String, Object> map);
 
 	/**
 	 * 根据用户ID获取角色列表
