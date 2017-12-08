@@ -10,7 +10,7 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<html>
+<html lang="">
 
 	<head>
 		<meta charset="utf-8">
@@ -137,6 +137,8 @@
 		</div>
 		<!-- ./wrapper -->
 
+
+		<!-- 修改密码弹窗 -->
 		<div class="modal fade" id="modal-password">
 			<div class="modal-dialog">
 				<div class="modal-content">

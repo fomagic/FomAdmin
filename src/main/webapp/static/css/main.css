@@ -44,3 +44,9 @@ html { overflow-x:hidden; }
 	background: #f4f4f4;
 	text-decoration: none
 }
+
+
+.div-dispaly {
+	display: none;
+}
+

@@ -9,7 +9,7 @@ import java.util.Map;
  * @author
  *
  */
-public class PageQuery extends LinkedHashMap<String, Object> {
+public class QueryUtil extends LinkedHashMap<String, Object> {
 
 	/**
 	 * 
@@ -22,7 +22,7 @@ public class PageQuery extends LinkedHashMap<String, Object> {
 	// 每页条数
 	private int limit;
 
-	public PageQuery(Map<String, Object> params) {
+	public QueryUtil(Map<String, Object> params) {
 		this.putAll(params);
 
 		this.page = Integer.parseInt(params.get("page").toString());

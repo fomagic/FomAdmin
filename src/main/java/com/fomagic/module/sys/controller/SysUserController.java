@@ -10,16 +10,17 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
-import com.alibaba.fastjson.JSON;
 import com.fomagic.common.controller.BaseController;
-import com.fomagic.common.util.PageQuery;
+import com.fomagic.common.util.QueryUtil;
 import com.fomagic.common.util.PageUtil;
 import com.fomagic.module.sys.entity.SysUser;
+import com.fomagic.module.sys.service.SysUserRoleService;
 import com.fomagic.module.sys.service.SysUserService;
 
 /**
@@ -34,6 +35,9 @@ public class SysUserController extends BaseController {
 
 	@Autowired
 	private SysUserService sysUserService;
+	
+	@Autowired
+	private SysUserRoleService sysUserRoleService;
 
 	/**
 	 * 登录
@@ -53,12 +57,11 @@ public class SysUserController extends BaseController {
 	public Map<String, Object> userList(@RequestParam(required = true) Map<String, Object> params) {
 		
 		
-		
 		if (params.isEmpty()) {
 			return params;
 		}
 		
-		PageQuery query = new PageQuery(params);
+		QueryUtil query = new QueryUtil(params);
 		List<SysUser> sysUserList = sysUserService.listUser(query);
 		int total = sysUserService.countUser(query);
 		PageUtil pageUtil = new PageUtil(sysUserList, total, query.getLimit(), query.getPage());
@@ -68,13 +71,26 @@ public class SysUserController extends BaseController {
 		return map;
 	}
 
+	@RequiresPermissions("sys:user:info")
+	@RequestMapping("/info/{userId}")
+	@ResponseBody
+	public Map<String,Object> userInfo(@PathVariable("userId") Long userId) {
+		
+		SysUser sysUser = sysUserService.getByUserId(userId);
+		List<Long> roleIdList = sysUserRoleService.listUserRoleId(userId);
+		sysUser.setRoleIdList(roleIdList);
+		
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("user", sysUser);
+		return map;
+	}
 	
 	
 	@RequestMapping("/password")
 	public String password(String password, String newPassword, RedirectAttributesModelMap modelMap) {
 
 		if (StringUtils.isEmpty(password) || StringUtils.isEmpty(newPassword)) {
-
+			
 		}
 
 		SysUser sysUser = (SysUser) SecurityUtils.getSubject().getPrincipal();

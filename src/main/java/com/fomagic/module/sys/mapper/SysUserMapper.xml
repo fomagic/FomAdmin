@@ -104,7 +104,14 @@
 		</if>
 	</update>
 
-	<select id="getByUserId"></select>
+	<select id="getByUserId" resultMap="SysUserMap">
+		SELECT
+		*
+		FROM
+		sys_user
+		WHERE
+		`user_id` = #{userId}
+	</select>
 
 	<select id="listUser" resultMap="SysUserMap">
 		SELECT * FROM sys_user
@@ -132,11 +139,11 @@
 	<select id="countUser" resultType="int">
 		select count(*) from sys_user
 		<where>
-			<if test="createUserId!=null">
+			<if test="createUserId != null">
 				AND `create_user_id` =#{createUserId}
 			</if>
-			<if test="userName!=null and userName.trim()!=''">
-				AND `username` LIKE concat('%',#{username},%')
+			<if test="searchName != null and searchName.trim()!=''">
+				AND `username` LIKE concat('%',#{searchName},'%')
 			</if>
 		</where>
 	</select>
