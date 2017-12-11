@@ -1,6 +1,7 @@
 package com.fomagic.module.sys.dao;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SysRoleMenuDao {
 
@@ -28,6 +29,6 @@ public interface SysRoleMenuDao {
 	 * @param roleId
 	 * @param menuIdList
 	 */
-	void saveRoleMenu(Long roleId, List<Long> menuIdList);
+	void saveRoleMenu(Map<String, Object> map);
 
 }

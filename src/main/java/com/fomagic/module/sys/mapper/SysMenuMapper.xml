@@ -25,7 +25,17 @@
 	<select id="listMenu" resultMap="SysMenuMap">
 		select m.*,(select p.name from sys_menu p where p.menu_id = m.parent_id) as parentName 
 			from sys_menu m 
+		<choose>
+			<when test="sidx != null and sidx.trim() != ''">
+				order by m.${sidx} ${order}
+			</when>
+			<otherwise>
 				order by m.order_num asc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit !=null">
+			limit #{offset}, #{limit}
+		</if>
 	</select>
 	
 	

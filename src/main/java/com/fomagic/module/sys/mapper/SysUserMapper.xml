@@ -87,6 +87,11 @@
 		<foreach collection="array" item="userId" open="(" separator="," close=")">
 			#{userId}
 		</foreach>
+		;
+		delete from sys_user_role where user_id in
+		<foreach collection="array" item="userId" open="(" separator="," close=")">
+			#{userId}
+		</foreach>
 	</delete>
 
 	<update id="updateUser" parameterType="com.fomagic.module.sys.entity.SysUser">

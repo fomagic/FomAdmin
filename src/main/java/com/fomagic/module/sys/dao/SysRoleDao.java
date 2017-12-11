@@ -43,7 +43,7 @@ public interface SysRoleDao {
 	 * @param role
 	 * @return
 	 */
-	Object saveRole(SysRole role);
+	void saveRole(SysRole role);
 
 	/**
 	 * 更新角色

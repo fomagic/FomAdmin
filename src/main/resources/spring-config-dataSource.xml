@@ -49,7 +49,7 @@
 		<property name="maxPoolPreparedStatementPerConnectionSize"
 			value="${druid.maxPoolPreparedStatementPerConnectionSize}" />
 
-		<!-- 配置监控统计拦截的filters,wall:防御SQL注入攻击 -->
+		<!-- 配置监控统计拦截的filters,wall:防御SQL注入攻击 stat:监控-->
 		<property name="filters" value="${druid.filters}" />
 	</bean>
 

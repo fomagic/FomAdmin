@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -95,7 +96,10 @@ public class UserRealm extends AuthorizingRealm {
 
 		SysUser user = sysUserService.getByUserName(username);
 		if (user==null) {
-			throw new UnknownAccountException("账号不正确： [" + username + "]");
+			throw new UnknownAccountException();
+		}
+		if (user.getStatus()==0) {
+			throw new LockedAccountException();
 		}
 		String realmname = getName();
 		ByteSource credentialsSalt = ByteSource.Util.bytes(username);

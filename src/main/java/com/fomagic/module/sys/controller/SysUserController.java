@@ -42,12 +42,12 @@ public class SysUserController extends BaseController {
 	private SysUserRoleService sysUserRoleService;
 
 	/**
-	 * 登录
+	 * 管理员列表
 	 * 
 	 * @return
 	 */
 	@RequestMapping({ "", "/", "/index" })
-	public String login() {
+	public String user() {
 
 		return "sys/user";
 	}
@@ -57,7 +57,6 @@ public class SysUserController extends BaseController {
 	@RequestMapping("/list")
 	@ResponseBody
 	public Map<String, Object> list(@RequestParam(required = true) Map<String, Object> params) {
-		
 		
 		if (params.isEmpty()) {
 			return params;

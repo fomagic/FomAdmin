@@ -14,7 +14,7 @@
 	</select>
 
 	<delete id="deleteRoleMenu">
-		delete from sys_role_menu where role_id = #{value}
+		delete from sys_role_menu where role_id = #{roleId}
 	</delete>
 
 	<insert id="saveRoleMenu">
