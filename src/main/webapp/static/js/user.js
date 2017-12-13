@@ -36,6 +36,7 @@ $(function () {
             order: "order"
         },
         gridComplete:function(){
+        	
         	//加载完毕调用
         }
     });
@@ -128,7 +129,7 @@ function saveOrUpdate(){
 	$.ajax({
 		type:"POST",
 		url:url,
-		contentType:"application/json",
+		dataType: "JSON",
 		data: JSON.stringify(userInfo),
 		success: function(res) {
 			
@@ -156,7 +157,7 @@ function deleteUser(){
 		$.ajax({
 			type:"POST",
 			url:"sys/user/delete",
-			contentType:"application/json",
+			dataType: "JSON",
 			data: JSON.stringify(userIds),
 			success:function(res){
 				var parsed = jQuery.parseJSON(res);

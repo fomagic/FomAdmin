@@ -146,7 +146,6 @@ public class SysLoginController extends BaseController {
 		}
 		Long userId = sysUser.getUserId();
 		List<SysMenu> menuList = null;
-		
 		menuList = sysMenuService.listUserMenu(userId);
 		
         logger.info("menuList-----" + menuList.size());

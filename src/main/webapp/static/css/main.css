@@ -19,7 +19,7 @@ html { overflow-x:hidden; }
 	margin-bottom: 12px;
 }
 
-#jqGrid {
+#jqGrid,#treegrid {
 	margin-bottom: 80px;
 }
 

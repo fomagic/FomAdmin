@@ -112,6 +112,7 @@ var zTree;
 //请求菜单树
 function getMenuTree() {
 	$.get("sys/menu/list",function(res){
+		alert(res);
 		var parsed = jQuery.parseJSON(res);
 		zTree = $.fn.zTree.init($("#menuTree"), setting, parsed);
 		zTree.expandAll(true);

@@ -123,7 +123,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 
 	private List<SysMenu> getMenuTreeList(List<SysMenu> menuList, List<Long> menuIdList) {
 		List<SysMenu> subMenuList = new ArrayList<SysMenu>();
-		
+
 		for (SysMenu menu : menuList) {
 			//目录
 			if (menu.getType() == 0) {
