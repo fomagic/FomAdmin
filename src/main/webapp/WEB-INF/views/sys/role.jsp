@@ -74,7 +74,7 @@
 
 
 
-	<div class="panel panel-default div-dispaly" id="role-information">
+	<div class="panel panel-default div-display-none" id="role-information">
 		<div class="panel-heading" id="role-title">角色</div>
 		<div class="panel-body">
 			<form class="form-horizontal" action="" method="post">

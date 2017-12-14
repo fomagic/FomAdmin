@@ -76,7 +76,7 @@
 
 
 
-	<div class="panel panel-default div-dispaly" id="user-information">
+	<div class="panel panel-default div-display-none" id="user-information">
 		<div class="panel-heading" id="user-title">用户信息</div>
 		<div class="panel-body">
 			<form class="form-horizontal" action="" method="post">

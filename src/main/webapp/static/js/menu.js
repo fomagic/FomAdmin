@@ -1,101 +1,110 @@
 $(function() {
+	
+	reloadMenuList();
+	getTreeGrid();
 
-			$.ajax({
-						url : "sys/menu/list",
-						dataType : "JSON",
-						success : function(res) {
-							getLevelData(res, 0, 0);
-							// $("#treegrid").jqGrid('clearGridData'); //清空表格
-							// $("#treegrid").jqGrid('setGridParam',{ // 重新加载数据
-							// datatype: "jsonstring",
-							// datastr: treeData
-							// }).trigger("reloadGrid");
-							getTreeGrid();
-						}
-					});
+	// 查询菜单按钮
+	$("#searchMenu").click(function() {
+		//reloadMenuList();
+	});
 
-			// 查询用户按钮
-			$("#getUser").click(function() {
-						reloadList();
-					});
+	// 添加菜单按钮
+	$("#saveMenu").click(function() {
+		clearPanel();
+		showList(false, "新增菜单");
+	});
+	// 修改用户
+	$("#updateMenu").click(function() {
+		var menuId = getSelectedRow();
+		if (menuId == null) {
+			return;
+		}
+		clearPanel();
+		getMenuInfo(menuId);
+		showList(false, "修改菜单");
+	});
 
-			// 添加用户按钮
-			$("#saveUser").click(function() {
-						clearPanel();
-						getRoleList();
-						showList(false, "添加用户");
-					});
-			// 修改用户
-			$("#updateUser").click(function() {
-						var userId = getSelectedRow();
-						if (userId == null) {
-							return;
-						}
-						clearPanel();
-						getRoleList();
-						getUserInfo(userId);
-						showList(false, "修改用户信息");
-					});
+	// 删除用户
+	$("#deleteMenu").click(function() {
 
-			// 删除用户
-			$("#deleteMenu").click(function() {
+		deleteMenu();
+	});
 
-						// deleteUser();
-					});
+	// 保存或修改确认
+	$("#saveOrUpdate").click(function() {
 
-			// 保存或修改确认
-			$("#saveOrUpdate").click(function() {
+		if (validator()) {
+			return;
+		}
+		saveOrUpdate();
+	});
 
-						if (validator()) {
-							return;
-						}
-						saveOrUpdate();
-					});
+	// 返回列表
+	$("#returnList").click(function() {
+		reloadMenuList();
+		showList(true);
+	});
+	
+	
 
-			// 返回列表
-			$("#returnList").click(function() {
-						reloadList();
-					});
+});
 
-		});
+var treeData = [];
 
-		var treeData = [];
+//加载菜单列表并按照规则整理数据
+function reloadMenuList() {
+	
+	treeData=[];
+	$("#jqGrid").jqGrid('clearGridData'); //清空表格
+	
+	$.ajax({
+		url : "sys/menu/list",
+		dataType : "JSON",
+		success : function(res) {
+			getLevelData(res, 0, 0);
+			
+			$("#jqGrid").jqGrid('setGridParam',{ // 重新加载数据
+			 	datastr: treeData,
+			 	treedatatype : "jsonstring"
+			}).trigger("reloadGrid");
+		}
+	});
+}
+
+//加载获取后的数据到jqgrid
 function getTreeGrid() {
-	$("#treegrid").jqGrid({
-		// url: "data.json",
+	$("#jqGrid").jqGrid({
+		//url: "sys/menu/list",
 		datatype : "jsonstring",
 		datastr : treeData,
 		colModel : [
-				{ label : "菜单ID", name : 'menuId', index : 'menuId', width : 80, key : true }, 
-				{ label : "菜单名称", name : 'name', width : 160 },
-				{ label : "父菜单", name : 'parentName', width : 100, align : "center" },
-				{
-					label : "图标",
-					name : 'icon',
-					width : 100
-				}, {
-					label : "类型",
-					name : 'type',
-					width : 60,
-					align : "center"
-				}, {
-					label : "序号",
-					name : 'orderNum',
-					width : 60,
-					align : "center"
-				}, {
-					label : "URL",
-					name : 'url',
-					width : 180
-				}, {
-					label : "授权",
-					name : 'perms',
-					width : 180
-				}],
+				{ label : "菜单ID", name : 'menuId', index : 'menuId', width : 50, key : true }, 
+				{ label : "菜单名称", name : 'name', width : 120 },
+				{ label : "父菜单", name : 'parentName', width : 60, align : "center" },
+				{ label : "图标", name : 'icon', width : 40, align : 'center', formatter : function(value, options, row){
+					return value == null ? '' : '<i class = "' + value +'">';
+				}},
+				{ label : "类型", name : 'type', width : 60, align : "center" ,formatter:function(value, options, row){
+					
+					if (value === 0) {
+						return '<sapn class="label label-primary">目录</span>';
+					}  
+					if (value === 1) {
+						return '<sapn class="label label-success">菜单</span>';
+					}
+					if (value === 2) {
+						return '<sapn class="label label-warning">按钮</span>';
+					}
+				}}, 
+				{ label : "序号", name : 'orderNum', width : 50, align : "center" }, 
+				{ label : "URL", name : 'url', width : 120 }, 
+				{ label : "授权", name : 'perms', width : 180}
+		],
 		hoverrows : false,
 		viewrecords : false,
 		gridview : true,
 		height : "auto",
+        autowidth:true,
 		sortname : "menuId",
 		treeGrid : true,
 		ExpandColumn : "name",
@@ -103,7 +112,6 @@ function getTreeGrid() {
 		// treeGridModel: "nested",
 		treeGridModel : "adjacency",
 		loadonce : true,
-		// configuration of the data comming from server
 		treeReader : {
 			parent_id_field : "parentId",
 			level_field : "level",
@@ -111,10 +119,25 @@ function getTreeGrid() {
 			expanded_field : "expanded",
 			loaded : "loaded",
 			icon_field:"xicon"
-		}
+		},
+        loadComplete: function(xhr){
+        	
+        },
+        gridComplete:function(){
+        	//加载完毕调用				
+        }
+//		treeIcons : {
+//			plus: "ui-icon-circlesmall-plus",
+//			minus: "ui-icon-circlesmall-minus",
+//			leaf : ""
+//		}
 
 	});
+	
 }
+
+
+//递归数组，排序生成符合treegrid要求的格式（暂时解决，效率问题，以后修改 思路：生成等级数组or遍历减去父节点）
 function getLevelData(rows,menuId,lv) {
 	var level = lv;
 	$.each(rows, function(index, item) {
@@ -138,40 +161,28 @@ function getLevelData(rows,menuId,lv) {
 }
 
 // 判断是否有用户名（插入还是更新）
-var mUserId = null;
+var mMenuId = null;
 
 // -----------------
-// 获取指定用户ID信息
-function getUserInfo(userId) {
+// 获取指定菜单ID信息
+function getMenuInfo(menuId) {
 	$.get("sys/user/info/" + userId, function(res) {
-				var parsed = jQuery.parseJSON(res);
-				var user = parsed.user;
-				$("#userName").val(user.userName);
-				$("#email").val(user.email);
-				$("#mobile").val(user.mobile);
-				$("input[name=status][value=" + user.status + "]").prop(
-						"checked", true);
-				$.each(user.roleIdList, function(index, roleId) {
-							$("input[name=roleStatus][value=" + roleId + "]")
-									.prop("checked", true);
-						});
+		var parsed = jQuery.parseJSON(res);
+		var user = parsed.user;
+		$("#userName").val(user.userName);
+		$("#email").val(user.email);
+		$("#mobile").val(user.mobile);
+		$("input[name=status][value=" + user.status + "]").prop(
+				"checked", true);
+		$.each(user.roleIdList, function(index, roleId) {
+					$("input[name=roleStatus][value=" + roleId + "]")
+							.prop("checked", true);
+				});
 
-				mUserId = user.userId;
-			});
-}
-
-// 请求角色列表
-function getRoleList() {
-	$.get("sys/role/select", function(res) {
-		var parsedJson = jQuery.parseJSON(res);
-		var html = "";
-		$.each(parsedJson.list, function(index, role) {
-			html += "<label class='checkbox-inline'><input type='checkbox' name='roleStatus' value="
-					+ role.roleId + ">" + role.roleName + "</label>";
-		});
-		$("#roleList").append(html);
+		mUserId = user.userId;
 	});
 }
+
 
 // 新增或者修改用户
 function saveOrUpdate() {
@@ -252,32 +263,19 @@ function clearPanel() {
 	$("#mobile").val("");
 	$("#roleList").empty();
 	mUserId = null;
-	$("input[name=status][value=1]").prop("checked", true);
+	$("input[name=menuType][value=0]").prop("checked", true);
 }
 
-// 重新加载表格
-function reloadList() {
-	showList(true);
-	var page = $("#jqGrid").jqGrid('getGridParam', 'page');
-	$("#jqGrid").jqGrid('setGridParam', {
-				postData : {
-					'searchName' : $("#searchName").val()
-				},
-				page : page
-			}).trigger("reloadGrid");
-
-	$("#jqGrid").setGridWidth($(window).width());
-}
 
 // 显示列表或者编辑界面
 function showList(show, title) {
-	$("#user-title").text(title);
+	$("#menu-title").text(title);
 	if (show) {
-		$("#user-list").show();
-		$("#user-information").hide();
+		$("#menu-list").show();
+		$("#menu-information").hide();
 	} else {
-		$("#user-list").hide();
-		$("#user-information").show();
+		$("#menu-list").hide();
+		$("#menu-information").show();
 	}
 }
 

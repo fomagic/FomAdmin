@@ -48,80 +48,84 @@
 </head>
 <body>
 
-	<div id="user-list">
+	<div id="menu-list">
 		<div class="grid-btn">
 			<div class="form-group col-sm-3">
 				<div class="input-group ">
-					<input type="text" class="form-control" id="searchName"
-						placeholder="菜单名称"> <span class="input-group-btn">
-						<button class="btn btn-default form-control" type="button"
-							id="searchMenu">查询</button>
+					<input type="text" class="form-control" id="searchName" placeholder="菜单名称"> <span class="input-group-btn">
+						<button class="btn btn-default form-control" type="button" id="searchMenu">查询</button>
 					</span>
 				</div>
 			</div>
 			<shiro:hasPermission name="sys:menu:save">
-				<a class="btn btn-primary btn-flat" id="saveMenu"><i
-					class="fa fa-plus"></i>&nbsp;新增</a>
+				<a class="btn btn-primary btn-flat" id="saveMenu"><i class="fa fa-plus"></i>&nbsp;新增</a>
 			</shiro:hasPermission>
 			<shiro:hasPermission name="sys:menu:update">
-				<a class="btn btn-primary btn-flat" id="updateMenu"><i
-					class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+				<a class="btn btn-primary btn-flat" id="updateMenu"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
 			</shiro:hasPermission>
 			<shiro:hasPermission name="sys:menu:delete">
-				<a class="btn btn-primary btn-flat" id="deleteMenu"><i
-					class="fa fa-trash-o"></i>&nbsp;删除</a>
+				<a class="btn btn-primary btn-flat" id="deleteMenu"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
 			</shiro:hasPermission>
 		</div>
-		<table id="treegrid"></table>
+		<table id="jqGrid"></table>
 	</div>
 
 	
 
-	<div class="panel panel-default div-dispaly" id="user-information">
-		<div class="panel-heading" id="user-title">用户信息</div>
+	<div class="panel panel-default div-display-none" id="menu-information">
+		<div class="panel-heading" id="menu-title">菜单</div>
 		<div class="panel-body">
 			<form class="form-horizontal" action="" method="post">
 				<div class="form-group">
-					<label class="col-sm-2 control-label">用户名</label>
+					<label class="col-sm-2 control-label">类型</label>
+					<div class="col-sm-10">
+						<label class="radio-inline">
+							<input type="radio" name = "menuType" value = "0" >目录
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name = "menuType" value = "1" >菜单
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name = "menuType" value = "2" >按钮
+						</label>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-sm-2 control-label">名称</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="username"
-							placeholder="登录账号" id="userName">
+						<input type="text" class="form-control" name="menuName" placeholder="菜单或按钮名称" id="menuName" >
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="col-sm-2 control-label">密码</label>
+					<label class="col-sm-2 control-label">上级菜单</label>
 					<div class="col-sm-4">
-						<input type="password" class="form-control" name="password"
-							placeholder="密码" id="password">
+						<input type="password" class="form-control" name="parentId" placeholder="默认为一级菜单" id="parentId" readonly>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label">邮箱</label>
+					<label class="col-sm-2 control-label">菜单URL</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="email"
-							placeholder="邮箱" id="email">
+						<input type="text" class="form-control" name="url" placeholder="菜单URL" id="menuURL">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label">手机号</label>
+					<label class="col-sm-2 control-label">授权标识</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="mobile"
-							placeholder="手机号" id="mobile">
+						<input type="text" class="form-control" name="perms" placeholder="多个逗号分割：user:list,user:update" id="perms">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label">角色</label>
-					<div class="col-sm-8" id="roleList"></div>
+					<label class="col-sm-2 control-label">序号</label>
+					<div class="col-sm-4">
+						<input type="number" class="form-control" value=0 name="orderNum" id="orderNum">
+					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label">状态</label>
-					<div class="col-sm-10">
-						<label class="radio-inline"> <input type="radio"
-							name="status" value="0">禁用
-						</label> <label class="radio-inline"> <input type="radio"
-							name="status" value="1">正常
-						</label>
+					<label class="col-sm-2 control-label">图标</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" name="icon" id="icon">
 					</div>
 				</div>
 
@@ -152,7 +156,7 @@
 
 	<!-- jqGrid -->
 	<script src="static/plugins/jqGrid/js/grid.locale-cn.js"></script>
-	<script src="static/plugins/jqGrid/js/jquery.jqGrid.min.js"></script>
+	<script src="static/plugins/jqGrid/js/jquery.jqGrid.js"></script>
 
 	<!-- Owner  -->
 	<script src="static/js/common.js"></script>
