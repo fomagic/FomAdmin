@@ -206,8 +206,8 @@ function getTreeGrid() {
         	//加载完毕调用				
         },
 		treeIcons : {
-			plus: "fa fa-caret-right",
-			minus: "fa fa-caret-down",
+//			plus: "fa fa-caret-right",
+//			minus: "fa fa-caret-down",
 			leaf : ""
 		}
 
