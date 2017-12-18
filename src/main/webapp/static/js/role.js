@@ -84,7 +84,7 @@ $(function () {
 
 
 //----------------
-
+var zTree;
 var setting = {
 	check: {
 		enable: true
@@ -107,12 +107,11 @@ var setting = {
 
 //判断是否有角色名（插入还是更新）
 var mRoleId = null;
-var zTree;
+
 
 //请求菜单树
 function getMenuTree() {
 	$.get("sys/menu/list",function(res){
-		alert(res);
 		var parsed = jQuery.parseJSON(res);
 		zTree = $.fn.zTree.init($("#menuTree"), setting, parsed);
 		zTree.expandAll(true);
@@ -146,22 +145,19 @@ function saveOrUpdate(){
 	var roleInfo = getPanelInfo();
 	roleInfo.roleId = mRoleId;
 	
-	alert(JSON.stringify(roleInfo));
-	
 	$.ajax({
 		type:"POST",
 		url:url,
 		contentType:"application/json",
+		dataType: "json",
 		data: JSON.stringify(roleInfo),
 		success: function(res) {
 			
-			var parsed = jQuery.parseJSON(res);
-			
-			if (parsed.code === 0) {
+			if (res.code === 0) {
 				alert("操作成功");
 				reloadList();
 			} else {
-				alert(parsed.msg);
+				alert(res.msg);
 			}
 		}
 	});
@@ -180,15 +176,15 @@ function deleteUser(){
 			type:"POST",
 			url:"sys/role/delete",
 			contentType:"application/json",
+			dataType: "json",
 			data: JSON.stringify(roleIds),
 			success:function(res){
-				var parsed = jQuery.parseJSON(res);
 			
-    			if (parsed.code === 0) {
+    			if (res.code === 0) {
     				alert("删除成功");
     				reloadList();
     			} else {
-    				alert(parsed.msg);
+    				alert(res.msg);
     			}
 			}
 		});

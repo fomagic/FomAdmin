@@ -53,20 +53,26 @@
 <body>
 
 	<div id="role-list">
-		<div class="grid-btn">
-			<div class="form-group col-sm-3">
-				<input type="text" class="form-control" id="searchName" placeholder="角色名称">
+		<div class="grid-btn row" >
+			<div class="form-group col-sm-3" >
+				<div class="input-group">
+					<input type="text" class="form-control" id="searchName" placeholder="角色名称"> 
+					<span class="input-group-btn">
+						<button class="btn btn-default form-control" type="button" id="getRole">查询</button>
+					</span>
+				</div>
 			</div>
-			<a class="btn btn-default btn-flat" id="getRole">查询</a>
-			<shiro:hasPermission name="sys:role:save">
-				<a class="btn btn-primary btn-flat" id="saveRole"><i class="fa fa-plus"></i>&nbsp;新增</a>
-			</shiro:hasPermission>
-			<shiro:hasPermission name="sys:role:update">
-				<a class="btn btn-primary btn-flat" id="updateRole"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
-			</shiro:hasPermission>
-			<shiro:hasPermission name="sys:role:delete">
-				<a class="btn btn-primary btn-flat" id="deleteRole"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
-			</shiro:hasPermission>
+			<div class="form-group col-sm-4  pull-right text-right">
+				<shiro:hasPermission name="sys:role:save">
+					<a class="btn btn-primary btn-flat" id="saveRole"><i class="fa fa-plus"></i>&nbsp;新增</a>
+				</shiro:hasPermission>
+				<shiro:hasPermission name="sys:role:update">
+					<a class="btn btn-primary btn-flat" id="updateRole"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+				</shiro:hasPermission>
+				<shiro:hasPermission name="sys:role:delete">
+					<a class="btn btn-primary btn-flat" id="deleteRole"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+				</shiro:hasPermission>
+			</div>
 		</div>
 		<table id="jqGrid"></table>
 		<div id="jqGridPager"></div>
@@ -74,7 +80,7 @@
 
 
 
-	<div class="panel panel-default div-display-none" id="role-information">
+	<div class="panel panel-default  div-display-none" id="role-information">
 		<div class="panel-heading" id="role-title">角色</div>
 		<div class="panel-body">
 			<form class="form-horizontal" action="" method="post">

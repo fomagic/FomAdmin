@@ -129,17 +129,15 @@ function saveOrUpdate(){
 	$.ajax({
 		type:"POST",
 		url:url,
-		dataType: "JSON",
+		contentType : "application/json",
+		dataType: "json",
 		data: JSON.stringify(userInfo),
 		success: function(res) {
-			
-			var parsed = jQuery.parseJSON(res);
-			
-			if (parsed.code === 0) {
+			if (res.code === 0) {
 				alert("操作成功");
 				reloadList();
 			} else {
-				alert(parsed.msg);
+				alert(res.msg);
 			}
 		}
 	});
@@ -157,16 +155,15 @@ function deleteUser(){
 		$.ajax({
 			type:"POST",
 			url:"sys/user/delete",
-			dataType: "JSON",
+			contentType : "application/json",
+			dataType: "json",
 			data: JSON.stringify(userIds),
 			success:function(res){
-				var parsed = jQuery.parseJSON(res);
-			
-    			if (parsed.code === 0) {
+    			if (res.code === 0) {
     				alert("删除成功");
     				reloadList();
     			} else {
-    				alert(parsed.msg);
+    				alert(res.msg);
     			}
 			}
 		});

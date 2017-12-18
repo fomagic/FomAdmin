@@ -51,24 +51,32 @@
 <body>
 
 	<div id="user-list">
-		<div class="grid-btn">
+		<div class="grid-btn row">
+
 			<div class="form-group col-sm-3">
-				<input type="text" class="form-control" id="searchName"
-					placeholder="用户名">
+				<div class="input-group">
+					<input type="text" class="form-control" id="searchName"
+						placeholder="用户名"> <span class="input-group-btn">
+						<button class="btn btn-default form-control" type="button"
+							id="getUser">查询</button>
+					</span>
+				</div>
 			</div>
-			<a class="btn btn-default btn-flat" id="getUser">查询</a>
-			<shiro:hasPermission name="sys:role:save">
-				<a class="btn btn-primary btn-flat" id="saveUser"><i
-					class="fa fa-plus"></i>&nbsp;新增</a>
-			</shiro:hasPermission>
-			<shiro:hasPermission name="sys:role:update">
-				<a class="btn btn-primary btn-flat" id="updateUser"><i
-					class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
-			</shiro:hasPermission>
-			<shiro:hasPermission name="sys:role:delete">
-				<a class="btn btn-primary btn-flat" id="deleteUser"><i
-					class="fa fa-trash-o"></i>&nbsp;删除</a>
-			</shiro:hasPermission>
+			<div class="form-group col-sm-4  pull-right text-right">
+				<shiro:hasPermission name="sys:role:save">
+					<a class="btn btn-primary btn-flat" id="saveUser"><i
+						class="fa fa-plus"></i>&nbsp;新增</a>
+				</shiro:hasPermission>
+				<shiro:hasPermission name="sys:role:update">
+					<a class="btn btn-primary btn-flat" id="updateUser"> <i
+						class="fa fa-pencil-square-o"></i>&nbsp;修改
+					</a>
+				</shiro:hasPermission>
+				<shiro:hasPermission name="sys:role:delete">
+					<a class="btn btn-primary btn-flat" id="deleteUser"><i
+						class="fa fa-trash-o"></i>&nbsp;删除</a>
+				</shiro:hasPermission>
+			</div>
 		</div>
 		<table id="jqGrid"></table>
 		<div id="jqGridPager"></div>
@@ -76,55 +84,62 @@
 
 
 
-	<div class="panel panel-default div-display-none" id="user-information">
+	<div class="panel panel-default  div-display-none"
+		id="user-information">
 		<div class="panel-heading" id="user-title">用户信息</div>
 		<div class="panel-body">
 			<form class="form-horizontal" action="" method="post">
 				<div class="form-group">
 					<label class="col-sm-2 control-label">用户名</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="username" placeholder="登录账号" id="userName">
+						<input type="text" class="form-control" name="username"
+							placeholder="登录账号" id="userName">
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label class="col-sm-2 control-label">密码</label>
 					<div class="col-sm-4">
-						<input type="password" class="form-control" name="password" placeholder="密码" id="password" >
+						<input type="password" class="form-control" name="password"
+							placeholder="密码" id="password">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">邮箱</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="email" placeholder="邮箱" id="email">
+						<input type="text" class="form-control" name="email"
+							placeholder="邮箱" id="email">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">手机号</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="mobile" placeholder="手机号" id="mobile" >
+						<input type="text" class="form-control" name="mobile"
+							placeholder="手机号" id="mobile">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">角色</label>
-					<div class="col-sm-8" id="roleList">
-					
-						
-					</div>
+					<div class="col-sm-8" id="roleList"></div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">状态</label>
 					<div class="col-sm-10">
-						<label class="radio-inline"> <input type="radio" name="status" value="0">禁用</label> 
-						<label class="radio-inline"> <input type="radio" name="status" value="1">正常</label>
+						<label class="radio-inline"> <input type="radio"
+							name="status" value="0">禁用
+						</label> <label class="radio-inline"> <input type="radio"
+							name="status" value="1">正常
+						</label>
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label class="col-sm-2 control-label"></label>
 					<div class="col-sm-4">
-						<input type="button" class="btn btn-primary btn-flat" value="确定" id="saveOrUpdate"/>
-						<input type="button" class="btn btn-warning btn-flat pull-right" value="返回" id="returnList"/>
+						<input type="button" class="btn btn-primary btn-flat" value="确定"
+							id="saveOrUpdate" /> <input type="button"
+							class="btn btn-warning btn-flat pull-right" value="返回"
+							id="returnList" />
 					</div>
 				</div>
 			</form>

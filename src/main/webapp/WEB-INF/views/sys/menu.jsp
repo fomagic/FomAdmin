@@ -35,6 +35,9 @@
 <link rel="stylesheet" href="static/css/_all-skins.min.css">
 <!-- jqGrid -->
 <link rel="stylesheet" href="static/plugins/jqGrid/css/ui.jqgrid-bootstrap.css">
+<!-- zTree -->
+<link rel="stylesheet" href="static/plugins/zTree/css/metroStyle/metroStyle.css">
+
 <!-- Owner -->
 <link rel="stylesheet" href="static/css/main.css">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -49,44 +52,38 @@
 <body>
 
 	<div id="menu-list">
-		<div class="grid-btn">
-			<div class="form-group col-sm-3">
-				<div class="input-group ">
-					<input type="text" class="form-control" id="searchName" placeholder="菜单名称"> <span class="input-group-btn">
-						<button class="btn btn-default form-control" type="button" id="searchMenu">查询</button>
-					</span>
-				</div>
-			</div>
-			<shiro:hasPermission name="sys:menu:save">
+		<div class="grid-btn row">
+			<div class="form-group col-sm-4 pull-right text-right">
+				<shiro:hasPermission name="sys:menu:save">
 				<a class="btn btn-primary btn-flat" id="saveMenu"><i class="fa fa-plus"></i>&nbsp;新增</a>
-			</shiro:hasPermission>
-			<shiro:hasPermission name="sys:menu:update">
-				<a class="btn btn-primary btn-flat" id="updateMenu"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
-			</shiro:hasPermission>
-			<shiro:hasPermission name="sys:menu:delete">
-				<a class="btn btn-primary btn-flat" id="deleteMenu"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
-			</shiro:hasPermission>
+				</shiro:hasPermission>
+				<shiro:hasPermission name="sys:menu:update">
+					<a class="btn btn-primary btn-flat" id="updateMenu"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+				</shiro:hasPermission>
+				<shiro:hasPermission name="sys:menu:delete">
+					<a class="btn btn-primary btn-flat" id="deleteMenu"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+				</shiro:hasPermission>
+			</div>
 		</div>
 		<table id="jqGrid"></table>
 	</div>
 
-	
 
 	<div class="panel panel-default div-display-none" id="menu-information">
 		<div class="panel-heading" id="menu-title">菜单</div>
 		<div class="panel-body">
-			<form class="form-horizontal" action="" method="post">
+			<form class="form-horizontal">
 				<div class="form-group">
 					<label class="col-sm-2 control-label">类型</label>
 					<div class="col-sm-10">
 						<label class="radio-inline">
-							<input type="radio" name = "menuType" value = "0" >目录
+							<input type="radio" name = "menuType" value = 0 >目录
 						</label>
 						<label class="radio-inline">
-							<input type="radio" name = "menuType" value = "1" >菜单
+							<input type="radio" name = "menuType" value = 1 >菜单
 						</label>
 						<label class="radio-inline">
-							<input type="radio" name = "menuType" value = "2" >按钮
+							<input type="radio" name = "menuType" value = 2 >按钮
 						</label>
 					</div>
 				</div>
@@ -101,28 +98,28 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">上级菜单</label>
 					<div class="col-sm-4">
-						<input type="password" class="form-control" name="parentId" placeholder="默认为一级菜单" id="parentId" readonly>
+						<input type="text" class="form-control" name="parentName" placeholder="默认为一级菜单,请选择" id="parentName" readonly >
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" id="div-menu-url">
 					<label class="col-sm-2 control-label">菜单URL</label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" name="url" placeholder="菜单URL" id="menuURL">
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group"  id="div-menu-perms">
 					<label class="col-sm-2 control-label">授权标识</label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" name="perms" placeholder="多个逗号分割：user:list,user:update" id="perms">
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group"  id="div-menu-order">
 					<label class="col-sm-2 control-label">序号</label>
 					<div class="col-sm-4">
 						<input type="number" class="form-control" value=0 name="orderNum" id="orderNum">
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" id="div-menu-icon">
 					<label class="col-sm-2 control-label">图标</label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" name="icon" id="icon">
@@ -142,6 +139,25 @@
 		</div>
 
 	</div>
+	
+	<div class="modal fade" tabindex="-1" role="dialog" id="showMenuList">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+					<h4 class="modal-title">选择菜单</h4>
+				</div>
+				<div class="modal-body">
+					<ul id="menuTree" class="ztree"></ul>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary btn-flat" id="selectMenu">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 
@@ -158,6 +174,9 @@
 	<script src="static/plugins/jqGrid/js/grid.locale-cn.js"></script>
 	<script src="static/plugins/jqGrid/js/jquery.jqGrid.js"></script>
 
+	<!-- zTree -->
+	<script src="static/plugins/zTree/js/jquery.ztree.all.js"></script>
+	
 	<!-- Owner  -->
 	<script src="static/js/common.js"></script>
 	<script src="static/js/menu.js"></script>

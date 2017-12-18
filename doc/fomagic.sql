@@ -11,7 +11,7 @@
  Target Server Version : 50638
  File Encoding         : 65001
 
- Date: 30/11/2017 10:24:46
+ Date: 18/12/2017 18:29:18
 */
 
 SET NAMES utf8mb4;
@@ -31,16 +31,16 @@ CREATE TABLE `sys_menu` (
   `icon` varchar(50) DEFAULT NULL COMMENT '菜单图标',
   `order_num` int(11) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
 BEGIN;
 INSERT INTO `sys_menu` VALUES (1, 0, '系统管理', NULL, NULL, 0, 'fa fa-cog', 0);
-INSERT INTO `sys_menu` VALUES (2, 1, '管理员列表', 'modules/sys/user.html', NULL, 1, 'fa fa-user', 1);
-INSERT INTO `sys_menu` VALUES (3, 1, '角色管理', 'modules/sys/role.html', NULL, 1, 'fa fa-user-secret', 2);
-INSERT INTO `sys_menu` VALUES (4, 1, '菜单管理', 'modules/sys/menu.html', NULL, 1, 'fa fa-th-list', 3);
+INSERT INTO `sys_menu` VALUES (2, 1, '管理员列表', 'sys/user', NULL, 1, 'fa fa-user', 1);
+INSERT INTO `sys_menu` VALUES (3, 1, '角色管理', 'sys/role', NULL, 1, 'fa fa-user-secret', 2);
+INSERT INTO `sys_menu` VALUES (4, 1, '菜单管理', 'sys/menu', NULL, 1, 'fa fa-th-list', 3);
 INSERT INTO `sys_menu` VALUES (5, 1, 'SQL监控', 'druid/sql.html', NULL, 1, 'fa fa-bug', 4);
 INSERT INTO `sys_menu` VALUES (6, 1, '定时任务', 'modules/job/schedule.html', NULL, 1, 'fa fa-tasks', 5);
 INSERT INTO `sys_menu` VALUES (7, 6, '查看', NULL, 'sys:schedule:list,sys:schedule:info', 2, NULL, 0);
@@ -66,6 +66,14 @@ INSERT INTO `sys_menu` VALUES (26, 4, '删除', NULL, 'sys:menu:delete', 2, NULL
 INSERT INTO `sys_menu` VALUES (27, 1, '参数管理', 'modules/sys/config.html', 'sys:config:list,sys:config:info,sys:config:save,sys:config:update,sys:config:delete', 1, 'fa fa-sun-o', 6);
 INSERT INTO `sys_menu` VALUES (29, 1, '系统日志', 'modules/sys/log.html', 'sys:log:list', 1, 'fa fa-file-text-o', 7);
 INSERT INTO `sys_menu` VALUES (30, 1, '文件上传', 'modules/oss/oss.html', 'sys:oss:all', 1, 'fa fa-file-image-o', 6);
+INSERT INTO `sys_menu` VALUES (62, 0, '目录1', '', '', 0, '', 1);
+INSERT INTO `sys_menu` VALUES (63, 0, '目录修改2', '', '', 0, 'fa fa-bookmark', 3);
+INSERT INTO `sys_menu` VALUES (65, 62, '目录1-2', '', '', 0, '', NULL);
+INSERT INTO `sys_menu` VALUES (67, 65, '菜单1', '', '', 0, '', 0);
+INSERT INTO `sys_menu` VALUES (68, 65, '菜单2', '21212', '', 1, '', 0);
+INSERT INTO `sys_menu` VALUES (69, 63, '菜单2-2', '22222', '', 1, '', NULL);
+INSERT INTO `sys_menu` VALUES (70, 0, '21212121212121', '21212', '', 1, '', 0);
+INSERT INTO `sys_menu` VALUES (71, 0, '1212121212121212', '', '', 0, '', NULL);
 COMMIT;
 
 -- ----------------------------
@@ -79,7 +87,17 @@ CREATE TABLE `sys_role` (
   `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建者ID',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sys_role
+-- ----------------------------
+BEGIN;
+INSERT INTO `sys_role` VALUES (14, 'zcdasd', 'adsasdd', 1, '2017-12-11 16:01:07');
+INSERT INTO `sys_role` VALUES (15, 'aadasd', 'asdadasds', 1, '2017-12-11 16:03:40');
+INSERT INTO `sys_role` VALUES (16, 'dfsdfedfedf', 'sdfsdfdsf', 1, '2017-12-12 18:02:20');
+INSERT INTO `sys_role` VALUES (17, '哈哈哈', '深深的', 1, '2017-12-18 10:13:47');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -90,7 +108,27 @@ CREATE TABLE `sys_role_menu` (
   `role_id` int(20) DEFAULT NULL COMMENT '角色ID',
   `menu_id` int(20) DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
+
+-- ----------------------------
+-- Records of sys_role_menu
+-- ----------------------------
+BEGIN;
+INSERT INTO `sys_role_menu` VALUES (21, 16, 1);
+INSERT INTO `sys_role_menu` VALUES (22, 16, 3);
+INSERT INTO `sys_role_menu` VALUES (23, 16, 19);
+INSERT INTO `sys_role_menu` VALUES (24, 16, 4);
+INSERT INTO `sys_role_menu` VALUES (25, 16, 23);
+INSERT INTO `sys_role_menu` VALUES (26, 16, 24);
+INSERT INTO `sys_role_menu` VALUES (27, 16, 25);
+INSERT INTO `sys_role_menu` VALUES (28, 16, 26);
+INSERT INTO `sys_role_menu` VALUES (29, 17, 1);
+INSERT INTO `sys_role_menu` VALUES (30, 17, 3);
+INSERT INTO `sys_role_menu` VALUES (31, 17, 19);
+INSERT INTO `sys_role_menu` VALUES (32, 17, 20);
+INSERT INTO `sys_role_menu` VALUES (33, 17, 21);
+INSERT INTO `sys_role_menu` VALUES (34, 17, 22);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -106,14 +144,24 @@ CREATE TABLE `sys_user` (
   `status` varchar(4) DEFAULT NULL COMMENT '用户状态  0：禁用  1：正常',
   `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建者ID',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `username` (`username`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_user` VALUES (1, 'magic', '3d19491d6fc5645c243b8fa78b770444', 'magic', 'magic@qqq.com', '1234', '1', 1, '2017-11-11 11:11:11');
+INSERT INTO `sys_user` VALUES (1, 'magic', '6676480f0f77c6915478739fcb67e7b5', 'magic', 'magic@qqq.com', '1234', '1', 1, '2017-11-11 11:11:11');
+INSERT INTO `sys_user` VALUES (2, 'soul', 'b5b089370c04bc0892d6ffc0bf6d9cdd', 'magic', 'soul@qq.com', '12345678', '0', 1, NULL);
+INSERT INTO `sys_user` VALUES (4, 'sssss', '208a2bb5e0f45bbe4e2a228b34b0322e', 'magic', 'soul@qq.com', '12345678', '0', 1, NULL);
+INSERT INTO `sys_user` VALUES (5, 'dssds', '6676480f0f77c6915478739fcb67e7b5', 'magic', 'magic@qqq.com', '1234', '1', 1, '2017-11-11 11:11:11');
+INSERT INTO `sys_user` VALUES (6, 'dfffdf', '208a2bb5e0f45bbe4e2a228b34b0322e', 'magic', 'soul@qq.com', '12345678', '0', 1, NULL);
+INSERT INTO `sys_user` VALUES (7, 'vbvbvb', '6676480f0f77c6915478739fcb67e7b5', 'magic', 'magic@qqq.com', '1234', '1', 1, '2017-11-11 11:11:11');
+INSERT INTO `sys_user` VALUES (8, 'nbnbnb', '208a2bb5e0f45bbe4e2a228b34b0322e', 'magic', 'soul@qq.com', '12345678', '0', 1, NULL);
+INSERT INTO `sys_user` VALUES (9, 'xcxcx', '6676480f0f77c6915478739fcb67e7b5', 'magic', 'magic@qqq.com', '1234', '1', 1, '2017-11-11 11:11:11');
+INSERT INTO `sys_user` VALUES (45, '2121', '48e7c93922546313d118b1eb14751982', '2121', '212', '21212', '1', 1, '2017-12-08 17:27:06');
+INSERT INTO `sys_user` VALUES (46, '12121212', '741c7ce99daa8fb6a81ee59f67ede114', '12121212', '4343', '45454', '1', 1, '2017-12-08 17:27:14');
 COMMIT;
 
 -- ----------------------------
@@ -121,7 +169,7 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`)
