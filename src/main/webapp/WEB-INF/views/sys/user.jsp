@@ -63,16 +63,16 @@
 				</div>
 			</div>
 			<div class="form-group col-sm-4  pull-right text-right">
-				<shiro:hasPermission name="sys:role:save">
+				<shiro:hasPermission name="sys:user:save">
 					<a class="btn btn-primary btn-flat" id="saveUser"><i
 						class="fa fa-plus"></i>&nbsp;新增</a>
 				</shiro:hasPermission>
-				<shiro:hasPermission name="sys:role:update">
+				<shiro:hasPermission name="sys:user:update">
 					<a class="btn btn-primary btn-flat" id="updateUser"> <i
 						class="fa fa-pencil-square-o"></i>&nbsp;修改
 					</a>
 				</shiro:hasPermission>
-				<shiro:hasPermission name="sys:role:delete">
+				<shiro:hasPermission name="sys:user:delete">
 					<a class="btn btn-primary btn-flat" id="deleteUser"><i
 						class="fa fa-trash-o"></i>&nbsp;删除</a>
 				</shiro:hasPermission>

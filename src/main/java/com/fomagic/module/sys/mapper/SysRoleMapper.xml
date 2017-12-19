@@ -78,8 +78,8 @@
 	<update id="updateRole" parameterType="com.fomagic.module.sys.entity.SysRole">
 		update sys_role 
 		<set> 
-			<if test="roleName != null">`role_name` = #{roleName}, </if>
-			<if test="remark != null">`remark` = #{remark}</if>
+			<if test="roleName != null and roleName.trim() != ''">`role_name` = #{roleName}, </if>
+			<if test="remark != null and remark.trim() != ''">`remark` = #{remark}</if>
 		</set>
 		where role_id = #{roleId}
 	</update>

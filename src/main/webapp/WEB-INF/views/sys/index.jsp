@@ -10,7 +10,7 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<html lang="">
+<html>
 
 	<head>
 		<meta charset="utf-8">
@@ -150,7 +150,7 @@
 					</div>
 					<div class="modal-body">
 
-						<form class="form-horizontal" action="sys/user/password" method="post">
+						<form class="form-horizontal" >
 							<div class="box-body">
 
 								<div class="form-group">
@@ -165,19 +165,19 @@
 									<label class="col-sm-2 control-label">原密码</label>
 
 									<div class="col-sm-10">
-										<input type="password" class="form-control" name="password" placeholder="原密码">
+										<input type="password" class="form-control" name="password" placeholder="原密码" id="password">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label">新密码</label>
 
 									<div class="col-sm-10">
-										<input type="password" class="form-control" name="newPassword" placeholder="新密码">
+										<input type="password" class="form-control" name="newPassword" placeholder="新密码" id="newPassword">
 									</div>
 								</div>
 							</div>
 							<div class="modal-footer">
-								<button type="submit" class="btn btn-primary btn-flat">修改</button>
+								<button type="button" class="btn btn-primary btn-flat" id="btnPassword">修改</button>
 							</div>
 						</form>
 

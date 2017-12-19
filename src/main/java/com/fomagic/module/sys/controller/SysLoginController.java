@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.fomagic.common.controller.BaseController;
@@ -47,8 +48,6 @@ public class SysLoginController extends BaseController {
 	 */
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
 	public String login(String username, String password,String captcha, boolean rememberMe,RedirectAttributesModelMap modelMap) {
-
-		logger.info("login username ============ " +username);
 		
 		Subject curUser = SecurityUtils.getSubject();
 		

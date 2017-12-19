@@ -90,11 +90,11 @@ var mMenu = {
 	menuId:null,
 	parentId:0,
 	parentName:null,
-	url:"",
+	url:null,
 	type:1,
-	perms:"",
+	perms:null,
 	orderNum:0,
-	icon:""
+	icon:null
 };
 var treeData = [];
 //菜单树
@@ -259,7 +259,7 @@ function saveOrUpdate() {
 	}
 	var url = mMenu.menuId == null ? "sys/menu/save" : "sys/menu/update";
 	getPanelInfo();
-	alert(JSON.stringify(mMenu));
+	
 	$.ajax({
 		type : "POST",
 		url : url,
@@ -272,7 +272,7 @@ function saveOrUpdate() {
 				alert("操作成功");
 				reloadMenuList();
 			} else {
-				alert("res.msg = "+res.msg);
+				alert(res.msg);
 			}
 		}
 	});
@@ -373,7 +373,7 @@ function validator() {
 	}
 
 	if ($("input[name=menuType]:checked").val()==1 && $("#menuURL").val().length == 0) {
-		alert("菜单URL不能为空");
+		alert("菜单url不能为空");
 		return true;
 	}
 

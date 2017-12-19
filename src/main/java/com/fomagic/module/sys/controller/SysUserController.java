@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.fomagic.common.controller.BaseController;
 import com.fomagic.common.util.QueryUtil;
@@ -133,12 +132,16 @@ public class SysUserController extends BaseController {
 	
 	
 	@RequestMapping("/password")
-	public String password(String password, String newPassword, RedirectAttributesModelMap modelMap) {
+	@ResponseBody
+	public Map<String, Object> password(String password, String newPassword) {
 
+		Map<String, Object> map = new HashMap<String,Object>();
+		
 		if (StringUtils.isEmpty(password) || StringUtils.isEmpty(newPassword)) {
-			
+			map.put("msg", "密码不能为空");
+			System.out.println("password="+password+"&newPassword="+newPassword);
+			return map;
 		}
-
 		SysUser sysUser = (SysUser) SecurityUtils.getSubject().getPrincipal();
 		// 原密码
 		password = new SimpleHash("MD5", password, sysUser.getUserName(), 1024).toString();
@@ -146,9 +149,13 @@ public class SysUserController extends BaseController {
 		newPassword = new SimpleHash("MD5", newPassword, sysUser.getUserName(), 1024).toString();
 		// 更新密码
 		int count = sysUserService.updatePassword(sysUser.getUserId(), password, newPassword);
-		modelMap.addFlashAttribute("errMsg", count == 0 ? "原密码不正确，请重新登陆" : "修改成功，请重新登陆");
-		SecurityUtils.getSubject().logout();
-		return redirect("/sys/login");
+		
+		if (count == 0) {
+			map.put("msg", "原密码不正确,重新输入");
+			return map;
+		}
+		map.put("code", 0);
+		return map;
 	}
 
 }

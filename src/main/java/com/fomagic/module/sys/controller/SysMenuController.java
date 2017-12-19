@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fomagic.common.controller.BaseController;
 import com.fomagic.module.sys.entity.SysMenu;
+import com.fomagic.module.sys.entity.SysUser;
 import com.fomagic.module.sys.service.SysMenuService;
 
 /**
@@ -50,7 +52,7 @@ public class SysMenuController extends BaseController {
 	@RequestMapping("/list")
 	@ResponseBody
 	public List<SysMenu> listMenu() {
-		List<SysMenu> menuList = sysMenuService.listMenu(new HashMap<String,Object>());
+		List<SysMenu> menuList = sysMenuService.listMenu(((SysUser) SecurityUtils.getSubject().getPrincipal()).getUserId());
 		
 		return menuList;
 	}
@@ -111,8 +113,12 @@ public class SysMenuController extends BaseController {
 	@RequestMapping("/delete")
 	@ResponseBody
 	public Map<String,Object> deleteMenu(Long menuId) {
-		
 		Map<String, Object> map = new HashMap<String,Object>();
+		
+		if (menuId<=30) {
+			map.put("msg", "系统菜单，万万不可删除啊");
+			return map;
+		}
 		List<SysMenu> menuList = sysMenuService.listMenuIdByParentId(menuId);
 		if (menuList.size()>0) {
 			map.put("msg", "请先删除子菜单或按钮");
@@ -170,12 +176,12 @@ public class SysMenuController extends BaseController {
 	 */
 	private Map<String, Object> verifyForm(SysMenu menu){
 		Map<String, Object> map = new HashMap<String,Object>();
-		map.put("menu", menu);
+		
 		if (StringUtils.isBlank(menu.getName())) {
 			map.put("msg", "菜单名称不能为空");
 			return map;
 		} 
-		if (menu.getParentName()==null) {
+		if (menu.getParentId()==null) {
 			map.put("msg", "上级菜单不能为空");
 			return map;
 		} 
@@ -197,7 +203,7 @@ public class SysMenuController extends BaseController {
 		//目录、菜单
 		if (menu.getType() == 0 || menu.getType() == 1) {
 			if (parentType != 0) {
-				map.put("msg", "菜单URL不能为空");
+				map.put("msg", "菜单的上级只能为目录类型");
 			}
 			return map;
 		}
@@ -205,7 +211,7 @@ public class SysMenuController extends BaseController {
 		//按钮
 		if (menu.getType() == 2) {
 			if (parentType != 1) {
-				map.put("msg", "按钮的上级只能为菜单");
+				map.put("msg", "按钮的上级只能为菜单类型");
 			}
 			return map;
 		}

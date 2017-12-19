@@ -49,17 +49,13 @@ public class UserRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		
-
-		logger.info("doGetAuthorizationInfo  ================================= ");
-		
-		
 		SysUser user = (SysUser) principals.getPrimaryPrincipal();
 		Long userId =  user.getUserId();
 		
 		List<String> permsList = null;
 		
 		if (userId == 1) {
-			List<SysMenu> menuList = sysMenuService.listMenu(new HashMap<String, Object>());
+			List<SysMenu> menuList = sysMenuService.listMenu(1L);
 			permsList = new ArrayList<>(menuList.size());
 			for (SysMenu sysMenu : menuList) {
 				permsList.add(sysMenu.getPerms());
@@ -87,9 +83,6 @@ public class UserRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
-		
-
-		logger.info("doGetAuthenticationInfo  ================================= ");
 		
 		UsernamePasswordToken token = (UsernamePasswordToken)authcToken;
 		String username = token.getUsername();

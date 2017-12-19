@@ -59,7 +59,7 @@
 		<setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString" />
 		
         <!-- 打印查询语句 -->  
-        <setting name="logImpl" value="STDOUT_LOGGING" />  
+        <!--<setting name="logImpl" value="STDOUT_LOGGING" />  -->
 
 	</settings>
 	

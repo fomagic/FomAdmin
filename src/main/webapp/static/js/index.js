@@ -22,3 +22,57 @@ function loadFrame(obj) {
     $("#navTitle").text(nav.length==0?"Welcome.":nav);
 }
 
+var pasData = {
+	password : "",
+	newPassword : ""
+};
+
+function setPasData(){
+	pasData.password = $("#password").val();
+	pasData.newPassword = $("#newPassword").val();
+}
+
+function clearPasData(){
+	pasData.password = $("#password").val("");
+	pasData.newPassword = $("#newPassword").val("");
+}
+
+$("#btnPassword").click(function(){
+
+	setPasData();
+	
+	if (validator()) {
+		return;
+	}
+	var data = "password="+pasData.password+"&newPassword="+pasData.newPassword;
+	
+	$.ajax({
+		type:"POST",
+		url:"sys/user/password",
+		dataType: "json",
+		data: data,
+		success:function(res){
+			if (res.code === 0) {
+				alert("修改成功");
+				$('#modal-password').modal('hide');
+				clearPasData();
+			} else {
+				alert(res.msg);
+			}
+		}
+	});
+});
+
+//验证(demo)
+function validator(){
+	
+	if ($("#password").val().length==0){
+		alert("旧密码不能为空");
+		return true;
+	}
+	if ($("#newPassword").val().length==0){
+		alert("新密码不能为空");
+		return true;
+	}
+	
+}

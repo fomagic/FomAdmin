@@ -44,7 +44,7 @@ public interface SysMenuService {
 	/**
 	 * 查询菜单列表
 	 */
-	List<SysMenu> listMenu(Map<String, Object> map);
+	List<SysMenu> listMenu(Long userId);
 	
 	/**
 	 * 查询总数

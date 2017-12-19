@@ -1,6 +1,7 @@
 package com.fomagic.module.sys.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -84,8 +85,26 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 
 	@Override
-	public List<SysMenu> listMenu(Map<String, Object> map) {
-		return sysMenuDao.listMenu(map);
+	public List<SysMenu> listMenu(Long userId) {
+		
+		List<SysMenu> menuList = sysMenuDao.listMenu(null);
+		//系统管理员，最高全部权限
+		if (userId == 1) {
+			return menuList;
+		}
+		
+		//用户菜单列表
+		List<Long> menuIdList = sysUserService.listAllMenuId(userId);
+		
+		List<SysMenu> userMenuList = new ArrayList<>();
+		for (SysMenu sysMenu : menuList) {
+			if (menuIdList.contains(sysMenu.getMenuId())) {
+				userMenuList.add(sysMenu);
+			}
+		}
+		
+		return userMenuList;
+		
 	}
 
 	@Override
