@@ -26,7 +26,7 @@ public class ExceptionAdvice {
 	@ResponseBody
 	public Map<String, Object> handleDuplicateKeyException(DuplicateKeyException e){
 		Map<String, Object> map = new HashMap<String,Object>();
-		logger.error("数据库记录重复添加:"+e.getMessage());
+		logger.error("数据库记录重复添加:");
 		map.put("msg", "数据库已存在该记录");
 		return map;
 	}
@@ -35,7 +35,7 @@ public class ExceptionAdvice {
 	@ResponseBody
 	public Map<String, Object> handleAuthorizationException(AuthorizationException e){
 		Map<String, Object> map = new HashMap<String,Object>();
-		logger.error("权限不足:"+e.getMessage());
+		logger.error("权限不足:");
 		map.put("msg", "权限不足，联系管理员");
 		return map;
 	}

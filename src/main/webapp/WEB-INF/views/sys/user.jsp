@@ -35,8 +35,10 @@
      folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="static/css/_all-skins.min.css">
 <!-- jqGrid -->
-<link rel="stylesheet"
-	href="static/plugins/jqGrid/css/ui.jqgrid-bootstrap.css">
+<link rel="stylesheet" href="static/plugins/jqGrid/css/ui.jqgrid-bootstrap.css">
+
+<link rel="stylesheet" href="static/plugins/myAlertConfirm/myAlertConfirm.css">
+
 <!-- Owner -->
 <link rel="stylesheet" href="static/css/main.css">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -161,6 +163,9 @@
 	<!-- jqGrid -->
 	<script src="static/plugins/jqGrid/js/grid.locale-cn.js"></script>
 	<script src="static/plugins/jqGrid/js/jquery.jqGrid.min.js"></script>
+
+
+	<script src="static/plugins/myAlertConfirm/jquery.confirm.js"></script>
 
 	<!-- Owner  -->
 	<script src="static/js/common.js"></script>

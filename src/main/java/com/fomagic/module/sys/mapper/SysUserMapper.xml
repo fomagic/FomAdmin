@@ -97,13 +97,13 @@
 	<update id="updateUser" parameterType="com.fomagic.module.sys.entity.SysUser">
 		update sys_user
 		<set>
-			<if test="userName != null and userName.trim() != ''">`username` = #{userName},</if>
-			<if test="password != null and password.trim() != ''">`password` = #{password},</if>
-			<if test="email != null and email.trim() != ''">`email` = #{email},</if>
+			<if test="userName != null">`username` = #{userName},</if>
+			<if test="password != null">`password` = #{password},</if>
+			<if test="email != null">`email` = #{email},</if>
 			<if test="mobile != null">`mobile` = #{mobile},</if>
 			<if test="status != null">`status` = #{status}</if>
 		</set>
-		where user_id = #{userId}
+		where `user_id` = #{userId}
 		<if test="createUserId != null">
 			and `create_user_id` = #{createUserId}
 		</if>

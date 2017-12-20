@@ -23,6 +23,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fomagic.common.util.Constant;
 import com.fomagic.module.sys.entity.SysMenu;
 import com.fomagic.module.sys.entity.SysUser;
 import com.fomagic.module.sys.service.SysMenuService;
@@ -50,7 +51,7 @@ public class UserRealm extends AuthorizingRealm {
 		List<String> permsList = null;
 		
 		if (userId == 1) {
-			List<SysMenu> menuList = sysMenuService.listMenu(1L);
+			List<SysMenu> menuList = sysMenuService.listMenu(Constant.SUPER_ADMIN);
 			permsList = new ArrayList<>(menuList.size());
 			for (SysMenu sysMenu : menuList) {
 				permsList.add(sysMenu.getPerms());
@@ -86,7 +87,7 @@ public class UserRealm extends AuthorizingRealm {
 		if (user==null) {
 			throw new UnknownAccountException();
 		}
-		if (user.getStatus()==0) {
+		if (user.getStatus()== Constant.UserStatus.STATUS_LOCKED) {
 			throw new LockedAccountException();
 		}
 		String realmname = getName();
@@ -102,8 +103,8 @@ public class UserRealm extends AuthorizingRealm {
 	public static void main(String[] args) {
 		System.out.println();
 		int hashInterations = 1024;
-		Object salt = "soul";
-		Object credentials = "123456";
+		Object salt = "admin";
+		Object credentials = "admin";
 		String hashAlgorithmName = "MD5";
 
 		//long begin = System.currentTimeMillis();

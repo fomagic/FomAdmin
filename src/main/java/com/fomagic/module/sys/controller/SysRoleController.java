@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fomagic.common.controller.BaseController;
+import com.fomagic.common.util.Constant;
 import com.fomagic.common.util.PageUtil;
 import com.fomagic.common.util.QueryUtil;
 import com.fomagic.module.sys.entity.SysRole;
@@ -60,9 +61,8 @@ public class SysRoleController extends BaseController {
 	public Map<String, Object> listRole(@RequestParam Map<String, Object> params) {
 		
 		//如果不是超级管理员，只能查询自己创建的角色列表
-		Long userId = ((SysUser)SecurityUtils.getSubject().getPrincipal()).getUserId();
-		if (userId != 1) {
-			params.put("createUserId", userId);
+		if (getSysUserId() != Constant.SUPER_ADMIN) {
+			params.put("createUserId", getSysUserId());
 		} 
 		
 		QueryUtil query = new QueryUtil(params);
@@ -87,9 +87,8 @@ public class SysRoleController extends BaseController {
 		Map<String, Object> map = new HashMap<>();
 	
 		//如果不是超级管理员，只能查询自己创建的角色列表
-		Long userId = ((SysUser)SecurityUtils.getSubject().getPrincipal()).getUserId();
-		if (userId != 1) {
-			map.put("createUserId", userId);
+		if (getSysUserId() != Constant.SUPER_ADMIN) {
+			map.put("createUserId", getSysUserId());
 		} 
 		List<SysRole> list = sysRoleService.listRole(map);
 		
@@ -108,8 +107,7 @@ public class SysRoleController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> saveRole(@RequestBody SysRole sysRole) {
 	
-		Long userId = ((SysUser)SecurityUtils.getSubject().getPrincipal()).getUserId();
-		sysRole.setCreateUserId(userId);
+		sysRole.setCreateUserId(getSysUserId());
 		sysRoleService.saveRole(sysRole);
 		
 		Map<String, Object> mapR = new HashMap<String,Object>();
@@ -147,10 +145,7 @@ public class SysRoleController extends BaseController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public Map<String, Object> roleUpdate(@RequestBody SysRole sysRole){
-		
-		Long userId = ((SysUser)SecurityUtils.getSubject().getPrincipal()).getUserId();
-		sysRole.setCreateUserId(userId);
-		
+		sysRole.setCreateUserId(getSysUserId());
 		sysRoleService.updateRole(sysRole);
 		
 		Map<String, Object> mapR = new HashMap<String,Object>();

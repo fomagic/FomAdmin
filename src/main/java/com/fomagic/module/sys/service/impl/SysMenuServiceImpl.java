@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fomagic.common.util.Constant;
 import com.fomagic.module.sys.dao.SysMenuDao;
 import com.fomagic.module.sys.entity.SysMenu;
 import com.fomagic.module.sys.service.SysMenuService;
@@ -39,13 +40,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 		if (menuIdList == null) {
 			return menuList;
 		}
-		List<SysMenu> userMenuList = new ArrayList<>();
-		for (SysMenu sysMenu : menuList) {
-			if (menuIdList.contains(sysMenu.getMenuId())) {
-				userMenuList.add(sysMenu);
-			}
-		}
-		
+		List<SysMenu> userMenuList = fileterMenu(menuIdList,menuList);
 		return userMenuList;
 	}
 
@@ -55,8 +50,18 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 
 	@Override
-	public List<SysMenu> listNotButton() {
-		return sysMenuDao.listNotButton();
+	public List<SysMenu> listNotButton(Long userId) {
+		
+		List<SysMenu> menuList = sysMenuDao.listNotButton();
+		//系统管理员，全部菜单
+		if (userId == Constant.SUPER_ADMIN) {
+			return menuList;
+		}
+		//用户菜单列表
+		List<Long> menuIdList = sysUserService.listAllMenuId(userId);
+		List<SysMenu> userMenuList = fileterMenu(menuIdList,menuList);
+		
+		return userMenuList;
 	}
 
 	@Override
@@ -66,8 +71,8 @@ public class SysMenuServiceImpl implements SysMenuService {
 
 	@Override
 	public List<SysMenu> listUserMenu(Long userId) {
-		//系统管理员，最高全部权限
-		if (userId == 1) {
+		//系统管理员，全部菜单
+		if (userId == Constant.SUPER_ADMIN) {
 			return getAllMenuList(null);
 		}
 		
@@ -87,23 +92,15 @@ public class SysMenuServiceImpl implements SysMenuService {
 	public List<SysMenu> listMenu(Long userId) {
 		
 		List<SysMenu> menuList = sysMenuDao.listMenu(null);
-		//系统管理员，最高全部权限
-		if (userId == 1) {
+		//系统管理员，全部菜单
+		if (userId == Constant.SUPER_ADMIN) {
 			return menuList;
 		}
-		
 		//用户菜单列表
 		List<Long> menuIdList = sysUserService.listAllMenuId(userId);
-		
-		List<SysMenu> userMenuList = new ArrayList<>();
-		for (SysMenu sysMenu : menuList) {
-			if (menuIdList.contains(sysMenu.getMenuId())) {
-				userMenuList.add(sysMenu);
-			}
-		}
+		List<SysMenu> userMenuList = fileterMenu(menuIdList,menuList);
 		
 		return userMenuList;
-		
 	}
 
 	@Override
@@ -129,6 +126,21 @@ public class SysMenuServiceImpl implements SysMenuService {
 	
 	//------
 	
+	private List<SysMenu> fileterMenu(List<Long> menuIdList,List<SysMenu> menuList){
+		//过滤用户当前菜单
+		List<SysMenu> userMenuList = new ArrayList<>();
+		for (SysMenu sysMenu : menuList) {
+			if (menuIdList.contains(sysMenu.getMenuId())) {
+				userMenuList.add(sysMenu);
+			}
+		}
+		return userMenuList;
+	}
+	
+	
+	
+	//------
+	
 	private List<SysMenu> getAllMenuList(List<Long> menuIdList) {
 		//查询根菜单列表
 		List<SysMenu> menuList = listMenuIdByParentId(0L,menuIdList);
@@ -144,7 +156,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 
 		for (SysMenu menu : menuList) {
 			//目录
-			if (menu.getType() == 0) {
+			if (menu.getType() == Constant.MenuType.CATALOG) {
 				menu.setList(getMenuTreeList(listMenuIdByParentId(menu.getMenuId(),menuIdList), menuIdList));
 			}
 			subMenuList.add(menu);

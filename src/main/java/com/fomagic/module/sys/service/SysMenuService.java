@@ -29,7 +29,7 @@ public interface SysMenuService {
 	/**
 	 * 获取不包含按钮的菜单列表
 	 */
-	List<SysMenu> listNotButton();
+	List<SysMenu> listNotButton(Long userId);
 	
 	/**
 	 * 获取用户菜单列表

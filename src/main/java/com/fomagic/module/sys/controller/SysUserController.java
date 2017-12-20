@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fomagic.common.controller.BaseController;
 import com.fomagic.common.util.QueryUtil;
+import com.fomagic.common.util.Constant;
 import com.fomagic.common.util.PageUtil;
 import com.fomagic.module.sys.entity.SysUser;
 import com.fomagic.module.sys.service.SysUserRoleService;
@@ -61,6 +61,10 @@ public class SysUserController extends BaseController {
 			return params;
 		}
 		
+		if (getSysUserId() != Constant.SUPER_ADMIN) {
+			params.put("createUserId", getSysUserId());
+		}
+		
 		QueryUtil query = new QueryUtil(params);
 		List<SysUser> sysUserList = sysUserService.listUser(query);
 		int total = sysUserService.countUser(query);
@@ -91,7 +95,7 @@ public class SysUserController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> save(@RequestBody SysUser user) {
 		
-		user.setCreateUserId(((SysUser) SecurityUtils.getSubject().getPrincipal()).getUserId());
+		user.setCreateUserId(getSysUserId());
 		sysUserService.saveUser(user);
 		
 		Map<String, Object> map = new HashMap<String,Object>();
@@ -104,7 +108,7 @@ public class SysUserController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> update(@RequestBody SysUser user) {
 		
-		user.setCreateUserId(((SysUser) SecurityUtils.getSubject().getPrincipal()).getUserId());
+		user.setCreateUserId(getSysUserId());
 		sysUserService.updateUser(user);
 		
 		Map<String, Object> map = new HashMap<String,Object>();
@@ -121,7 +125,7 @@ public class SysUserController extends BaseController {
 			map.put("msg", "系统管理员不能删除");
 			return map;
 		}
-		if (ArrayUtils.contains(userIds, ((SysUser) SecurityUtils.getSubject().getPrincipal()).getUserId())) {
+		if (ArrayUtils.contains(userIds, getSysUserId())) {
 			map.put("msg", "不能删除当前用户");
 			return map;
 		}
@@ -139,10 +143,9 @@ public class SysUserController extends BaseController {
 		
 		if (StringUtils.isEmpty(password) || StringUtils.isEmpty(newPassword)) {
 			map.put("msg", "密码不能为空");
-			System.out.println("password="+password+"&newPassword="+newPassword);
 			return map;
 		}
-		SysUser sysUser = (SysUser) SecurityUtils.getSubject().getPrincipal();
+		SysUser sysUser = getSysUser();
 		// 原密码
 		password = new SimpleHash("MD5", password, sysUser.getUserName(), 1024).toString();
 		// 新密码

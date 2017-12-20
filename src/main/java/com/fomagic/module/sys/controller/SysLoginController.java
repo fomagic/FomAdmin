@@ -136,19 +136,15 @@ public class SysLoginController extends BaseController {
 	 */
 	@RequestMapping(value = {"","/","/index"})
 	public String sysIndex(ModelMap modelMap) {
-		Subject curUser = SecurityUtils.getSubject();
-		SysUser sysUser = (SysUser) curUser.getPrincipal();
 		
-		if (sysUser == null) {
+		if (getSysUser() == null) {
 			return "login";
 		}
-		Long userId = sysUser.getUserId();
-		List<SysMenu> menuList = null;
-		menuList = sysMenuService.listUserMenu(userId);
 		
-        logger.info("menuList-----" + menuList.size());
+		List<SysMenu> menuList = null;
+		menuList = sysMenuService.listUserMenu(getSysUserId());
 		modelMap.addAttribute("menuList",menuList);
-    	modelMap.addAttribute("sysUser",sysUser);
+    	modelMap.addAttribute("sysUser",getSysUser());
         logger.info("跳转到后台首页");
 		return "sys/index";
 	}

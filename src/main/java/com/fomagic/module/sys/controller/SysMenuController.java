@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fomagic.common.controller.BaseController;
 import com.fomagic.module.sys.entity.SysMenu;
-import com.fomagic.module.sys.entity.SysUser;
 import com.fomagic.module.sys.service.SysMenuService;
 
 /**
@@ -52,7 +50,7 @@ public class SysMenuController extends BaseController {
 	@RequestMapping("/list")
 	@ResponseBody
 	public List<SysMenu> listMenu() {
-		List<SysMenu> menuList = sysMenuService.listMenu(((SysUser) SecurityUtils.getSubject().getPrincipal()).getUserId());
+		List<SysMenu> menuList = sysMenuService.listMenu(getSysUserId());
 		
 		return menuList;
 	}
@@ -140,7 +138,7 @@ public class SysMenuController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> selectMenu(){
 		//查询不包含按钮的菜单列表
-		List<SysMenu> menuList = sysMenuService.listNotButton();
+		List<SysMenu> menuList = sysMenuService.listNotButton(getSysUserId());
 		
 		//添加一个顶级菜单目录
 		SysMenu root = new SysMenu();
