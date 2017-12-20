@@ -54,7 +54,7 @@
 	    <property name="credentialsMatcher" >  
 	        <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
 	            <property name="hashAlgorithmName" value="MD5"></property>
-	            <property name="hashIterations" value="1024"></property>
+	            <property name="hashIterations" value="7"></property>
 	        </bean>  
 	    </property>  
 	</bean>

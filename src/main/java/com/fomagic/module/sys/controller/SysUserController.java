@@ -83,6 +83,8 @@ public class SysUserController extends BaseController {
 		SysUser sysUser = sysUserService.getByUserId(userId);
 		List<Long> roleIdList = sysUserRoleService.listUserRoleId(userId);
 		sysUser.setRoleIdList(roleIdList);
+		sysUser.setPassword(null);
+		sysUser.setSalt(null);
 		
 		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("user", sysUser);
@@ -95,7 +97,6 @@ public class SysUserController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> save(@RequestBody SysUser user) {
 		
-		user.setCreateUserId(getSysUserId());
 		sysUserService.saveUser(user);
 		
 		Map<String, Object> map = new HashMap<String,Object>();
@@ -108,7 +109,8 @@ public class SysUserController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> update(@RequestBody SysUser user) {
 		
-		user.setCreateUserId(getSysUserId());
+		SysUser sysUser = sysUserService.getByUserId(user.getUserId());
+		user.setSalt(sysUser.getSalt());
 		sysUserService.updateUser(user);
 		
 		Map<String, Object> map = new HashMap<String,Object>();
@@ -147,9 +149,9 @@ public class SysUserController extends BaseController {
 		}
 		SysUser sysUser = getSysUser();
 		// 原密码
-		password = new SimpleHash("MD5", password, sysUser.getUserName(), 1024).toString();
+		password = new SimpleHash("MD5", password, sysUser.getSalt(), 7).toString();
 		// 新密码
-		newPassword = new SimpleHash("MD5", newPassword, sysUser.getUserName(), 1024).toString();
+		newPassword = new SimpleHash("MD5", newPassword, sysUser.getSalt(), 7).toString();
 		// 更新密码
 		int count = sysUserService.updatePassword(sysUser.getUserId(), password, newPassword);
 		

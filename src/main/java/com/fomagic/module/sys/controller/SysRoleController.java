@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +18,6 @@ import com.fomagic.common.util.Constant;
 import com.fomagic.common.util.PageUtil;
 import com.fomagic.common.util.QueryUtil;
 import com.fomagic.module.sys.entity.SysRole;
-import com.fomagic.module.sys.entity.SysUser;
 import com.fomagic.module.sys.service.SysRoleMenuService;
 import com.fomagic.module.sys.service.SysRoleService;
 

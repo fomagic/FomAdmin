@@ -34,6 +34,10 @@ $(function () {
             page:"page", 
             rows:"limit", 
             order: "order"
+        },        
+        loadComplete: function(xhr){
+        	//数据请求完成
+        	alert(JSON.stringify(xhr));
         },
         gridComplete:function(){
         	
@@ -125,8 +129,6 @@ function saveOrUpdate(){
 	var url = mUserId == null ? "sys/user/save" : "sys/user/update";
 	var userInfo = getPanelInfo();
 	userInfo.userId = mUserId;
-	
-	alert(JSON.stringify(userInfo));
 	
 	$.ajax({
 		type:"POST",
@@ -227,9 +229,8 @@ function showList(show,title) {
 function validator(){
 	
 	if ($("#userName").val().length==0){
-		//alert("用户名不能为空");
-		myAlert("用户名不能为空");
-		alert("1111");
+		alert("用户名不能为空");
+		//myAlert("用户名不能为空");
 		return true;
 	}
 	

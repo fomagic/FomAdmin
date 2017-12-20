@@ -104,9 +104,6 @@
 			<if test="status != null">`status` = #{status}</if>
 		</set>
 		where `user_id` = #{userId}
-		<if test="createUserId != null">
-			and `create_user_id` = #{createUserId}
-		</if>
 	</update>
 
 	<select id="getByUserId" resultMap="SysUserMap">
@@ -119,7 +116,15 @@
 	</select>
 
 	<select id="listUser" resultMap="SysUserMap">
-		SELECT * FROM sys_user
+		SELECT 
+			`user_id`, 
+			`username`,
+			`email`, 
+			`mobile`, 
+			`status`, 
+			`create_user_id`,
+			`create_time` 
+		FROM sys_user
 		<where>
 			<if test="createUserId != null">
 				AND `create_user_id` = #{createUserId}

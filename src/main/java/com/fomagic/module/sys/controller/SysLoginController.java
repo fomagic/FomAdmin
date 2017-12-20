@@ -22,7 +22,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.fomagic.common.controller.BaseController;
 import com.fomagic.module.sys.entity.SysMenu;
-import com.fomagic.module.sys.entity.SysUser;
 import com.fomagic.module.sys.service.SysMenuService;
 
 /**

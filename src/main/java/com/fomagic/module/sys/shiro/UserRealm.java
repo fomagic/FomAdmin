@@ -16,7 +16,7 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.codec.Base64;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
@@ -50,7 +50,7 @@ public class UserRealm extends AuthorizingRealm {
 		
 		List<String> permsList = null;
 		
-		if (userId == 1) {
+		if (userId == Constant.SUPER_ADMIN) {
 			List<SysMenu> menuList = sysMenuService.listMenu(Constant.SUPER_ADMIN);
 			permsList = new ArrayList<>(menuList.size());
 			for (SysMenu sysMenu : menuList) {
@@ -59,7 +59,6 @@ public class UserRealm extends AuthorizingRealm {
 		} else {
 			permsList = sysUserService.listAllperms(userId);
 		}
-		
 		
 		Set<String> permsSet = new HashSet<String>();
 		for (String perms : permsList) {
@@ -90,9 +89,8 @@ public class UserRealm extends AuthorizingRealm {
 		if (user.getStatus()== Constant.UserStatus.STATUS_LOCKED) {
 			throw new LockedAccountException();
 		}
-		String realmname = getName();
-		ByteSource credentialsSalt = ByteSource.Util.bytes(username);
-		AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user, user.getPassword(), credentialsSalt, realmname);
+		ByteSource credentialsSalt = ByteSource.Util.bytes(user.getSalt());
+		AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user, user.getPassword(), credentialsSalt, getName());
 		return authenticationInfo;	
 	}
 	
@@ -102,8 +100,8 @@ public class UserRealm extends AuthorizingRealm {
 	 */
 	public static void main(String[] args) {
 		System.out.println();
-		int hashInterations = 1024;
-		Object salt = "admin";
+		int hashInterations = 7;
+		Object salt = "4s3X1Auhexa8TJQGD/CeHw==";
 		Object credentials = "admin";
 		String hashAlgorithmName = "MD5";
 
@@ -113,7 +111,11 @@ public class UserRealm extends AuthorizingRealm {
 		//System.out.println("加密花费时间： " + (end-begin));
 		System.out.println("加密后的值： "+simpleHash);
 		
-		System.out.println(Base64.decode("4AvVhmFLUs0KTA3Kprsdag=="));
+		//System.out.println(Base64.decodeToString("4s3X1Auhexa8TJQGD/CeHw=="));
+		
+		//RandomNumberGenerator rng = new SecureRandomNumberGenerator();
+		String salt2 = new SecureRandomNumberGenerator().nextBytes().toString();
+		System.out.println(salt2.toString());
 		
 	}
 
