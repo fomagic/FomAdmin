@@ -21,6 +21,7 @@ public class ExceptionAdvice {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
+
 	@ExceptionHandler(DuplicateKeyException.class)
 	@ResponseBody
 	public Map<String, Object> handleDuplicateKeyException(DuplicateKeyException e){

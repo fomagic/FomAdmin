@@ -2,7 +2,6 @@ package com.fomagic.module.sys.shiro;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,8 +21,6 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fomagic.module.sys.entity.SysMenu;
@@ -40,8 +37,6 @@ public class UserRealm extends AuthorizingRealm {
 	@Autowired
 	private SysMenuService sysMenuService;
 
-
-	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	/**
 	 * 对用户进行授权和授予权限

@@ -55,7 +55,7 @@
 		<div class="grid-btn row">
 			<div class="form-group col-sm-4 pull-right text-right">
 				<shiro:hasPermission name="sys:menu:save">
-				<a class="btn btn-primary btn-flat" id="saveMenu"><i class="fa fa-plus"></i>&nbsp;新增</a>
+					<a class="btn btn-primary btn-flat" id="saveMenu"><i class="fa fa-plus"></i>&nbsp;新增</a>
 				</shiro:hasPermission>
 				<shiro:hasPermission name="sys:menu:update">
 					<a class="btn btn-primary btn-flat" id="updateMenu"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
