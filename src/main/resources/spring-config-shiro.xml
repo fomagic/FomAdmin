@@ -49,7 +49,7 @@
 	<!-- <bean id="someFilter" class="..."/> -->
 
 	<!-- 自定义Realm 继承自Realm -->
-	<bean id="userRealm" class="com.fomagic.module.sys.shiro.UserRealm" >
+	<bean id="sysRealm" class="com.fomagic.module.sys.shiro.SysRealm" >
 		<!--验证方式-->  
 	    <property name="credentialsMatcher" >  
 	        <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
@@ -82,10 +82,10 @@
 	<!-- Shiro安全管理器 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<!--设置自定义realm  -->
-		<property name="realm" ref="userRealm" />
+		<property name="realm" ref="sysRealm" />
 		<!--<property name="realms">
             <list>
-                <ref bean="userRealm"/>
+                <ref bean="sysRealm"/>
             </list>
         </property> -->
         <property name="cacheManager" ref="shiroEhcacheManager" /> 

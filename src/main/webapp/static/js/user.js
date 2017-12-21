@@ -37,7 +37,7 @@ $(function () {
         },        
         loadComplete: function(xhr){
         	//数据请求完成
-        	alert(JSON.stringify(xhr));
+        	//alert(JSON.stringify(xhr));
         },
         gridComplete:function(){
         	

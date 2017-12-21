@@ -30,7 +30,7 @@ import com.fomagic.module.sys.service.SysMenuService;
 import com.fomagic.module.sys.service.SysUserService;
 
 
-public class UserRealm extends AuthorizingRealm {
+public class SysRealm extends AuthorizingRealm {
 
 	@Autowired
 	private SysUserService sysUserService;
