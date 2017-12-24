@@ -118,7 +118,7 @@
 
 				<!-- Main content -->
 				<section class="content" style="background:#fff;">
-					<iframe id="contentFrame" name="contentFrame" frameborder="0" style="width:100%;min-height:200px;" src="index" onload="loadFrame(this)"></iframe>
+					<iframe id="contentFrame" name="contentFrame" src="index" onload="loadFrame(this)"></iframe>
 				</section>
 				<!-- /.content -->
 
