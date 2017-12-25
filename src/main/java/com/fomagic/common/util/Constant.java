@@ -17,6 +17,7 @@ public interface Constant {
 	 * 菜单类型
 	 */
 	public static class MenuType {
+		public static final int SYS_MENU_NUM = 1000;  //系统菜单编号预留
 		public static final int CATALOG = 0; 	//目录
 		public static final int MENU = 1;		//菜单
 		public static final int BUTTON = 2;		//按钮
