@@ -16,8 +16,6 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.crypto.SecureRandomNumberGenerator;
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -94,28 +92,25 @@ public class SysRealm extends AuthorizingRealm {
 		return authenticationInfo;	
 	}
 	
+	
+	
 	/**
 	 * 测试
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println();
-		int hashInterations = 7;
-		Object salt = "4s3X1Auhexa8TJQGD/CeHw==";
-		Object credentials = "admin";
-		String hashAlgorithmName = "MD5";
+		
+		//Object salt = "4s3X1Auhexa8TJQGD/CeHw==";
+		String credentials = "admin";
 
 		//long begin = System.currentTimeMillis();
-		Object simpleHash = new SimpleHash(hashAlgorithmName, credentials, salt,hashInterations);
+		String salt = ShiroUtil.randomSalt();
+		System.out.println("盐值：" + salt);
+		Object simpleHash = ShiroUtil.shiroMD5(credentials, salt);
 		//long end = System.currentTimeMillis();
 		//System.out.println("加密花费时间： " + (end-begin));
-		System.out.println("加密后的值： "+simpleHash);
-		
-		//System.out.println(Base64.decodeToString("4s3X1Auhexa8TJQGD/CeHw=="));
-		
-		//RandomNumberGenerator rng = new SecureRandomNumberGenerator();
-		String salt2 = new SecureRandomNumberGenerator().nextBytes().toString();
-		System.out.println(salt2.toString());
+		System.out.println("加密前的值：" + credentials);
+		System.out.println("加密后的值：" + simpleHash);
 		
 	}
 

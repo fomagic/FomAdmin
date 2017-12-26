@@ -7,7 +7,6 @@ import java.util.Map;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +22,7 @@ import com.fomagic.common.util.PageUtil;
 import com.fomagic.module.sys.entity.SysUser;
 import com.fomagic.module.sys.service.SysUserRoleService;
 import com.fomagic.module.sys.service.SysUserService;
+import com.fomagic.module.sys.shiro.ShiroUtil;
 
 /**
  * 系统用户
@@ -149,9 +149,9 @@ public class SysUserController extends BaseController {
 		}
 		SysUser sysUser = getSysUser();
 		// 原密码
-		password = new SimpleHash("MD5", password, sysUser.getSalt(), 7).toString();
+		password = ShiroUtil.shiroMD5(password, sysUser.getSalt());
 		// 新密码
-		newPassword = new SimpleHash("MD5", newPassword, sysUser.getSalt(), 7).toString();
+		newPassword = ShiroUtil.shiroMD5(newPassword, sysUser.getSalt());
 		// 更新密码
 		int count = sysUserService.updatePassword(sysUser.getUserId(), password, newPassword);
 		

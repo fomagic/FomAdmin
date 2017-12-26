@@ -11,7 +11,7 @@
  Target Server Version : 50638
  File Encoding         : 65001
 
- Date: 19/12/2017 18:21:16
+ Date: 26/12/2017 10:18:44
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +31,7 @@ CREATE TABLE `sys_menu` (
   `icon` varchar(50) DEFAULT NULL COMMENT '菜单图标',
   `order_num` int(11) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -66,8 +66,6 @@ INSERT INTO `sys_menu` VALUES (26, 4, '删除', NULL, 'sys:menu:delete', 2, NULL
 INSERT INTO `sys_menu` VALUES (27, 1, '参数管理', 'sys/config', 'sys:config:list,sys:config:info,sys:config:save,sys:config:update,sys:config:delete', 1, 'fa fa-sun-o', 6);
 INSERT INTO `sys_menu` VALUES (28, 1, '系统日志', 'sys/log', 'sys:log:list', 1, 'fa fa-file-text-o', 7);
 INSERT INTO `sys_menu` VALUES (29, 1, '文件上传', 'sys/oss', 'sys:oss:all', 1, 'fa fa-file-image-o', 6);
-INSERT INTO `sys_menu` VALUES (32, 0, '454545', '', '', 0, 'fa fa-bookmark', 1);
-INSERT INTO `sys_menu` VALUES (33, 32, '44444', 'hghjk', '', 1, '', 0);
 COMMIT;
 
 -- ----------------------------
@@ -81,14 +79,7 @@ CREATE TABLE `sys_role` (
   `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建者ID',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of sys_role
--- ----------------------------
-BEGIN;
-INSERT INTO `sys_role` VALUES (18, '运营', '运营', 1, '2017-12-19 13:25:06');
-COMMIT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -99,21 +90,7 @@ CREATE TABLE `sys_role_menu` (
   `role_id` int(20) DEFAULT NULL COMMENT '角色ID',
   `menu_id` int(20) DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
-
--- ----------------------------
--- Records of sys_role_menu
--- ----------------------------
-BEGIN;
-INSERT INTO `sys_role_menu` VALUES (97, 18, 1);
-INSERT INTO `sys_role_menu` VALUES (98, 18, 2);
-INSERT INTO `sys_role_menu` VALUES (99, 18, 15);
-INSERT INTO `sys_role_menu` VALUES (100, 18, 3);
-INSERT INTO `sys_role_menu` VALUES (101, 18, 19);
-INSERT INTO `sys_role_menu` VALUES (102, 18, 20);
-INSERT INTO `sys_role_menu` VALUES (103, 18, 21);
-INSERT INTO `sys_role_menu` VALUES (104, 18, 22);
-COMMIT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -131,15 +108,13 @@ CREATE TABLE `sys_user` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username` (`username`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_user` VALUES (1, 'admin', 'df655ad8d3229f3269fad2a8bab59b6c', 'magic', 'magic@qqq.com', '1234', '1', 1, '2017-11-11 11:11:11');
-INSERT INTO `sys_user` VALUES (56, 'magic', '3d19491d6fc5645c243b8fa78b770444', 'admin', '111', '', '1', 1, '2017-12-19 14:03:41');
-INSERT INTO `sys_user` VALUES (58, 'soul', 'b5b089370c04bc0892d6ffc0bf6d9cdd', 'soul', 'soul', '', '1', 56, '2017-12-19 14:43:53');
+INSERT INTO `sys_user` VALUES (1, 'admin', 'ef338e79bc415c99e7383b82f44db35e', '4s3X1Auhexa8TJQGD/CeHw==', 'magic@qqq.com', '1234', '1', 1, '2017-11-11 11:11:11');
 COMMIT;
 
 -- ----------------------------
@@ -151,13 +126,6 @@ CREATE TABLE `sys_user_role` (
   `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='用户与角色的对应关系';
-
--- ----------------------------
--- Records of sys_user_role
--- ----------------------------
-BEGIN;
-INSERT INTO `sys_user_role` VALUES (8, 56, 18);
-COMMIT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户与角色的对应关系';
 
 SET FOREIGN_KEY_CHECKS = 1;

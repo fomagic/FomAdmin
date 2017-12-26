@@ -1,6 +1,7 @@
 package com.fomagic.module.sys.shiro;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -30,6 +31,14 @@ public class ShiroUtil {
 	 */
 	public static String shiroMD5(String password,String salt){
 		return new SimpleHash(hashAlgorithmName, password, salt, hashInterations).toString();
+	}
+	
+	/**
+	 * 生成盐值
+	 * @return
+	 */
+	public static String randomSalt(){
+		return new SecureRandomNumberGenerator().nextBytes().toString();
 	}
 	
 	/**

@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.shiro.crypto.SecureRandomNumberGenerator;
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +13,7 @@ import com.fomagic.module.sys.dao.SysUserDao;
 import com.fomagic.module.sys.entity.SysUser;
 import com.fomagic.module.sys.service.SysUserRoleService;
 import com.fomagic.module.sys.service.SysUserService;
+import com.fomagic.module.sys.shiro.ShiroUtil;
 
 @Service
 public class SysUserServiceImpl implements SysUserService {
@@ -57,9 +56,9 @@ public class SysUserServiceImpl implements SysUserService {
 	public void saveUser(SysUser sysUser) {
 		
 		sysUser.setCreateTime(new Date());
-		String salt = new SecureRandomNumberGenerator().nextBytes().toString();
-		Object simpleHash = new SimpleHash("MD5", sysUser.getPassword(),salt,7);
-		sysUser.setPassword(simpleHash.toString());
+		String salt = ShiroUtil.randomSalt();
+		String simpleHash = ShiroUtil.shiroMD5(sysUser.getPassword(), salt);
+		sysUser.setPassword(simpleHash);
 		sysUser.setSalt(salt);
 		sysUserDao.saveUser(sysUser);
 		sysUserRoleService.saveUserRole(sysUser.getUserId(), sysUser.getRoleIdList());
@@ -76,7 +75,7 @@ public class SysUserServiceImpl implements SysUserService {
 		if (StringUtils.isBlank(sysUser.getPassword())) {
 			sysUser.setPassword(null);
 		} else {
-			String simpleHash = new SimpleHash("MD5", sysUser.getPassword(), sysUser.getSalt(),7).toString();
+			String simpleHash = ShiroUtil.shiroMD5(sysUser.getPassword(), sysUser.getSalt());
 			sysUser.setPassword(simpleHash);
 		}
 		
