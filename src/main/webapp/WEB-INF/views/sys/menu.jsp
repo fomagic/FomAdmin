@@ -33,8 +33,9 @@
 <!-- AdminLTE Skins. Choose a skin from the css/skins
      folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="static/css/_all-skins.min.css">
-<!-- jqGrid -->
-<link rel="stylesheet" href="static/plugins/jqGrid/css/ui.jqgrid-bootstrap.css">
+<!-- free-jqGrid -->
+<link rel="stylesheet" href="static/plugins/free-jqgrid/css/ui.jqgrid.css">
+<link rel="stylesheet" href="static/plugins/free-jqgrid/css/ui.jqgrid.bootstrap.css">
 <!-- zTree -->
 <link rel="stylesheet" href="static/plugins/zTree/css/metroStyle/metroStyle.css">
 
@@ -170,9 +171,9 @@
 	<!-- AdminLTE App -->
 	<script src="static/libs/adminlte.min.js"></script>
 
-	<!-- jqGrid -->
-	<script src="static/plugins/jqGrid/js/grid.locale-cn.js"></script>
-	<script src="static/plugins/jqGrid/js/jquery.jqGrid.js"></script>
+	<!-- free-jqGrid -->
+	<script src="static/plugins/free-jqgrid/js/jquery.jqgrid.src.js"></script>
+	<script src="static/plugins/free-jqgrid/js/grid.locale-cn.js"></script>
 
 	<!-- zTree -->
 	<script src="static/plugins/zTree/js/jquery.ztree.all.js"></script>

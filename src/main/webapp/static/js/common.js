@@ -1,7 +1,10 @@
 $.jgrid.defaults.width = 1000;
-$.jgrid.defaults.responsive = true;
-$.jgrid.defaults.styleUI = 'Bootstrap';
+//$.jgrid.defaults.responsive = true;
+$.jgrid.defaults.guiStyle = 'bootstrap';
 
+$(window).resize(function(){
+	$("#jqGrid").jqGrid('setGridWidth', $(window).width(), true);
+});
 
 //单选
 function getOneRow() {

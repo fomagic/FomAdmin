@@ -229,8 +229,8 @@ function showList(show,title) {
 function validator(){
 	
 	if ($("#userName").val().length==0){
-		alert("用户名不能为空");
-		//myAlert("用户名不能为空");
+		//alert("用户名不能为空");
+		myAlert("用户名不能为空");
 		return true;
 	}
 	

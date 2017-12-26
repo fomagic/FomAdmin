@@ -10,6 +10,8 @@
  *
  * @license MIT
  * @url http://myclabs.github.io/jquery.confirm/
+ * 
+ * http://blog.csdn.net/aphy358/article/details/49701373
  */
 (function ($) {
 
