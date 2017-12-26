@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fomagic.common.controller.BaseController;
+import com.fomagic.common.util.Constant;
 import com.fomagic.module.sys.entity.SysMenu;
 import com.fomagic.module.sys.service.SysMenuService;
 
@@ -113,7 +114,8 @@ public class SysMenuController extends BaseController {
 	public Map<String,Object> deleteMenu(Long menuId) {
 		Map<String, Object> map = new HashMap<String,Object>();
 		
-		if (menuId<=30) {
+		//系统菜单不能删除
+		if (menuId<=Constant.MenuType.SYS_MENU_NUM) {
 			map.put("msg", "系统菜单，万万不可删除啊");
 			return map;
 		}

@@ -100,12 +100,12 @@
 
 	<!-- 为Spring配置的bean启用Shiro注解(如@RequiresRoles，@RequiresPermissions)。 -->
 	<!-- 仅在lifecycleBeanProcessor运行后运行 -->
-	<!-- 避免角色、权限硬编码，再决定使用注解方式 -->
+	<!-- 需在SpringMvc中启用代理,不使用以下方式
 	
 	<bean
 		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
 		depends-on="lifecycleBeanPostProcessor" >
-	</bean>
+	</bean> -->
 		
 	<bean
 		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">

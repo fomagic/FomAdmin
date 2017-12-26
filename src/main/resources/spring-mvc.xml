@@ -23,12 +23,13 @@
 	
 	
 	<!-- 启用aop注解 对类代理-->
-	<aop:config proxy-target-class="true"/>
+	<!-- blog.csdn.net/sadfishsc/article/details/51027873
+		 http://blog.csdn.net/xichenguan/article/details/50487583 
+		 http://www.bkjia.com/Javabc/1027463.html -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 
 	<!-- 扫描controller，对controller层进行注入 -->
-	<!-- 会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 
-		两个bean,是spring MVC为@Controllers分发请求所必须的 -->
+	<!-- 会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 两个bean,是spring MVC为@Controllers分发请求所必须的 -->
 	<context:component-scan base-package="com.fomagic"
 		use-default-filters="false">
 		<context:include-filter type="annotation"

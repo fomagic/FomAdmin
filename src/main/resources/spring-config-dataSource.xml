@@ -77,6 +77,10 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
+	
+	
+	<!-- 事务： http://blog.csdn.net/zhaofuwu/article/details/52432883 -->
 
 	<!-- Spring事务类型详解： 
 	
@@ -89,9 +93,12 @@
 		PROPAGATION_NESTED 如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则进行与PROPAGATION_REQUIRED类似的操作。 
 	
 	-->
+	
+	<!-- 1、编程式事务  启用对事务注解的支持-->
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
 
-	<!-- 配置事务通知 属性 -->
+	<!-- 2、 声明式事务-->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<!-- 定义事务传播属性 -->
 		<tx:attributes>
@@ -104,7 +111,7 @@
 			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
 			<tx:method name="list*" propagation="REQUIRED" read-only="true" />
 			<tx:method name="count*" propagation="REQUIRED" read-only="true" />
-			<tx:method name="*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="*"/> <!-- 其他方法默认读写 -->
 		</tx:attributes>
 	</tx:advice>
 
@@ -124,13 +131,9 @@
 	-->
 
 	<aop:config>
-		<aop:pointcut id="serviceMethods"
-			expression="execution(* com.fomagic..service..*(..))" />
+		<aop:pointcut id="serviceMethods" expression="execution(* com.fomagic..service..*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods" />
 	</aop:config>
-
-	<!-- 启用对事务注解的支持（编程式事物），需要开启<context:annotation-config /> -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
-
-
+	
+	
 </beans>
