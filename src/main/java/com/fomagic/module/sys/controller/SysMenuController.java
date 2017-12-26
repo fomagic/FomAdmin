@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fomagic.common.controller.BaseController;
 import com.fomagic.common.util.Constant;
+import com.fomagic.common.util.Result;
 import com.fomagic.module.sys.entity.SysMenu;
 import com.fomagic.module.sys.service.SysMenuService;
 
@@ -67,15 +68,14 @@ public class SysMenuController extends BaseController {
 	public Map<String,Object> saveMenu(@RequestBody SysMenu sysMenu) {
 		
 		Map<String, Object> map = new HashMap<String,Object>();
-		
 		map=verifyForm(sysMenu);
 		
 		if (map.containsKey("msg")) {
 			return map;
 		}
 		sysMenuService.saveMenu(sysMenu);
-		map.put("code", 0);
-		return map;
+		
+		return Result.success();
 	} 
 	
 	/**
@@ -98,8 +98,7 @@ public class SysMenuController extends BaseController {
 		
 		sysMenuService.updateMenu(sysMenu);
 		
-		map.put("code", 0);
-		return map;
+		return Result.success();
 	}
 	
 	
@@ -112,23 +111,19 @@ public class SysMenuController extends BaseController {
 	@RequestMapping("/delete")
 	@ResponseBody
 	public Map<String,Object> deleteMenu(Long menuId) {
-		Map<String, Object> map = new HashMap<String,Object>();
 		
 		//系统菜单不能删除
 		if (menuId<=Constant.MenuType.SYS_MENU_NUM) {
-			map.put("msg", "系统菜单，万万不可删除啊");
-			return map;
+			return Result.error("系统菜单，万万不可删除啊");
 		}
 		List<SysMenu> menuList = sysMenuService.listMenuIdByParentId(menuId);
 		if (menuList.size()>0) {
-			map.put("msg", "请先删除子菜单或按钮");
-			return map;
+			return Result.error("请先删除子菜单");
 		}
 		
 		sysMenuService.deleteBatchByMenuIds(new Long[]{menuId});
 		
-		map.put("code", 0);
-		return map;
+		return Result.success();
 	}
 	
 	/**
@@ -149,9 +144,7 @@ public class SysMenuController extends BaseController {
 		root.setParentId(-1L);
 		menuList.add(root);
 		
-		Map<String, Object> map = new HashMap<String,Object>();
-		map.put("menuList", menuList);
-		return map;
+		return Result.success().put("menuList", menuList);
 	}
 
 	/**
@@ -165,9 +158,7 @@ public class SysMenuController extends BaseController {
 		
 		SysMenu menu = sysMenuService.getByMenuId(menuId);
 		
-		Map<String, Object> map = new HashMap<String,Object>();
-		map.put("menu", menu);
-		return map;
+		return Result.success().put("menu", menu);
 	}
 	
 	

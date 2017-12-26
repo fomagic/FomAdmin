@@ -68,7 +68,6 @@ public class SysLoginController extends BaseController {
 			logger.info("sessionTimeout:" + session.getTimeout()); 
 
 		} catch ( UnknownAccountException uae ) {
-			//System.out.println(uae.getMessage());
 			logMsg = "账户不存在";
 			errMsg = "账户/密码不匹配！";
 		} catch (IncorrectCredentialsException ice) {

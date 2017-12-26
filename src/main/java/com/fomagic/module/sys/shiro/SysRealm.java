@@ -47,7 +47,6 @@ public class SysRealm extends AuthorizingRealm {
 		Long userId =  user.getUserId();
 		
 		List<String> permsList = null;
-		
 		if (userId == Constant.SUPER_ADMIN) {
 			List<SysMenu> menuList = sysMenuService.listMenu(Constant.SUPER_ADMIN);
 			permsList = new ArrayList<>(menuList.size());

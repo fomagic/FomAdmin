@@ -11,7 +11,7 @@ public interface Constant {
 	/**
 	 * 超级管理员默认ID
 	 */
-	public static final Long SUPER_ADMIN = 1L;
+	public static final long SUPER_ADMIN = 1; //写成Long后匹配错误
 
 	/**
 	 * 菜单类型

@@ -1,6 +1,5 @@
 package com.fomagic.module.sys.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +18,7 @@ import com.fomagic.common.controller.BaseController;
 import com.fomagic.common.util.QueryUtil;
 import com.fomagic.common.util.Constant;
 import com.fomagic.common.util.PageUtil;
+import com.fomagic.common.util.Result;
 import com.fomagic.module.sys.entity.SysUser;
 import com.fomagic.module.sys.service.SysUserRoleService;
 import com.fomagic.module.sys.service.SysUserService;
@@ -58,7 +58,7 @@ public class SysUserController extends BaseController {
 	public Map<String, Object> list(@RequestParam(required = true) Map<String, Object> params) {
 		
 		if (params.isEmpty()) {
-			return params;
+			return Result.error("参数不能为空");
 		}
 		
 		if (getSysUserId() != Constant.SUPER_ADMIN) {
@@ -70,9 +70,7 @@ public class SysUserController extends BaseController {
 		int total = sysUserService.countUser(query);
 		PageUtil pageUtil = new PageUtil(sysUserList, total, query.getLimit(), query.getPage());
 		
-		Map<String, Object> map = new HashMap<String,Object>();
-		map.put("page", pageUtil);
-		return map;
+		return Result.success().put("page", pageUtil);
 	}
 
 	@RequiresPermissions("sys:user:info")
@@ -85,10 +83,8 @@ public class SysUserController extends BaseController {
 		sysUser.setRoleIdList(roleIdList);
 		sysUser.setPassword(null);
 		sysUser.setSalt(null);
-		
-		Map<String, Object> map = new HashMap<String,Object>();
-		map.put("user", sysUser);
-		return map;
+	
+		return Result.success().put("user", sysUser);
 	}
 	
 	
@@ -99,9 +95,7 @@ public class SysUserController extends BaseController {
 		
 		sysUserService.saveUser(user);
 		
-		Map<String, Object> map = new HashMap<String,Object>();
-		map.put("code", 0);
-		return map;
+		return Result.success();
 	} 
 	
 	@RequiresPermissions("sys:user:update")
@@ -113,39 +107,31 @@ public class SysUserController extends BaseController {
 		user.setSalt(sysUser.getSalt());
 		sysUserService.updateUser(user);
 		
-		Map<String, Object> map = new HashMap<String,Object>();
-		map.put("code", 0);
-		return map;
+		return Result.success();
 	} 
 	
 	@RequiresPermissions("sys:user:delete")
 	@RequestMapping("/delete")
 	@ResponseBody
 	public Map<String, Object> delete(@RequestBody Long[] userIds) {
-		Map<String, Object> map = new HashMap<String,Object>();
+		
 		if (ArrayUtils.contains(userIds, 1L)) {
-			map.put("msg", "系统管理员不能删除");
-			return map;
+			return Result.error("系统管理员不能删除");
 		}
 		if (ArrayUtils.contains(userIds, getSysUserId())) {
-			map.put("msg", "不能删除当前用户");
-			return map;
+			return Result.error("不能删除当前用户");
 		}
 		sysUserService.deleteBatchByUserIds(userIds);
-		map.put("code", 0);
-		return map;
+		return Result.success();
 	}
 	
 	
 	@RequestMapping("/password")
 	@ResponseBody
 	public Map<String, Object> password(String password, String newPassword) {
-
-		Map<String, Object> map = new HashMap<String,Object>();
 		
 		if (StringUtils.isEmpty(password) || StringUtils.isEmpty(newPassword)) {
-			map.put("msg", "密码不能为空");
-			return map;
+			return Result.error("密码不能为空");
 		}
 		SysUser sysUser = getSysUser();
 		// 原密码
@@ -156,11 +142,9 @@ public class SysUserController extends BaseController {
 		int count = sysUserService.updatePassword(sysUser.getUserId(), password, newPassword);
 		
 		if (count == 0) {
-			map.put("msg", "原密码不正确,重新输入");
-			return map;
+			return Result.error("原密码不正确,重新输入");
 		}
-		map.put("code", 0);
-		return map;
+		return Result.success();
 	}
 
 }

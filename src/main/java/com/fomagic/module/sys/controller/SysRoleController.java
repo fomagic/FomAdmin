@@ -17,6 +17,7 @@ import com.fomagic.common.controller.BaseController;
 import com.fomagic.common.util.Constant;
 import com.fomagic.common.util.PageUtil;
 import com.fomagic.common.util.QueryUtil;
+import com.fomagic.common.util.Result;
 import com.fomagic.module.sys.entity.SysRole;
 import com.fomagic.module.sys.service.SysRoleMenuService;
 import com.fomagic.module.sys.service.SysRoleService;
@@ -68,9 +69,8 @@ public class SysRoleController extends BaseController {
 		int total = sysRoleService.countRole(query);
 		
 		PageUtil pageUtil = new PageUtil(list, total, query.getLimit(), query.getPage());
-		Map<String, Object> map = new HashMap<String,Object>();
-		map.put("page", pageUtil);
-		return map;
+		
+		return Result.success().put("page", pageUtil);
 	}
 	
 	/**
@@ -90,9 +90,7 @@ public class SysRoleController extends BaseController {
 		} 
 		List<SysRole> list = sysRoleService.listRole(map);
 		
-		Map<String, Object> mapR = new HashMap<String,Object>();
-		mapR.put("list", list);
-		return mapR;
+		return Result.success().put("list", list);
 	}
 	
 	/**
@@ -108,9 +106,7 @@ public class SysRoleController extends BaseController {
 		sysRole.setCreateUserId(getSysUserId());
 		sysRoleService.saveRole(sysRole);
 		
-		Map<String, Object> mapR = new HashMap<String,Object>();
-		mapR.put("code", 0);
-		return mapR;
+		return Result.success();
 	}
 	
 	/**
@@ -129,9 +125,7 @@ public class SysRoleController extends BaseController {
 		List<Long> menuIdList = sysRoleMenuService.listRoleMenuId(roleId);
 		sysRole.setMenuIdList(menuIdList);
 		
-		Map<String, Object> mapR = new HashMap<String,Object>();
-		mapR.put("role", sysRole);
-		return mapR;
+		return Result.success().put("role", sysRole);
 	}
 	
 	/**
@@ -146,9 +140,7 @@ public class SysRoleController extends BaseController {
 		sysRole.setCreateUserId(getSysUserId());
 		sysRoleService.updateRole(sysRole);
 		
-		Map<String, Object> mapR = new HashMap<String,Object>();
-		mapR.put("code", 0);
-		return mapR;
+		return Result.success();
 	}
 	
 	
@@ -163,9 +155,7 @@ public class SysRoleController extends BaseController {
 	public Map<String, Object> roleDelete(@RequestBody Long[] roleIds){
 		sysRoleService.deleteBatchByRoleIds(roleIds);
 		
-		Map<String, Object> mapR = new HashMap<String,Object>();
-		mapR.put("code", 0);
-		return mapR;
+		return Result.success();
 	}
 	
 }
