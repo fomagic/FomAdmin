@@ -142,7 +142,6 @@ function reloadMenuList() {
 		success : function(res) {
 			getLevelData(res, 0, 0);
 
-			alert(JSON.stringify(treeData));
 			$("#jqGrid").jqGrid('setGridParam',{ // 重新加载数据
 			 	datastr: treeData,
 			 	treedatatype : "jsonstring"
