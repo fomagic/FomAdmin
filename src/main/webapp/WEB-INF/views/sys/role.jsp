@@ -135,6 +135,6 @@
 
 	<!-- Owner  -->
 	<script src="static/js/common.js"></script>
-	<script src="static/js/role.js"></script>
+	<script src="static/js/sys/role.js"></script>
 </body>
 </html>

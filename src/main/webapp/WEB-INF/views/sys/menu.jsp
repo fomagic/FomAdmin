@@ -180,6 +180,6 @@
 	
 	<!-- Owner  -->
 	<script src="static/js/common.js"></script>
-	<script src="static/js/menu.js"></script>
+	<script src="static/js/sys/menu.js"></script>
 </body>
 </html>
