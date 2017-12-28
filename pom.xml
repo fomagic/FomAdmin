@@ -30,6 +30,7 @@
 		<log4j.version>1.2.17</log4j.version>
 		<fastjson.version>1.2.23</fastjson.version>
 		<jackson.version>2.8.6</jackson.version>
+		<quartz.version>2.2.3</quartz.version>
 	</properties>
 
 	<dependencies>
@@ -235,6 +236,22 @@
 			<artifactId>shiro-spring</artifactId>
 			<version>${shiro.version}</version>
 		</dependency>
+		
+		
+		<!-- ==========================quartz============================ -->
+		
+		<dependency>
+		    <groupId>org.quartz-scheduler</groupId>
+		    <artifactId>quartz</artifactId>
+		    <version>${quartz.version}</version>
+		    <exclusions>
+		    	<exclusion>
+		    		<artifactId>c3p0</artifactId>
+		    		<groupId>c3p0</groupId>
+		    	</exclusion>
+		    </exclusions>
+		</dependency>
+		
 
 		<!-- ===========================Tool============================= -->
 

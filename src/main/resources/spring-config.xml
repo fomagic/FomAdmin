@@ -55,6 +55,7 @@
 	<import resource="classpath:spring-config-template.xml" />
 	<import resource="classpath:spring-config-dataSource.xml" />
 	<import resource="classpath:spring-config-shiro.xml" />
+	<import resource="classpath:spring-config-scheduler.xml" />
 
 
 </beans>

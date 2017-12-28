@@ -29,4 +29,12 @@ public interface Constant {
 		public static final int STATUS_LOCKED  = 0;		//锁定，禁止登录
 		public static final int STATUS_NORMAL  = 1;		//正常
 	}
+	
+	/**
+	 * 定时器状态
+	 */
+	public static class ScheduleStatus {
+		public static final int STATUS_NORMAL  = 0;		//正常
+		public static final int STATUS_PAUSE  = 1;		//暂停
+	}
 }
