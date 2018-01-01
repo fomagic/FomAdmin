@@ -20,7 +20,7 @@ public class ScheduleJobController {
 	@RequestMapping({"","/","index"})
 	public String sechdule(){
 		
-		return "sys/schedule";
+		return "job/schedule";
 	}
 	
 	public Map<String, Object> listSchedule(@RequestParam Map<String, Object> params){
