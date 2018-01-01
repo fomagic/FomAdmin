@@ -12,27 +12,28 @@ import com.fomagic.module.job.service.ScheduleJobLogService;
 
 @Service
 public class ScheduleJobLogServiceImpl implements ScheduleJobLogService {
+
 	@Autowired
 	private ScheduleJobLogDao scheduleJobLogDao;
-	
+
 	@Override
-	public ScheduleJobLog queryObject(Long jobId) {
-		return scheduleJobLogDao.queryObject(jobId);
+	public ScheduleJobLog getByJobLogId(Long jobId) {
+		return scheduleJobLogDao.getByJobLogId(jobId);
 	}
 
 	@Override
-	public List<ScheduleJobLog> queryList(Map<String, Object> map) {
-		return scheduleJobLogDao.queryList(map);
+	public List<ScheduleJobLog> listJobLog(Map<String, Object> map) {
+		return scheduleJobLogDao.listJobLog(map);
 	}
 
 	@Override
-	public int queryTotal(Map<String, Object> map) {
-		return scheduleJobLogDao.queryTotal(map);
+	public int countJobLog(Map<String, Object> map) {
+		return scheduleJobLogDao.countJobLog(map);
 	}
 
 	@Override
-	public void save(ScheduleJobLog log) {
-		scheduleJobLogDao.save(log);
+	public void saveJobLog(ScheduleJobLog log) {
+		scheduleJobLogDao.saveJobLog(log);
 	}
 
 }

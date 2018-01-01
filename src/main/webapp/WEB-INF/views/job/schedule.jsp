@@ -60,7 +60,7 @@
 					</span>
 				</div>
 			</div>
-			<div class="form-group col-sm-4  pull-right text-right">
+			<div class="form-group">
 				<shiro:hasPermission name="sys:schedule:save">
 					<a class="btn btn-primary btn-flat" id="saveUser"><i
 						class="fa fa-plus"></i>&nbsp;新增</a>

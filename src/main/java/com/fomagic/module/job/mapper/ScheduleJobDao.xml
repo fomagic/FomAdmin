@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fomagic.module.job.dao.ScheduleJobDao">
+	<resultMap type="com.fomagic.module.job.entity.ScheduleJob" id="ScheduleJobMap">
+		<result property="jobId" column="job_id" />
+		<result property="beanName" column="bean_name" />
+		<result property="methodName" column="method_name" />
+		<result property="params" column="params" />
+		<result property="cronExpression" column="cron_expression" />
+		<result property="status" column="status" />
+		<result property="remark" column="remark" />
+		<result property="createTime" column="create_time" />
+	</resultMap>
+
+
+	<select id="getByJobId" resultMap="ScheduleJobMap">
+		select * from schedule_job
+		where job_id = #{value}
+	</select>
+
+	<select id="listJob" resultMap="ScheduleJobMap">
+		select * from schedule_job
+		<where>
+			<if test="beanName != null and beanName.trim() != ''">
+				bean_name like concat('%', #{beanName}, '%')
+			</if>
+		</where>
+		<if test="offset != null and limit != null ">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="countJob" resultType="int">
+		select count(1) from schedule_job
+		<where>
+			<if test="beanName != null and beanName.trim() != ''">
+				bean_name like concat('%', #{beanName}, '%')
+			</if>
+		</where>
+	</select>
+
+	<insert id="saveJob" parameterType="com.fomagic.module.job.entity.ScheduleJob"
+		useGeneratedKeys="true" keyProperty="jobId">
+		insert into schedule_job
+		(
+		`bean_name`,
+		`method_name`,
+		`params`,
+		`cron_expression`,
+		`status`,
+		`remark`,
+		`create_time`
+		)
+		values
+		(
+		#{beanName},
+		#{methodName},
+		#{params},
+		#{cronExpression},
+		#{status},
+		#{remark},
+		#{createTime}
+		)
+	</insert>
+
+	<update id="updateJob" parameterType="com.fomagic.module.job.entity.ScheduleJob">
+		update schedule_job
+		<set>
+			<if test="beanName != null">`bean_name` = #{beanName}, </if>
+			<if test="methodName != null">`method_name` = #{methodName}, </if>
+			<if test="params != null">`params` = #{params}, </if>
+			<if test="cronExpression != null">`cron_expression` = #{cronExpression}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+		</set>
+		where job_id = #{jobId}
+	</update>
+
+
+	<update id="updateBatchJob">
+		update schedule_job set status = #{status} where job_id in
+		<foreach item="jobId" collection="list" open="(" separator=","
+			close=")">
+			#{jobId}
+		</foreach>
+	</update>
+
+	<delete id="deleteBatchByJobIds">
+		delete from schedule_job where job_id in
+		<foreach item="jobId" collection="array" open="(" separator=","
+			close=")">
+			#{jobId}
+		</foreach>
+	</delete>
+</mapper>

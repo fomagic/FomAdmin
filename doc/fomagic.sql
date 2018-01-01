@@ -11,17 +11,17 @@
  Target Server Version : 50638
  File Encoding         : 65001
 
- Date: 01/01/2018 23:36:58
+ Date: 02/01/2018 00:21:59
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for sys_job
+-- Table structure for schedule_job
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_job`;
-CREATE TABLE `sys_job` (
+DROP TABLE IF EXISTS `schedule_job`;
+CREATE TABLE `schedule_job` (
   `job_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '任务id',
   `bean_name` varchar(200) DEFAULT NULL COMMENT 'spring bean名称',
   `method_name` varchar(100) DEFAULT NULL COMMENT '方法名',
@@ -34,18 +34,18 @@ CREATE TABLE `sys_job` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='定时任务';
 
 -- ----------------------------
--- Records of sys_job
+-- Records of schedule_job
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_job` VALUES (1, 'testTask', 'test', 'renren', '0 0/30 * * * ?', 0, '有参数测试', '2016-12-01 23:16:46');
-INSERT INTO `sys_job` VALUES (2, 'testTask', 'test2', NULL, '0 0/30 * * * ?', 1, '无参数测试', '2016-12-03 14:55:56');
+INSERT INTO `schedule_job` VALUES (1, 'testTask', 'test', 'fomagic', '0 0/30 * * * ?', 0, '有参数测试', '2016-12-01 23:16:46');
+INSERT INTO `schedule_job` VALUES (2, 'testTask', 'test2', NULL, '0 0/30 * * * ?', 1, '无参数测试', '2016-12-03 14:55:56');
 COMMIT;
 
 -- ----------------------------
--- Table structure for sys_job_log
+-- Table structure for schedule_job_log
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_job_log`;
-CREATE TABLE `sys_job_log` (
+DROP TABLE IF EXISTS `schedule_job_log`;
+CREATE TABLE `schedule_job_log` (
   `log_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '任务日志id',
   `job_id` bigint(20) NOT NULL COMMENT '任务id',
   `bean_name` varchar(200) DEFAULT NULL COMMENT 'spring bean名称',
@@ -60,12 +60,12 @@ CREATE TABLE `sys_job_log` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
 
 -- ----------------------------
--- Records of sys_job_log
+-- Records of schedule_job_log
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_job_log` VALUES (1, 1, 'testTask', 'test', 'fomagic', 0, NULL, 1084, '2017-11-29 11:30:00');
-INSERT INTO `sys_job_log` VALUES (2, 1, 'testTask', 'test', 'fomagic', 0, NULL, 1038, '2017-12-01 15:00:00');
-INSERT INTO `sys_job_log` VALUES (3, 1, 'testTask', 'test', 'fomagic', 0, NULL, 1026, '2017-12-01 17:30:00');
+INSERT INTO `schedule_job_log` VALUES (1, 1, 'testTask', 'test', 'fomagic', 0, NULL, 1084, '2017-11-29 11:30:00');
+INSERT INTO `schedule_job_log` VALUES (2, 1, 'testTask', 'test', 'fomagic', 0, NULL, 1038, '2017-12-01 15:00:00');
+INSERT INTO `schedule_job_log` VALUES (3, 1, 'testTask', 'test', 'fomagic', 0, NULL, 1026, '2017-12-01 17:30:00');
 COMMIT;
 
 -- ----------------------------

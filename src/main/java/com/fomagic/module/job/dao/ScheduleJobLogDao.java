@@ -5,20 +5,43 @@ import java.util.Map;
 
 import com.fomagic.module.job.entity.ScheduleJobLog;
 
-
 /**
  * 定时任务日志
+ * 
  * @author FOM
  *
  */
-public interface ScheduleJobLogDao{
+public interface ScheduleJobLogDao {
 
-	ScheduleJobLog queryObject(Long jobId);
+	/**
+	 * 根据任务ID获取任务信息
+	 * 
+	 * @param jobId
+	 * @return
+	 */
+	ScheduleJobLog getByJobLogId(Long jobId);
 
-	List<ScheduleJobLog> queryList(Map<String, Object> map);
+	/**
+	 * 获取任务日志列表
+	 * 
+	 * @param map
+	 * @return
+	 */
+	List<ScheduleJobLog> listJobLog(Map<String, Object> map);
 
-	int queryTotal(Map<String, Object> map);
+	/**
+	 * 获取总数
+	 * 
+	 * @param map
+	 * @return
+	 */
+	int countJobLog(Map<String, Object> map);
 
-	void save(ScheduleJobLog log);
-	
+	/**
+	 * 保存任务日志
+	 * 
+	 * @param log
+	 */
+	void saveJobLog(ScheduleJobLog log);
+
 }

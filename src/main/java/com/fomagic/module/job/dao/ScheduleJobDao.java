@@ -5,32 +5,64 @@ import java.util.Map;
 
 import com.fomagic.module.job.entity.ScheduleJob;
 
-
 /**
  * 定时任务
+ * 
  * @author FOM
  *
  */
-public interface ScheduleJobDao{
-	
+public interface ScheduleJobDao {
+
+	/**
+	 * 获取任务信息
+	 * 
+	 * @param jobId
+	 * @return
+	 */
+	ScheduleJob getByJobId(Long jobId);
+
+	/**
+	 * 获取任务列表
+	 * 
+	 * @param map
+	 * @return
+	 */
+	List<ScheduleJob> listJob(Map<String, Object> map);
+
+	/**
+	 * 获取任务数量
+	 * 
+	 * @param map
+	 * @return
+	 */
+	int countJob(Map<String, Object> map);
+
+	/**
+	 * 保存任务
+	 * 
+	 * @param scheduleJob
+	 */
+	void saveJob(ScheduleJob scheduleJob);
+
+	/**
+	 * 更新任务
+	 * 
+	 * @param scheduleJob
+	 */
+	void updateJob(ScheduleJob scheduleJob);
+
 	/**
 	 * 批量更新状态
+	 * 
+	 * @param map
+	 * @return
 	 */
-	int updateBatch(Map<String, Object> map);
+	int updateBatchJob(Map<String, Object> map);
 
-
-	ScheduleJob queryObject(Long jobId);
-
-	int queryTotal(Map<String, Object> map);
-
-	List<ScheduleJob> queryList(Map<String, Object> map);
-
-
-	void save(ScheduleJob scheduleJob);
-
-
-	void update(ScheduleJob scheduleJob);
-
-
-	void deleteBatch(Long[] jobIds);
+	/**
+	 * 批量删除
+	 * 
+	 * @param jobIds
+	 */
+	void deleteBatchByJobIds(Long[] jobIds);
 }

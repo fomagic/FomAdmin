@@ -29,9 +29,9 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 	/**
 	 * 项目启动时，初始化定时器
 	 */
-	//@PostConstruct
+	@PostConstruct
 	public void init(){
-		List<ScheduleJob> scheduleJobList = schedulerJobDao.queryList(new HashMap<String, Object>());
+		List<ScheduleJob> scheduleJobList = schedulerJobDao.listJob(new HashMap<String, Object>());
 		for(ScheduleJob scheduleJob : scheduleJobList){
 			CronTrigger cronTrigger = QuartzUtil.getCronTrigger(scheduler, scheduleJob.getJobId());
             //如果不存在，则创建
@@ -44,62 +44,62 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 	}
 	
 	@Override
-	public ScheduleJob queryObject(Long jobId) {
-		return schedulerJobDao.queryObject(jobId);
+	public ScheduleJob getByJobId(Long jobId) {
+		return schedulerJobDao.getByJobId(jobId);
 	}
 
 	@Override
-	public List<ScheduleJob> queryList(Map<String, Object> map) {
-		return schedulerJobDao.queryList(map);
+	public List<ScheduleJob> listJob(Map<String, Object> map) {
+		return schedulerJobDao.listJob(map);
 	}
 
 	@Override
-	public int queryTotal(Map<String, Object> map) {
-		return schedulerJobDao.queryTotal(map);
+	public int countJob(Map<String, Object> map) {
+		return schedulerJobDao.countJob(map);
 	}
 
 	@Override
 	@Transactional
-	public void save(ScheduleJob scheduleJob) {
+	public void saveJob(ScheduleJob scheduleJob) {
 		scheduleJob.setCreateTime(new Date());
 		scheduleJob.setStatus(Constant.ScheduleStatus.STATUS_NORMAL);
-        schedulerJobDao.save(scheduleJob);
+        schedulerJobDao.saveJob(scheduleJob);
         
         QuartzUtil.createScheduleJob(scheduler, scheduleJob);
     }
 	
 	@Override
 	@Transactional
-	public void update(ScheduleJob scheduleJob) {
+	public void updateJob(ScheduleJob scheduleJob) {
 		QuartzUtil.updateScheduleJob(scheduler, scheduleJob);
                 
-        schedulerJobDao.update(scheduleJob);
+        schedulerJobDao.updateJob(scheduleJob);
     }
 
 	@Override
 	@Transactional
-    public void deleteBatch(Long[] jobIds) {
+    public void deleteBatchByJobIds(Long[] jobIds) {
     	for(Long jobId : jobIds){
     		QuartzUtil.deleteScheduleJob(scheduler, jobId);
     	}
     	
     	//删除数据
-    	schedulerJobDao.deleteBatch(jobIds);
+    	schedulerJobDao.deleteBatchByJobIds(jobIds);
 	}
 
 	@Override
-    public int updateBatch(Long[] jobIds, int status){
+    public int updateBatchJob(Long[] jobIds, int status){
     	Map<String, Object> map = new HashMap<>();
     	map.put("list", jobIds);
     	map.put("status", status);
-    	return schedulerJobDao.updateBatch(map);
+    	return schedulerJobDao.updateBatchJob(map);
     }
     
 	@Override
 	@Transactional
     public void run(Long[] jobIds) {
     	for(Long jobId : jobIds){
-    		QuartzUtil.run(scheduler, queryObject(jobId));
+    		QuartzUtil.run(scheduler, getByJobId(jobId));
     	}
     }
 
@@ -110,7 +110,7 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
         	QuartzUtil.pauseJob(scheduler, jobId);
     	}
         
-    	updateBatch(jobIds, Constant.ScheduleStatus.STATUS_PAUSE);
+        updateBatchJob(jobIds, Constant.ScheduleStatus.STATUS_PAUSE);
     }
 
 	@Override
@@ -120,7 +120,7 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
     		QuartzUtil.resumeJob(scheduler, jobId);
     	}
 
-    	updateBatch(jobIds, Constant.ScheduleStatus.STATUS_NORMAL);
+    	updateBatchJob(jobIds, Constant.ScheduleStatus.STATUS_NORMAL);
     }
     
 }

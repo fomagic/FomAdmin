@@ -4,14 +4,16 @@ $(function () {
         url: 'sys/schedule/list',
         datatype: "json",
         colModel: [			
-			{ label: '用户ID', name: 'userId', index: "user_id", width: 35, key: true },
-			{ label: '用户名', name: 'userName', width: 75 },
-			{ label: '邮箱', name: 'email', width: 90 },
-			{ label: '手机号', name: 'mobile', width: 90 },
-			{ label: '状态', name: 'status', width: 40, align:"center",formatter: function(value, options, row){
+			{ label: '任务ID', name: 'jobId',width: 35, key: true },
+			{ label: 'bean名称', name: 'beanName', width: 75 },
+			{ label: '方法名称', name: 'methodName', width: 75 },
+			{ label: '参数', name: 'params', width: 75 },
+			{ label: 'cron表达式', name: 'cronExpression', width: 90 },
+			{ label: '备注', name: 'remark', width: 90 },
+			{ label: '状态', name: 'status', width: 40, align: 'center', formatter: function(value, options, row){
 				return value === 0 ? 
-					'<span class="label label-danger ">禁用</span>' : 
-					'<span class="label label-success">正常</span>';
+					'<span class="label label-success">正常</span>': 
+					'<span class="label label-danger ">暂停</span>' ;
 			}},
 			{ label: '创建时间', name: 'createTime', index: "create_time", width: 80}
         ],

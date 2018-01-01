@@ -29,10 +29,11 @@ public class QuartzJob extends QuartzJobBean {
 
 	@Override
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-		
+
 		ScheduleJob scheduleJob = (ScheduleJob) context.getMergedJobDataMap().get(ScheduleJob.JOB_PARAM_KEY);
 
-		ScheduleJobLogService scheduleJobLogService = (ScheduleJobLogService) SpringContextUtil.getBean("scheduleJobLogService");
+		ScheduleJobLogService scheduleJobLogService = (ScheduleJobLogService) SpringContextUtil
+				.getBean("scheduleJobLogService");
 
 		// 数据库保存执行记录
 		ScheduleJobLog log = new ScheduleJobLog();
@@ -48,8 +49,8 @@ public class QuartzJob extends QuartzJobBean {
 		try {
 			// 执行任务
 			logger.info("任务准备执行，任务ID：" + scheduleJob.getJobId());
-			QuartzRunnable task = new QuartzRunnable(scheduleJob.getBeanName(),
-					scheduleJob.getMethodName(), scheduleJob.getParams());
+			QuartzRunnable task = new QuartzRunnable(scheduleJob.getBeanName(), scheduleJob.getMethodName(),
+					scheduleJob.getParams());
 			Future<?> future = service.submit(task);
 
 			future.get();
@@ -72,7 +73,7 @@ public class QuartzJob extends QuartzJobBean {
 			log.setStatus(1);
 			log.setError(StringUtils.substring(e.toString(), 0, 2000));
 		} finally {
-			scheduleJobLogService.save(log);
+			scheduleJobLogService.saveJobLog(log);
 		}
 	}
 }

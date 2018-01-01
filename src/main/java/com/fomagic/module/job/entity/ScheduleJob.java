@@ -1,6 +1,5 @@
 package com.fomagic.module.job.entity;
 
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,14 +10,14 @@ import java.util.Date;
  *
  */
 public class ScheduleJob implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 任务调度参数key
 	 */
-    public static final String JOB_PARAM_KEY = "JOB_PARAM_KEY";
-	
+	public static final String JOB_PARAM_KEY = "JOB_PARAM_KEY";
+
 	/**
 	 * 任务id
 	 */
@@ -28,18 +27,18 @@ public class ScheduleJob implements Serializable {
 	 * spring bean名称
 	 */
 	private String beanName;
-	
+
 	/**
 	 * 方法名
 	 */
-	
+
 	private String methodName;
-	
+
 	/**
 	 * 参数
 	 */
 	private String params;
-	
+
 	/**
 	 * cron表达式
 	 */
@@ -61,16 +60,14 @@ public class ScheduleJob implements Serializable {
 	 */
 	private Date createTime;
 
-
 	public void setJobId(Long jobId) {
 		this.jobId = jobId;
 	}
 
-
 	public Long getJobId() {
 		return jobId;
 	}
-	
+
 	public String getBeanName() {
 		return beanName;
 	}
@@ -103,31 +100,25 @@ public class ScheduleJob implements Serializable {
 		this.remark = remark;
 	}
 
-
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
-
 	public Integer getStatus() {
 		return status;
 	}
-	
 
 	public void setCronExpression(String cronExpression) {
 		this.cronExpression = cronExpression;
 	}
 
-
 	public String getCronExpression() {
 		return cronExpression;
 	}
-	
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-
 
 	public Date getCreateTime() {
 		return createTime;
