@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fomagic.module.sys.dao.SysLogDao">
+	<resultMap type="com.fomagic.module.sys.entity.SysLog" id="SysLogMap">
+		<result property="id" column="id" />
+		<result property="userName" column="username" />
+		<result property="operation" column="operation" />
+		<result property="method" column="method" />
+		<result property="params" column="params" />
+		<result property="time" column="time" />
+		<result property="ip" column="ip" />
+		<result property="createTime" column="create_date" />
+	</resultMap>
+
+	<select id="listLog" resultMap="SysLogMap">
+		select * from sys_log 
+		<where>
+			<if test="key != null and key.trim() != ''">
+				`username` like concat('%',#{key},'%') or `operation` like concat('%',#{key},'%')
+			</if>
+		</where>
+		order by id desc 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+	<select id="countLog" resultType="int">
+		select count(*) from sys_log 
+		<where>
+			<if test="key != null and key.trim() != ''">
+				`username` like concat('%',#{key},'%') or `operation` like concat('%',#{key},'%')
+			</if>
+		</where>
+	</select>
+	
+	
+	<insert id="saveLog" parameterType="com.fomagic.module.sys.entity.SysLog" useGeneratedKeys="true" keyProperty="id">
+		insert into sys_log
+		(
+			`username`, 
+			`operation`, 
+			`method`, 
+			`params`,
+			`time`,
+			`ip`,
+			`create_date`
+		)
+		values
+		(
+			#{userName},
+			#{operation},
+			#{method},
+			#{params},
+			#{time},
+			#{ip},
+			#{createTime}
+		)
+	</insert>
+
+</mapper>

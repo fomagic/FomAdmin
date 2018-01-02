@@ -1,6 +1,5 @@
 package com.fomagic.common.exception;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.shiro.authz.AuthorizationException;
@@ -11,32 +10,43 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fomagic.common.util.Result;
+
 
 /**
  * 全局异常处理
  *
  */
 @ControllerAdvice
-public class ExceptionAdvice {
+public class FomExceptionHandler {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 
+	@ExceptionHandler(FomException.class)
+	@ResponseBody
+	public Map<String, Object> handleFomException(FomException e){
+		
+		Result result = new Result();
+		result.put("code", e.getCode());
+		result.put("msg", e.getMessage());
+		
+		return result;
+	}
+	
 	@ExceptionHandler(DuplicateKeyException.class)
 	@ResponseBody
 	public Map<String, Object> handleDuplicateKeyException(DuplicateKeyException e){
-		Map<String, Object> map = new HashMap<String,Object>();
 		logger.error("数据库记录重复添加:");
-		map.put("msg", "数据库已存在该记录");
-		return map;
+		return Result.error("数据库已存在该记录");
 	}
 	
 	@ExceptionHandler(AuthorizationException.class)
 	@ResponseBody
 	public Map<String, Object> handleAuthorizationException(AuthorizationException e){
-		Map<String, Object> map = new HashMap<String,Object>();
 		logger.error("权限不足:");
-		map.put("msg", "权限不足，联系管理员");
-		return map;
+		return Result.error("权限不足，联系管理员");
 	}
+	
+
 }

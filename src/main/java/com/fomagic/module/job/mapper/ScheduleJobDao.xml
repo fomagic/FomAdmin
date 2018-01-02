@@ -22,8 +22,8 @@
 	<select id="listJob" resultMap="ScheduleJobMap">
 		select * from schedule_job
 		<where>
-			<if test="beanName != null and beanName.trim() != ''">
-				bean_name like concat('%', #{beanName}, '%')
+			<if test="searchName != null and searchName.trim() != ''">
+				bean_name like concat('%', #{searchName}, '%')
 			</if>
 		</where>
 		<if test="offset != null and limit != null ">

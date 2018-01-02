@@ -123,4 +123,5 @@ public class ScheduleJob implements Serializable {
 	public Date getCreateTime() {
 		return createTime;
 	}
+
 }

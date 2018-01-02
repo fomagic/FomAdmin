@@ -62,31 +62,34 @@
 			</div>
 			<div class="form-group">
 				<shiro:hasPermission name="sys:schedule:save">
-					<a class="btn btn-primary btn-flat" id="saveUser"><i
+					<a class="btn btn-primary btn-flat" id="addSchedule"><i
 						class="fa fa-plus"></i>&nbsp;新增</a>
 				</shiro:hasPermission>
 				<shiro:hasPermission name="sys:schedule:update">
-					<a class="btn btn-primary btn-flat" id="updateUser"> <i
+					<a class="btn btn-primary btn-flat" id="updateSchedule"> <i
 						class="fa fa-pencil-square-o"></i>&nbsp;修改
 					</a>
 				</shiro:hasPermission>
 				<shiro:hasPermission name="sys:schedule:delete">
-					<a class="btn btn-primary btn-flat" id="deleteUser"><i
+					<a class="btn btn-primary btn-flat" id="deleteSchedule"><i
 						class="fa fa-trash-o"></i>&nbsp;删除</a>
 				</shiro:hasPermission>
 				
 				<shiro:hasPermission name="sys:schedule:pause">
-					<a class="btn btn-primary btn-flat" id="saveUser"><i
+					<a class="btn btn-primary btn-flat" id="pauseSchedule"><i
 						class="fa fa-pause"></i>&nbsp;暂停</a>
 				</shiro:hasPermission>
 				<shiro:hasPermission name="sys:schedule:resume">
-					<a class="btn btn-primary btn-flat" id="updateUser"> <i
+					<a class="btn btn-primary btn-flat" id="resumeSchedule"> <i
 						class="fa fa-play"></i>&nbsp;恢复
 					</a>
 				</shiro:hasPermission>
 				<shiro:hasPermission name="sys:schedule:run">
-					<a class="btn btn-primary btn-flat" id="deleteUser"><i
+					<a class="btn btn-primary btn-flat" id="runSchedule"><i
 						class="fa fa-arrow-circle-right"></i>&nbsp;立即执行</a>
+				</shiro:hasPermission>
+				<shiro:hasPermission name="sys:schedule:log">
+					<a class="btn btn-warning btn-flat pull-right" id="logSchedule">日志列表</a>
 				</shiro:hasPermission>
 			</div>
 		</div>
@@ -95,57 +98,41 @@
 	</div>
 
 
-
-	<div class="panel panel-default  div-display-none"
-		id="user-information">
-		<div class="panel-heading" id="user-title">用户信息</div>
+	<div class="panel panel-default  div-display-none" id="schedule-information">
+		<div class="panel-heading" id="schedule-title">任务</div>
 		<div class="panel-body">
 			<form class="form-horizontal" action="" method="post">
 				<div class="form-group">
-					<label class="col-sm-2 control-label">用户名</label>
+					<label class="col-sm-2 control-label">bean名称</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="username"
-							placeholder="登录账号" id="userName">
+						<input type="text" class="form-control" placeholder="Spring bean 名称,对应的注解名称" id="beanName">
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="col-sm-2 control-label">密码</label>
+					<label class="col-sm-2 control-label">方法名称</label>
 					<div class="col-sm-4">
-						<input type="password" class="form-control" name="password"
-							placeholder="密码" id="password">
+						<input type="text" class="form-control" placeholder="方法名称" id="methodName">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label">邮箱</label>
+					<label class="col-sm-2 control-label">参数</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="email"
-							placeholder="邮箱" id="email">
+						<input type="text" class="form-control" placeholder="参数" id="params">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label">手机号</label>
+					<label class="col-sm-2 control-label">cron表达式</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="mobile"
-							placeholder="手机号" id="mobile">
+						<input type="text" class="form-control" placeholder="例(整点执行)：0 ? * * * ? *" id="cronExpression">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label">角色</label>
-					<div class="col-sm-8" id="roleList"></div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">状态</label>
-					<div class="col-sm-10">
-						<label class="radio-inline"> 
-							<input type="radio" name="status" value="0">禁用
-						</label>
-						<label class="radio-inline"> 
-							<input type="radio" name="status" value="1">正常
-						</label>
+					<label class="col-sm-2 control-label">备注</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" placeholder="备注" id="remark">
 					</div>
 				</div>
-
 				<div class="form-group">
 					<label class="col-sm-2 control-label"></label>
 					<div class="col-sm-4">

@@ -22,7 +22,7 @@
 	<select id="listJobLog" resultMap="ScheduleJobLogMap" >
 		select * from schedule_job_log 
 		<where>
-			<if test="jobId != null">
+			<if test="jobId != null and jobId.trim() != ''">
 				and job_id = #{jobId}
 			</if>
 		</where>

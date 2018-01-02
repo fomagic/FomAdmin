@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.ReflectionUtils;
 
+import com.fomagic.common.exception.FomException;
 import com.fomagic.common.util.SpringContextUtil;
 
 /**
@@ -39,7 +40,7 @@ public class QuartzRunnable implements Runnable {
 				method.invoke(target);
 			}
 		}catch (Exception e) {
-			//throw new RRException("执行定时任务失败", e);
+			throw new FomException("执行定时任务失败", e);
 		}
 	}
 

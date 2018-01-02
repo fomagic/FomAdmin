@@ -9,7 +9,7 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd ">
         
-        <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         	
         </bean>
         

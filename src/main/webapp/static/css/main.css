@@ -24,6 +24,9 @@ html { overflow-x:hidden; }
 	margin-bottom: 80px;
 }
 
+.pointer{
+	cursor: pointer;
+}
 
 
 .navbar-nav>.setting-menu>.dropdown-menu {

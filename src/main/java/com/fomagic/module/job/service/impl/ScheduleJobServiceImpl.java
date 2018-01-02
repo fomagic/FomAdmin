@@ -21,8 +21,10 @@ import com.fomagic.module.job.service.ScheduleJobService;
 
 @Service
 public class ScheduleJobServiceImpl implements ScheduleJobService {
+	
 	@Autowired
     private Scheduler scheduler;
+	
 	@Autowired
 	private ScheduleJobDao schedulerJobDao;
 	
@@ -59,7 +61,6 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 	}
 
 	@Override
-	@Transactional
 	public void saveJob(ScheduleJob scheduleJob) {
 		scheduleJob.setCreateTime(new Date());
 		scheduleJob.setStatus(Constant.ScheduleStatus.STATUS_NORMAL);
@@ -69,7 +70,6 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
     }
 	
 	@Override
-	@Transactional
 	public void updateJob(ScheduleJob scheduleJob) {
 		QuartzUtil.updateScheduleJob(scheduler, scheduleJob);
                 
@@ -77,7 +77,6 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
     }
 
 	@Override
-	@Transactional
     public void deleteBatchByJobIds(Long[] jobIds) {
     	for(Long jobId : jobIds){
     		QuartzUtil.deleteScheduleJob(scheduler, jobId);

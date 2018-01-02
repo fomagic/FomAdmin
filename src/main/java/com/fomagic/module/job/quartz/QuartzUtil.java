@@ -11,6 +11,7 @@ import org.quartz.SchedulerException;
 import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
 
+import com.fomagic.common.exception.FomException;
 import com.fomagic.common.util.Constant;
 import com.fomagic.module.job.entity.ScheduleJob;
 
@@ -45,8 +46,7 @@ public class QuartzUtil {
         try {
             return (CronTrigger) scheduler.getTrigger(getTriggerKey(jobId));
         } catch (SchedulerException e) {
-            return null;
-            //throw new RRException("获取定时任务CronTrigger出现异常", e);
+            throw new FomException("获取定时任务CronTrigger出现异常", e);
         }
     }
 
@@ -74,7 +74,7 @@ public class QuartzUtil {
             	pauseJob(scheduler, scheduleJob.getJobId());
             }
         } catch (SchedulerException e) {
-            //throw new RRException("创建定时任务失败", e);
+            throw new FomException("创建定时任务失败", e);
         }
     }
     
@@ -105,7 +105,7 @@ public class QuartzUtil {
             }
             
         } catch (SchedulerException e) {
-            //throw new RRException("更新定时任务失败", e);
+            throw new FomException("更新定时任务失败", e);
         }
     }
 
@@ -120,7 +120,7 @@ public class QuartzUtil {
         	
             scheduler.triggerJob(getJobKey(scheduleJob.getJobId()), dataMap);
         } catch (SchedulerException e) {
-            //throw new RRException("立即执行定时任务失败", e);
+            throw new FomException("立即执行定时任务失败", e);
         }
     }
 
@@ -131,7 +131,7 @@ public class QuartzUtil {
         try {
             scheduler.pauseJob(getJobKey(jobId));
         } catch (SchedulerException e) {
-            //throw new RRException("暂停定时任务失败", e);
+            throw new FomException("暂停定时任务失败", e);
         }
     }
 
@@ -142,7 +142,7 @@ public class QuartzUtil {
         try {
             scheduler.resumeJob(getJobKey(jobId));
         } catch (SchedulerException e) {
-            //throw new RRException("暂停定时任务失败", e);
+            throw new FomException("暂停定时任务失败", e);
         }
     }
 
@@ -153,7 +153,7 @@ public class QuartzUtil {
         try {
             scheduler.deleteJob(getJobKey(jobId));
         } catch (SchedulerException e) {
-            //throw new RRException("删除定时任务失败", e);
+            throw new FomException("删除定时任务失败", e);
         }
     }
 }
