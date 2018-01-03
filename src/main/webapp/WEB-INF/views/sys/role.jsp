@@ -63,7 +63,7 @@
 					</span>
 				</div>
 			</div>
-			<div class="form-group col-sm-4  pull-right text-right">
+			<div class="form-group col-sm-9 text-right">
 				<shiro:hasPermission name="sys:role:save">
 					<a class="btn btn-primary btn-flat" id="saveRole"><i class="fa fa-plus"></i>&nbsp;新增</a>
 				</shiro:hasPermission>
