@@ -20,7 +20,7 @@ $(function () {
 		viewrecords: true,
         height: 'auto',
         rowNum: 10,
-		rowList : [10,30,50,100],
+		rowList : [10,30,50,100,-1],
         rownumbers: true, 
         rownumWidth: 25, 
         autowidth:true,

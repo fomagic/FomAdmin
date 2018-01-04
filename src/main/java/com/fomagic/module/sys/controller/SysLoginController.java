@@ -133,7 +133,6 @@ public class SysLoginController extends BaseController {
 	 * 
 	 * @return
 	 */
-	@SysLogAnno("登录后台")
 	@RequestMapping(value = {"","/","/index"})
 	public String sysIndex(ModelMap modelMap) {
 		

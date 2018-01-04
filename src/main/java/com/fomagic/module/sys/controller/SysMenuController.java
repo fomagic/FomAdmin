@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fomagic.common.annotation.SysLogAnno;
 import com.fomagic.common.controller.BaseController;
 import com.fomagic.common.util.Constant;
 import com.fomagic.common.util.Result;
@@ -107,6 +108,7 @@ public class SysMenuController extends BaseController {
 	 * @param menuId
 	 * @return
 	 */
+	@SysLogAnno("删除菜单")
 	@RequiresPermissions("sys:menu:delete")
 	@RequestMapping("/delete")
 	@ResponseBody

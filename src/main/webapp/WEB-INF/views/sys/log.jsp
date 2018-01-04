@@ -51,7 +51,6 @@
 
 	<div id="schedule-list">
 		<div class="grid-btn row">
-
 			<div class="form-group col-sm-3">
 				<div class="input-group">
 					<input type="text" class="form-control" id="searchName" placeholder="用户名、用户操作">
@@ -60,6 +59,8 @@
 					</span>
 				</div>
 			</div>
+			
+			<a class="btn btn-primary btn-flat pull-right" id="exportFile"><i class="fa fa-plus"></i>&nbsp;导出</a>
 		</div>
 		<table id="jqGrid"></table>
 		<div id="jqGridPager"></div>
@@ -80,6 +81,12 @@
 	<!-- free-jqGrid -->
 	<script src="static/plugins/free-jqgrid/js/jquery.jqgrid.src.js"></script>
 	<script src="static/plugins/free-jqgrid/js/grid.locale-cn.js"></script>
+
+	<!-- tableExport -->
+	<script src="static/plugins/tableExport/libs/FileSaver/FileSaver.min.js"></script>
+	<script src="static/plugins/tableExport/libs/js-xlsx/xlsx.core.min.js"></script>
+	<script src="static/plugins/tableExport/tableExport.js"></script>
+
 
 	<!-- Owner  -->
 	<script src="static/js/common.js"></script>
