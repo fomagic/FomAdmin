@@ -59,6 +59,7 @@
 			</div>
 		</div>
 		<div class="form-group col-sm-9 text-right">
+			<a class="btn btn-primary btn-flat" id="exportFile">导出 Excel</a>
 			<a class="btn btn-warning btn-flat" id="back">返回</a>
 		</div>
 	</div>
@@ -78,6 +79,11 @@
 	<!-- free-jqGrid -->
 	<script src="static/plugins/free-jqgrid/js/jquery.jqgrid.src.js"></script>
 	<script src="static/plugins/free-jqgrid/js/grid.locale-cn.js"></script>
+	
+	<!-- tableExport -->
+	<script src="static/plugins/tableExport/libs/FileSaver/FileSaver.min.js"></script>
+	<script src="static/plugins/tableExport/libs/js-xlsx/xlsx.core.min.js"></script>
+	<script src="static/plugins/tableExport/tableExport.js"></script>
 
 	<!-- Owner  -->
 	<script src="static/js/common.js"></script>

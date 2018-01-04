@@ -59,15 +59,13 @@
 					</span>
 				</div>
 			</div>
-			
-			<a class="btn btn-primary btn-flat pull-right" id="exportFile"><i class="fa fa-plus"></i>&nbsp;导出</a>
+			<div class="form-group col-sm-9 text-right">
+				<a class="btn btn-primary btn-flat" id="exportFile">导出 Excel</a>
+			</div>
 		</div>
 		<table id="jqGrid"></table>
 		<div id="jqGridPager"></div>
 	</div>
-
-
-
 
 	<!-- REQUIRED JS SCRIPTS -->
 

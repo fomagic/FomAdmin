@@ -49,22 +49,7 @@ $(function () {
     
     $("#exportFile").click(function(){
     	
-    	var options = {
-	        //ignoreRow: [1,11,12,-2],
-	        //ignoreColumn: [0,-1],
-	        //pdfmake: {enabled: true},
-	        tableName: 'Table name'
-	      };
-	
-	      $.extend(true, options, {type: 'excel', excelstyles: ['background-color', 'color',
-                                                                'border-bottom-color', 'border-bottom-style', 'border-bottom-width',
-                                                                'border-top-color', 'border-top-style', 'border-top-width',
-                                                                'border-left-color', 'border-left-style', 'border-left-width',
-                                                                'border-right-color', 'border-right-style', 'border-right-width',
-                                                                'font-family', 'font-size', 'font-weight']
-                                  });
-	
-	      $('#jqGrid').tableExport(options);
+	      $('#jqGrid').tableExport( {type:'excel', excelstyles:['border-bottom', 'border-top', 'border-left', 'border-right']});
     });
 
     

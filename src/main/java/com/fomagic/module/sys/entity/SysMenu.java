@@ -67,6 +67,7 @@ public class SysMenu implements Serializable{
 	 */
 	private List<?> list;
 
+	
 	public Long getMenuId() {
 		return menuId;
 	}

@@ -48,10 +48,8 @@ public class QuartzJob extends QuartzJobBean {
 		try {
 			// 执行任务
 			logger.info("任务准备执行，任务ID：" + scheduleJob.getJobId());
-			QuartzRunnable task = new QuartzRunnable(scheduleJob.getBeanName(), scheduleJob.getMethodName(),
-					scheduleJob.getParams());
+			QuartzRunnable task = new QuartzRunnable(scheduleJob.getBeanName(), scheduleJob.getMethodName(), scheduleJob.getParams());
 			Future<?> future = service.submit(task);
-
 			future.get();
 
 			// 任务执行总时长

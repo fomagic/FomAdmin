@@ -56,7 +56,15 @@ $(function () {
     	history.go(-1);
     });
     
-    
+    $("#exportFile").click(function(){
+    	
+	      $('#jqGrid').tableExport( {type:'excel', excelstyles: ['background-color', 'color',
+                                                                 'border-bottom-color', 'border-bottom-style', 'border-bottom-width',
+                                                                 'border-top-color', 'border-top-style', 'border-top-width',
+                                                                 'border-left-color', 'border-left-style', 'border-left-width',
+                                                                 'border-right-color', 'border-right-style', 'border-right-width',
+                                                                 'font-family', 'font-size', 'font-weight']});
+  });
 });
 
 
