@@ -51,7 +51,6 @@
 
 	<div id="schedule-list">
 		<div class="grid-btn row">
-
 			<div class="form-group col-sm-3">
 				<div class="input-group">
 					<input type="text" class="form-control" id="searchName" placeholder="bean名称">
@@ -60,7 +59,7 @@
 					</span>
 				</div>
 			</div>
-			<div class="form-group">
+			<div class="form-group col-sm-9">
 				<shiro:hasPermission name="sys:schedule:save">
 					<a class="btn btn-primary btn-flat" id="addSchedule"><i
 						class="fa fa-plus"></i>&nbsp;新增</a>

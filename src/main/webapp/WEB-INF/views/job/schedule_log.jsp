@@ -49,24 +49,21 @@
 </head>
 <body>
 
-	<div id="schedule-list">
-		<div class="grid-btn row">
-
-			<div class="form-group col-sm-3">
-				<div class="input-group">
-					<input type="text" class="form-control" id="searchName" placeholder="任务ID">
-						<span class="input-group-btn">
-						<button class="btn btn-default form-control" type="button" id="getScheduleLog">查询</button>
-					</span>
-				</div>
+	<div class="grid-btn row">
+		<div class="form-group col-sm-3">
+			<div class="input-group">
+				<input type="text" class="form-control" id="searchName" placeholder="任务ID">
+					<span class="input-group-btn">
+					<button class="btn btn-default form-control" type="button" id="getScheduleLog">查询</button>
+				</span>
 			</div>
-			<a class="btn btn-warning btn-flat" id="back">返回</a> 
 		</div>
-		<table id="jqGrid"></table>
-		<div id="jqGridPager"></div>
+		<div class="form-group col-sm-9 text-right">
+			<a class="btn btn-warning btn-flat" id="back">返回</a>
+		</div>
 	</div>
-
-
+	<table id="jqGrid"></table>
+	<div id="jqGridPager"></div>
 
 
 	<!-- REQUIRED JS SCRIPTS -->
