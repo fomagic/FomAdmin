@@ -49,15 +49,7 @@
 	<!-- <bean id="someFilter" class="..."/> -->
 
 	<!-- 自定义Realm 继承自Realm -->
-	<bean id="sysRealm" class="com.fomagic.module.sys.shiro.SysRealm" >
-		<!--验证方式-->  
-	    <property name="credentialsMatcher" >  
-	        <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
-	            <property name="hashAlgorithmName" value="MD5"></property>
-	            <property name="hashIterations" value="7"></property>
-	        </bean>  
-	    </property>  
-	</bean>
+	<bean id="sysRealm" class="com.fomagic.module.sys.shiro.SysRealm" ></bean>
 	
 	 <!-- 记住我 -->
 	<bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">  
@@ -67,9 +59,9 @@
     </bean>
      
     <!-- rememberMe管理器 ,cookie加密的密钥, 默认AES算法 密钥长度(128 256 512 位) -->
-    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">  
-        <property name="cipherKey"  value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}" />  
-        <property name="cookie" ref="rememberMeCookie" />  
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+         <!-- <property name="cipherKey"  value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}" />   -->
+        <property name="cookie" ref="rememberMeCookie" />
     </bean>  
 	
 	

@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
-import com.fomagic.common.annotation.SysLogAnno;
 import com.fomagic.common.controller.BaseController;
 import com.fomagic.module.sys.entity.SysMenu;
 import com.fomagic.module.sys.service.SysMenuService;
@@ -147,5 +146,6 @@ public class SysLoginController extends BaseController {
         logger.info("跳转到后台首页");
 		return "sys/index";
 	}
+
 
 }

@@ -3,6 +3,8 @@ package com.fomagic.common.util;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.fomagic.common.xss.SQLFilter;
+
 /**
  * 分页查询辅助类
  * 
@@ -36,8 +38,8 @@ public class QueryUtil extends LinkedHashMap<String, Object> {
 		String sidx = params.get("sidx").toString();
 		String order = params.get("order").toString();
 
-		this.put("sidx", sidx);
-		this.put("order", order);
+		this.put("sidx", SQLFilter.sqlValidate(sidx));
+		this.put("order", SQLFilter.sqlValidate(order));
 
 	}
 
