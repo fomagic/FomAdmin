@@ -50,3 +50,18 @@ function getSelectedRows() {
 	return grid.jqGrid('getGridParam',"selarrrow");
 }
 
+//判断为空
+isBlank = function(obj){
+    return(!obj || $.trim(obj) === "");
+}
+
+//	isBlank(" ") //true
+//	isBlank("") //true
+//	isBlank("\n") //true
+//	isBlank("a") //false
+//
+//	isBlank(null) //true
+//	isBlank(undefined) //true
+//	isBlank(false) //true
+//	isBlank([]) //true
+

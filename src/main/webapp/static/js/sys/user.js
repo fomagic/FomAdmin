@@ -229,18 +229,18 @@ function showList(show,title) {
 //验证(demo)
 function validator(){
 	
-	if ($("#userName").val().length==0){
-		//alert("用户名不能为空");
-		myAlert("用户名不能为空");
+	if (isBlank($("#userName").val())){
+		alert("用户名不能为空");
+		//myAlert("用户名不能为空");
 		return true;
 	}
 	
-	if (mUserId == null && $("#password").val().length==0) {
+	if (mUserId == null && isBlank($("#password").val())) {
 		alert("密码不能为空");
 		return true;
 	}
 	
-	if ($("#email").val().length==0) {
+	if (isBlank($("#email").val())) {
 		alert("邮箱不能为空");
 		return true;
 	}

@@ -246,7 +246,7 @@ function showList(show,title) {
 //验证(demo)
 function validator(){
 	
-	if ($("#roleName").val().length==0){
+	if (isBlank($("#roleName").val())){
 		alert("角色名不能为空");
 		return true;
 	}

@@ -367,12 +367,12 @@ function showList(show, title) {
 // 验证(demo)
 function validator() {
 
-	if ($("#menuName").val().length == 0) {
+	if (isBlank($("#menuName").val())) {
 		alert("菜单名称不能为空");
 		return true;
 	}
 
-	if ($("input[name=menuType]:checked").val()==1 && $("#menuURL").val().length == 0) {
+	if ($("input[name=menuType]:checked").val()==1 && isBlank($("#menuURL").val())) {
 		alert("菜单url不能为空");
 		return true;
 	}
