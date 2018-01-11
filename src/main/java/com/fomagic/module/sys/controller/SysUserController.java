@@ -52,6 +52,11 @@ public class SysUserController extends BaseController {
 	}
 
 
+	/**
+	 * 用户列表
+	 * @param params
+	 * @return
+	 */
 	@RequiresPermissions("sys:user:list")
 	@RequestMapping("/list")
 	@ResponseBody
@@ -73,6 +78,12 @@ public class SysUserController extends BaseController {
 		return Result.success().put("page", pageUtil);
 	}
 
+	
+	/**
+	 * 用户信息
+	 * @param userId
+	 * @return
+	 */
 	@RequiresPermissions("sys:user:info")
 	@RequestMapping("/info/{userId}")
 	@ResponseBody
@@ -88,6 +99,11 @@ public class SysUserController extends BaseController {
 	}
 	
 	
+	/**
+	 * 新增用户
+	 * @param user
+	 * @return
+	 */
 	@RequiresPermissions("sys:user:save")
 	@RequestMapping("/save")
 	@ResponseBody
@@ -98,6 +114,11 @@ public class SysUserController extends BaseController {
 		return Result.success();
 	} 
 	
+	/**
+	 * 更新用户信息
+	 * @param user
+	 * @return
+	 */
 	@RequiresPermissions("sys:user:update")
 	@RequestMapping("/update")
 	@ResponseBody
@@ -110,6 +131,11 @@ public class SysUserController extends BaseController {
 		return Result.success();
 	} 
 	
+	/**
+	 * 批量删除用户
+	 * @param userIds
+	 * @return
+	 */
 	@RequiresPermissions("sys:user:delete")
 	@RequestMapping("/delete")
 	@ResponseBody
@@ -125,7 +151,12 @@ public class SysUserController extends BaseController {
 		return Result.success();
 	}
 	
-	
+	/**
+	 * 修改密码
+	 * @param password
+	 * @param newPassword
+	 * @return
+	 */
 	@RequestMapping("/password")
 	@ResponseBody
 	public Map<String, Object> password(String password, String newPassword) {
