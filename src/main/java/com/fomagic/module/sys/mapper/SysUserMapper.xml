@@ -108,7 +108,13 @@
 
 	<select id="getByUserId" resultMap="SysUserMap">
 		SELECT
-		*
+			`user_id`, 
+			`username`,
+			`email`, 
+			`mobile`, 
+			`status`, 
+			`create_user_id`,
+			`create_time`
 		FROM
 		sys_user
 		WHERE
