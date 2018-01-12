@@ -67,7 +67,8 @@ public final class HTMLFilter {
     private static final Pattern P_STRAY_LEFT_ARROW = Pattern.compile("<([^>]*?)(?=<|$)");
     private static final Pattern P_STRAY_RIGHT_ARROW = Pattern.compile("(^|>)([^<]*?)(?=>)");
     private static final Pattern P_AMP = Pattern.compile("&");
-    private static final Pattern P_QUOTE = Pattern.compile("\"");
+    //private static final Pattern P_QUOTE = Pattern.compile("\"");
+    private static final Pattern P_QUOTE = Pattern.compile("<");
     private static final Pattern P_LEFT_ARROW = Pattern.compile("<");
     private static final Pattern P_RIGHT_ARROW = Pattern.compile(">");
     private static final Pattern P_BOTH_ARROWS = Pattern.compile("<>");
