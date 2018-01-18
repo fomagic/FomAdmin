@@ -11,8 +11,9 @@ $(window).on('resize', function() {
 //显示点击状态
 function loadFrame(obj) {
 	var url = obj.contentWindow.location.href;
-	var index = url.lastIndexOf("\/");
-	var str = url.substring(index + 1, url.length);
+	//var index = url.lastIndexOf("\/");
+	//var str = url.substring(index + 1, url.length);
+	var str = url.substr(url.lastIndexOf('/', url.lastIndexOf('/') - 1) + 1);
 	//导航菜单展开
 	$(".treeview").removeClass("active");
 	$(".treeview-menu li").removeClass("active");
