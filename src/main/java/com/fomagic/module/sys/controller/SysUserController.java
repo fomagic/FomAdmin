@@ -109,6 +109,7 @@ public class SysUserController extends BaseController {
 	@ResponseBody
 	public Map<String,Object> save(@RequestBody SysUser user) {
 		
+		user.setCreateUserId(getSysUserId());
 		sysUserService.saveUser(user);
 		
 		return Result.success();
