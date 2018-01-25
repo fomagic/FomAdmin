@@ -12,7 +12,7 @@
 
 	<properties>
 
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.encoding>UTF-8</project.build.encoding>
 		<jdk.version>1.7</jdk.version>
 
 		<junit.version>4.12</junit.version>
@@ -366,6 +366,14 @@
 					<version>3.0.0</version>
 					<configuration>
 						<encoding>${project.build.encoding}</encoding>
+						<resources>
+                            <resource>
+                                <directory>src/main/java</directory>
+                                <includes>
+                                    <include>**/*.xml</include>
+                                </includes>
+                            </resource>
+                        </resources>
 					</configuration>
 				</plugin>
 
