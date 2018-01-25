@@ -284,7 +284,7 @@
 		<finalName>${project.artifactId}-${project.version}</finalName>	<!-- build目标文件的文件名，默认情况下为${artifactId}-${version} -->
 		<defaultGoal>compile</defaultGoal>	<!-- 执行build任务时，如果没有指定目标，将使用的默认值 ，如：在命令行中执行mvn，则相当于执行mvn compile； -->
 
-		<pluginManagement><!-- 父类工程使用，单一工程不需要配置 -->
+		<!-- <pluginManagement>  --> <!-- 父类工程使用，单一工程不需要配置 -->
 
 			<!-- 官方文档：https://maven.apache.org/plugins/ -->
 			<!-- 查看maven插件信息，如： mvn help:describe -Dplugin=org.apache.maven.plugins:maven-compiler-plugin:3.6.0 -->
@@ -341,24 +341,6 @@
 					</configuration>
 				</plugin>
 
-				<!-- execution下可配置phase属性, 意思是在什么阶段打包源文件。如<phase>package</phase> -->
-				<!-- 执行 mvn install，maven会自动将source install到repository 。 -->
-				<!-- 执行 mvn deploy，maven会自动将source deploy到remote-repository 。 -->
-				<!-- 执行 mvn source:jar，单独打包源码。 -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-source-plugin</artifactId>
-					<version>3.0.0</version>
-					<executions>
-						<execution>
-							<id>attach-sources</id>
-							<goals>
-								<goal>jar-no-fork</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-
 				<!-- 处理资源文件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -366,19 +348,30 @@
 					<version>3.0.0</version>
 					<configuration>
 						<encoding>${project.build.encoding}</encoding>
-						<resources>
-                            <resource>
-                                <directory>src/main/java</directory>
-                                <includes>
-                                    <include>**/*.xml</include>
-                                </includes>
-                            </resource>
-                        </resources>
 					</configuration>
 				</plugin>
-
 			</plugins>
-		</pluginManagement>
+		<!-- </pluginManagement> -->
+		
+		<resources>  
+            <resource>  
+                <directory>src/main/java</directory>  
+                <includes>  
+                    <include>**/*.properties</include>  
+                    <include>**/*.xml</include>  
+                </includes>  
+                <!-- 是否替换资源中的属性-->  
+                <filtering>false</filtering>  
+            </resource>  
+            <resource>  
+                <directory>src/main/resources</directory>  
+                <!--  
+                    <includes> <include>**/*.properties</include>  
+                    <include>**/*.xml</include> </includes> <filtering>true</filtering>  
+                -->  
+            </resource>  
+		</resources> 
+		
 
 	</build>
 
