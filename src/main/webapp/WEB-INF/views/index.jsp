@@ -10,6 +10,9 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 	name="viewport">
 <link rel="stylesheet" href="static/css/bootstrap.min.css">
+
+<!-- Owner -->
+<link rel="stylesheet" href="static/css/main.css">
 </head>
 <body>
 	<div class="panel panel-default">

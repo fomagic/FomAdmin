@@ -31,7 +31,7 @@
        folder instead of downloading all of them to reduce the load. -->
 		<link rel="stylesheet" href="static/css/_all-skins.min.css">
 		<!-- Owner css -->
-		<link rel="stylesheet" href="static/css/main.css">
+		<link rel="stylesheet" href="static/css/index.css">
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -117,7 +117,7 @@
 				</section>
 
 				<!-- Main content -->
-				<section class="content" style="background:#fff;">
+				<section class="content">
 					<iframe id="contentFrame" name="contentFrame" src="index" onload="loadFrame(this)"></iframe>
 				</section>
 				<!-- /.content -->
@@ -126,7 +126,7 @@
 			<!-- /.content-wrapper -->
 
 			<!-- Main Footer -->
-			<footer class="main-footer">
+			<footer class="main-footer navbar-fixed-bottom">
 				<!-- To the right -->
 				<div class="pull-right hidden-xs">可添加一些相关信息</div>
 				<!-- Default to the left -->

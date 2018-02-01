@@ -1,7 +1,7 @@
 //iframe自适应
 $(window).on('resize', function() {
 	var $content = $('.content');
-	$content.height($(this).height());
+	$content.height($(this).height()-100);
 	$content.find('iframe').each(function() {
 		$(this).height($content.height());
 	});
