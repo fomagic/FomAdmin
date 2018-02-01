@@ -230,18 +230,20 @@ function showList(show,title) {
 function validator(){
 	
 	if (isBlank($("#userName").val())){
-		alert("用户名不能为空");
-		//myAlert("用户名不能为空");
+		//alert("用户名不能为空");
+		Layer.showTips('用户名不能为空','#userName');
 		return true;
 	}
 	
 	if (mUserId == null && isBlank($("#password").val())) {
-		alert("密码不能为空");
+		//alert("密码不能为空");
+		Layer.showTips('密码不能为空','#password');
 		return true;
 	}
 	
 	if (isBlank($("#email").val())) {
-		alert("邮箱不能为空");
+		//alert("邮箱不能为空");
+		parent.Layer.showAlert('邮箱不能为空');
 		return true;
 	}
 	

@@ -48,7 +48,7 @@
 
 	</head>
 
-	<body class="hold-transition skin-blue sidebar-mini">
+	<body class="hold-transition skin-blue fixed sidebar-mini">
 		<div class="wrapper">
 			<header class="main-header">
 
@@ -197,6 +197,12 @@
 		<script src="static/libs/bootstrap.min.js"></script>
 		<!-- AdminLTE App -->
 		<script src="static/libs/adminlte.min.js"></script>
+		
+		<!-- layer -->
+		<script src="static/plugins/layer/layer.js"></script>
+		<script src="static/plugins/layer/layerTool.js"></script>
+		
+		<!-- Owner -->
 		<script src="static/js/sys/index.js"></script>
 
 		<!-- Optionally, you can add Slimscroll and FastClick plugins.

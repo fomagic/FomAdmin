@@ -21,7 +21,11 @@ import com.fomagic.module.sys.entity.SysLog;
 import com.fomagic.module.sys.entity.SysUser;
 import com.fomagic.module.sys.service.SysLogService;
 
-
+/**
+ * 
+ * @author FOM
+ *
+ */
 @Aspect
 @Component
 public class SysLogAspect {

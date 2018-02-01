@@ -1,11 +1,12 @@
 //iframe自适应
 $(window).on('resize', function() {
 	var $content = $('.content');
-	$content.height($(this).height() + 120);
+	$content.height($(this).height());
 	$content.find('iframe').each(function() {
 		$(this).height($content.height());
 	});
 }).resize();
+
 
 
 //显示点击状态
@@ -21,7 +22,11 @@ function loadFrame(obj) {
     
     var nav = $("a[href$='"+str+"'] span").text();
     $("#navTitle").text(nav.length==0?"Welcome.":nav);
+
+    var iframeBody = $("#contentFrame").contents().find("body");
+	
 }
+
 
 var pasData = {
 	password : "",

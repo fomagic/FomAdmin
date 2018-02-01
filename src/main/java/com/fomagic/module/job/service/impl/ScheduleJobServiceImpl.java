@@ -19,6 +19,11 @@ import com.fomagic.module.job.entity.ScheduleJob;
 import com.fomagic.module.job.quartz.QuartzUtil;
 import com.fomagic.module.job.service.ScheduleJobService;
 
+/**
+ * 
+ * @author FOM
+ *
+ */
 @Service
 public class ScheduleJobServiceImpl implements ScheduleJobService {
 	

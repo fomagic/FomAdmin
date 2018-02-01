@@ -318,7 +318,6 @@ function validator(){
 	
 	if ($("#beanName").val().length==0){
 		alert("用户名不能为空");
-		//myAlert("bean名称不能为空");
 		return true;
 	}
 	

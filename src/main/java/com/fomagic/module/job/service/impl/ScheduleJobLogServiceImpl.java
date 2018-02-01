@@ -10,6 +10,11 @@ import com.fomagic.module.job.dao.ScheduleJobLogDao;
 import com.fomagic.module.job.entity.ScheduleJobLog;
 import com.fomagic.module.job.service.ScheduleJobLogService;
 
+/**
+ * 
+ * @author FOM
+ *
+ */
 @Service
 public class ScheduleJobLogServiceImpl implements ScheduleJobLogService {
 

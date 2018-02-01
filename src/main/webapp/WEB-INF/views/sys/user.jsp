@@ -9,7 +9,7 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -38,8 +38,6 @@
 <link rel="stylesheet" href="static/plugins/free-jqgrid/css/ui.jqgrid.css">
 <link rel="stylesheet" href="static/plugins/free-jqgrid/css/ui.jqgrid.bootstrap.css">
 
-
-<link rel="stylesheet" href="static/plugins/myAlert/myAlertConfirm.css">
 
 <!-- Owner -->
 <link rel="stylesheet" href="static/css/main.css">
@@ -166,8 +164,10 @@
 	<script src="static/plugins/free-jqgrid/js/jquery.jqgrid.src.js"></script>
 	<script src="static/plugins/free-jqgrid/js/grid.locale-cn.js"></script>
 
-	<!-- myAlert -->
-	<script src="static/plugins/myAlert/jquery.confirm.js"></script>
+
+	<!-- layer -->
+	<script src="static/plugins/layer/layer.js"></script>
+	<script src="static/plugins/layer/layerTool.js"></script>
 
 	<!-- Owner  -->
 	<script src="static/js/common.js"></script>

@@ -17,6 +17,12 @@ import com.fomagic.common.util.Result;
 import com.fomagic.module.job.entity.ScheduleJobLog;
 import com.fomagic.module.job.service.ScheduleJobLogService;
 
+/**
+ * 任务调度日志
+ * 
+ * @author FOM
+ *
+ */
 @Controller
 @RequestMapping("/sys/scheduleLog")
 public class ScheduleJobLogController {
@@ -37,36 +43,39 @@ public class ScheduleJobLogController {
 
 	/**
 	 * 定时任务列表
+	 * 
 	 * @param params
 	 * @return
 	 */
 	@RequiresPermissions("sys:schedule:log")
 	@RequestMapping("/list")
 	@ResponseBody
-	public Map<String, Object> listScheduleLog(@RequestParam Map<String, Object> params){
-		
+	public Map<String, Object> listScheduleLog(
+			@RequestParam Map<String, Object> params) {
+
 		QueryUtil query = new QueryUtil(params);
 		List<ScheduleJobLog> jobList = scheduleJobLogService.listJobLog(query);
 		int total = scheduleJobLogService.countJobLog(query);
-		
-		PageUtil pageUtil = new PageUtil(jobList, total, query.getLimit(), query.getPage());
-		
+
+		PageUtil pageUtil = new PageUtil(jobList, total, query.getLimit(),
+				query.getPage());
+
 		return Result.success().put("page", pageUtil);
 	}
-	
-	
+
 	/**
 	 * 定时任务日志信息
+	 * 
 	 * @param logId
 	 * @return
 	 */
 	@RequestMapping("/info/{logId}")
 	@ResponseBody
-	public Map<String, Object> infoScheduleLog(@PathVariable("logId") Long logId){
-	
+	public Map<String, Object> infoScheduleLog(@PathVariable("logId") Long logId) {
+
 		ScheduleJobLog jobLog = scheduleJobLogService.getByJobLogId(logId);
-		
+
 		return Result.success().put("log", jobLog);
 	}
-	
+
 }
