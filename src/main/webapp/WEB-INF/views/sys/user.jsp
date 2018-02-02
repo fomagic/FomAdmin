@@ -95,8 +95,8 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">用户名</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="username1"
-							placeholder="登录账号" id="userName1" >
+						<input type="text" class="form-control" name="username"
+							placeholder="登录账号" id="userName" >
 					</div>
 				</div>
 				
@@ -106,8 +106,8 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">密码</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="password1"
-							placeholder="密码" id="password1" >
+						<input type="text" class="form-control" name="password"
+							placeholder="密码" id="password" >
 					</div>
 				</div>	
 				
