@@ -90,22 +90,28 @@
 		id="user-information">
 		<div class="panel-heading" id="user-title">用户信息</div>
 		<div class="panel-body">
-			<form class="form-horizontal" action="" method="post">
+			<form class="form-horizontal" >
+			
 				<div class="form-group">
 					<label class="col-sm-2 control-label">用户名</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="username"
-							placeholder="登录账号" id="userName">
+						<input type="text" class="form-control" name="username1"
+							placeholder="登录账号" id="userName1" >
 					</div>
 				</div>
-
+				
+				<!-- 暂时解决Chrome浏览器表单自动填充问题 -->
+				<input type="password" class="div-display-none">
+				
 				<div class="form-group">
 					<label class="col-sm-2 control-label">密码</label>
 					<div class="col-sm-4">
-						<input type="password" class="form-control" name="password"
-							placeholder="密码" id="password">
+						<input type="text" class="form-control" name="password1"
+							placeholder="密码" id="password1" >
 					</div>
-				</div>
+				</div>	
+				
+
 				<div class="form-group">
 					<label class="col-sm-2 control-label">邮箱</label>
 					<div class="col-sm-4">

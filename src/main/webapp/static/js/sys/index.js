@@ -8,7 +8,6 @@ $(window).on('resize', function() {
 }).resize();
 
 
-
 //显示点击状态
 function loadFrame(obj) {
 	var url = obj.contentWindow.location.href;
@@ -22,8 +21,6 @@ function loadFrame(obj) {
     
     var nav = $("a[href$='"+str+"'] span").text();
     $("#navTitle").text(nav.length==0?"Welcome.":nav);
-
-    var iframeBody = $("#contentFrame").contents().find("body");
 	
 }
 
