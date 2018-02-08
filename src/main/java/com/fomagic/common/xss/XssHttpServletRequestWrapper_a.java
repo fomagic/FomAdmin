@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -50,22 +49,8 @@ public class XssHttpServletRequestWrapper_a extends HttpServletRequestWrapper {
 
 		// xss过滤
 		json = xssEncode(json);
-		final ByteArrayInputStream bis = new ByteArrayInputStream(
-				json.getBytes("utf-8"));
+		final ByteArrayInputStream bis = new ByteArrayInputStream(json.getBytes("utf-8"));
 		return new ServletInputStream() {
-			@Override
-			public boolean isFinished() {
-				return true;
-			}
-
-			@Override
-			public boolean isReady() {
-				return true;
-			}
-
-			@Override
-			public void setReadListener(ReadListener readListener) {
-			}
 
 			@Override
 			public int read() throws IOException {
