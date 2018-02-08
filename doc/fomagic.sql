@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50635
 File Encoding         : 65001
 
-Date: 2018-01-03 09:49:42
+Date: 2018-02-08 16:56:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,8 +34,8 @@ CREATE TABLE `schedule_job` (
 -- ----------------------------
 -- Records of schedule_job
 -- ----------------------------
-INSERT INTO `schedule_job` VALUES ('1', 'testTask', 'test', 'fomagic', '0 0/1 * * * ?', '0', '有参数测试', '2016-12-01 23:16:46');
-INSERT INTO `schedule_job` VALUES ('2', 'testTask', 'test2', '', '0 0/1 * * * ?', '0', '无参数测试', '2018-01-02 14:44:34');
+INSERT INTO `schedule_job` VALUES ('1', 'testTask', 'test', 'fomagic', '0 0/1 * * * ?', '1', '有参数测试', '2016-12-01 23:16:46');
+INSERT INTO `schedule_job` VALUES ('2', 'testTask', 'test2', '', '0 0/1 * * * ?', '1', '无参数测试', '2018-01-02 14:44:34');
 
 -- ----------------------------
 -- Table structure for schedule_job_log
@@ -53,25 +53,11 @@ CREATE TABLE `schedule_job_log` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`log_id`),
   KEY `job_id` (`job_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
 
 -- ----------------------------
 -- Records of schedule_job_log
 -- ----------------------------
-INSERT INTO `schedule_job_log` VALUES ('1', '6', 'testTask', 'test2', '', '0', null, '0', '2018-01-03 09:43:00');
-INSERT INTO `schedule_job_log` VALUES ('2', '1', 'testTask', 'test', 'fomagic', '0', null, '1003', '2018-01-03 09:43:00');
-INSERT INTO `schedule_job_log` VALUES ('3', '6', 'testTask', 'test2', '', '0', null, '2', '2018-01-03 09:44:00');
-INSERT INTO `schedule_job_log` VALUES ('4', '1', 'testTask', 'test', 'fomagic', '0', null, '1004', '2018-01-03 09:44:00');
-INSERT INTO `schedule_job_log` VALUES ('5', '6', 'testTask', 'test2', '', '0', null, '2', '2018-01-03 09:45:00');
-INSERT INTO `schedule_job_log` VALUES ('6', '1', 'testTask', 'test', 'fomagic', '0', null, '1004', '2018-01-03 09:45:00');
-INSERT INTO `schedule_job_log` VALUES ('7', '6', 'testTask', 'test2', '', '0', null, '0', '2018-01-03 09:46:00');
-INSERT INTO `schedule_job_log` VALUES ('8', '1', 'testTask', 'test', 'fomagic', '0', null, '1001', '2018-01-03 09:46:00');
-INSERT INTO `schedule_job_log` VALUES ('9', '6', 'testTask', 'test2', '', '0', null, '1', '2018-01-03 09:47:00');
-INSERT INTO `schedule_job_log` VALUES ('10', '1', 'testTask', 'test', 'fomagic', '0', null, '1001', '2018-01-03 09:47:00');
-INSERT INTO `schedule_job_log` VALUES ('11', '6', 'testTask', 'test2', '', '0', null, '1', '2018-01-03 09:48:00');
-INSERT INTO `schedule_job_log` VALUES ('12', '1', 'testTask', 'test', 'fomagic', '0', null, '1004', '2018-01-03 09:48:00');
-INSERT INTO `schedule_job_log` VALUES ('13', '6', 'testTask', 'test2', '', '0', null, '2', '2018-01-03 09:49:00');
-INSERT INTO `schedule_job_log` VALUES ('14', '1', 'testTask', 'test', 'fomagic', '0', null, '1004', '2018-01-03 09:49:00');
 
 -- ----------------------------
 -- Table structure for sys_log
@@ -87,7 +73,7 @@ CREATE TABLE `sys_log` (
   `ip` varchar(64) DEFAULT NULL COMMENT 'IP地址',
   `create_date` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='系统日志';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='系统日志';
 
 -- ----------------------------
 -- Records of sys_log
@@ -96,6 +82,11 @@ INSERT INTO `sys_log` VALUES ('1', 'admin', '测试', 'ok', '111', '0', '0:0:0:0
 INSERT INTO `sys_log` VALUES ('2', 'admin', '登录后台', 'com.fomagic.module.sys.controller.SysLoginController.sysIndex()', '{\"menuList\":[{\"icon\":\"fa fa-cog\",\"list\":[{\"icon\":\"fa fa-user\",\"menuId\":2,\"name\":\"管理员列表\",\"orderNum\":1,\"parentId\":1,\"type\":1,\"url\":\"sys/user\"},{\"icon\":\"fa fa-user-secret\",\"menuId\":3,\"name\":\"角色管理\",\"orderNum\":2,\"parentId\":1,\"type\":1,\"url\":\"sys/role\"},{\"icon\":\"fa fa-th-list\",\"menuId\":4,\"name\":\"菜单管理\",\"orderNum\":3,\"parentId\":1,\"type\":1,\"url\":\"sys/menu\"},{\"icon\":\"fa fa-bug\",\"menuId\":5,\"name\":\"SQL监控\",\"orderNum\":4,\"parentId\":1,\"type\":1,\"url\":\"druid/sql.html\"},{\"icon\":\"fa fa-tasks\",\"menuId\":6,\"name\":\"定时任务\",\"orderNum\":5,\"parentId\":1,\"type\":1,\"url\":\"sys/schedule\"},{\"icon\":\"fa fa-sun-o\",\"menuId\":27,\"name\":\"参数管理\",\"orderNum\":6,\"parentId\":1,\"perms\":\"sys:config:list,sys:config:info,sys:config:save,sys:config:update,sys:config:delete\",\"type\":1,\"url\":\"sys/config\"},{\"icon\":\"fa fa-file-image-o\",\"menuId\":29,\"name\":\"文件上传\",\"orderNum\":6,\"parentId\":1,\"perms\":\"sys:oss:all\",\"type\":1,\"url\":\"sys/oss\"},{\"icon\":\"fa fa-file-text-o\",\"menuId\":28,\"name\":\"系统日志\",\"orderNum\":7,\"parentId\":1,\"perms\":\"sys:log:list\",\"type\":1,\"url\":\"sys/log\"}],\"menuId\":1,\"name\":\"系统管理\",\"orderNum\":0,\"parentId\":0,\"type\":0}],\"sysUser\":{\"createTime\":1510369871000,\"createUserId\":1,\"email\":\"magic@qqq.com\",\"mobile\":\"1234\",\"password\":\"ef338e79bc415c99e7383b82f44db35e\",\"salt\":\"4s3X1Auhexa8TJQGD/CeHw==\",\"status\":1,\"userId\":1,\"userName\":\"admin\"}}', '31', '0:0:0:0:0:0:0:1', '2018-01-02 18:54:22');
 INSERT INTO `sys_log` VALUES ('3', 'admin', '登录后台', 'com.fomagic.module.sys.controller.SysLoginController.sysIndex()', '{\"menuList\":[{\"icon\":\"fa fa-cog\",\"list\":[{\"icon\":\"fa fa-user\",\"menuId\":2,\"name\":\"管理员列表\",\"orderNum\":1,\"parentId\":1,\"type\":1,\"url\":\"sys/user\"},{\"icon\":\"fa fa-user-secret\",\"menuId\":3,\"name\":\"角色管理\",\"orderNum\":2,\"parentId\":1,\"type\":1,\"url\":\"sys/role\"},{\"icon\":\"fa fa-th-list\",\"menuId\":4,\"name\":\"菜单管理\",\"orderNum\":3,\"parentId\":1,\"type\":1,\"url\":\"sys/menu\"},{\"icon\":\"fa fa-bug\",\"menuId\":5,\"name\":\"SQL监控\",\"orderNum\":4,\"parentId\":1,\"type\":1,\"url\":\"druid/sql.html\"},{\"icon\":\"fa fa-tasks\",\"menuId\":6,\"name\":\"定时任务\",\"orderNum\":5,\"parentId\":1,\"type\":1,\"url\":\"sys/schedule\"},{\"icon\":\"fa fa-sun-o\",\"menuId\":27,\"name\":\"参数管理\",\"orderNum\":6,\"parentId\":1,\"perms\":\"sys:config:list,sys:config:info,sys:config:save,sys:config:update,sys:config:delete\",\"type\":1,\"url\":\"sys/config\"},{\"icon\":\"fa fa-file-image-o\",\"menuId\":29,\"name\":\"文件上传\",\"orderNum\":6,\"parentId\":1,\"perms\":\"sys:oss:all\",\"type\":1,\"url\":\"sys/oss\"},{\"icon\":\"fa fa-file-text-o\",\"menuId\":28,\"name\":\"系统日志\",\"orderNum\":7,\"parentId\":1,\"perms\":\"sys:log:list\",\"type\":1,\"url\":\"sys/log\"}],\"menuId\":1,\"name\":\"系统管理\",\"orderNum\":0,\"parentId\":0,\"type\":0}],\"sysUser\":{\"createTime\":1510369871000,\"createUserId\":1,\"email\":\"magic@qqq.com\",\"mobile\":\"1234\",\"password\":\"ef338e79bc415c99e7383b82f44db35e\",\"salt\":\"4s3X1Auhexa8TJQGD/CeHw==\",\"status\":1,\"userId\":1,\"userName\":\"admin\"}}', '57', '0:0:0:0:0:0:0:1', '2018-01-02 18:55:14');
 INSERT INTO `sys_log` VALUES ('4', 'admin', '登录后台', 'com.fomagic.module.sys.controller.SysLoginController.sysIndex()', '{\"menuList\":[{\"icon\":\"fa fa-cog\",\"list\":[{\"icon\":\"fa fa-user\",\"menuId\":2,\"name\":\"管理员列表\",\"orderNum\":1,\"parentId\":1,\"type\":1,\"url\":\"sys/user\"},{\"icon\":\"fa fa-user-secret\",\"menuId\":3,\"name\":\"角色管理\",\"orderNum\":2,\"parentId\":1,\"type\":1,\"url\":\"sys/role\"},{\"icon\":\"fa fa-th-list\",\"menuId\":4,\"name\":\"菜单管理\",\"orderNum\":3,\"parentId\":1,\"type\":1,\"url\":\"sys/menu\"},{\"icon\":\"fa fa-bug\",\"menuId\":5,\"name\":\"SQL监控\",\"orderNum\":4,\"parentId\":1,\"type\":1,\"url\":\"druid/sql.html\"},{\"icon\":\"fa fa-tasks\",\"menuId\":6,\"name\":\"定时任务\",\"orderNum\":5,\"parentId\":1,\"type\":1,\"url\":\"sys/schedule\"},{\"icon\":\"fa fa-sun-o\",\"menuId\":27,\"name\":\"参数管理\",\"orderNum\":6,\"parentId\":1,\"perms\":\"sys:config:list,sys:config:info,sys:config:save,sys:config:update,sys:config:delete\",\"type\":1,\"url\":\"sys/config\"},{\"icon\":\"fa fa-file-image-o\",\"menuId\":29,\"name\":\"文件上传\",\"orderNum\":6,\"parentId\":1,\"perms\":\"sys:oss:all\",\"type\":1,\"url\":\"sys/oss\"},{\"icon\":\"fa fa-file-text-o\",\"menuId\":28,\"name\":\"系统日志\",\"orderNum\":7,\"parentId\":1,\"perms\":\"sys:log:list\",\"type\":1,\"url\":\"sys/log\"}],\"menuId\":1,\"name\":\"系统管理\",\"orderNum\":0,\"parentId\":0,\"type\":0}],\"sysUser\":{\"createTime\":1510369871000,\"createUserId\":1,\"email\":\"magic@qqq.com\",\"mobile\":\"1234\",\"password\":\"ef338e79bc415c99e7383b82f44db35e\",\"salt\":\"4s3X1Auhexa8TJQGD/CeHw==\",\"status\":1,\"userId\":1,\"userName\":\"admin\"}}', '19', '192.168.1.103', '2018-01-02 19:13:52');
+INSERT INTO `sys_log` VALUES ('5', 'admin', '登录后台', 'com.fomagic.module.sys.controller.SysLoginController.sysIndex()', '{\"menuList\":[{\"icon\":\"fa fa-cog\",\"list\":[{\"icon\":\"fa fa-user\",\"menuId\":2,\"name\":\"管理员列表\",\"orderNum\":1,\"parentId\":1,\"type\":1,\"url\":\"sys/user\"},{\"icon\":\"fa fa-user-secret\",\"menuId\":3,\"name\":\"角色管理\",\"orderNum\":2,\"parentId\":1,\"type\":1,\"url\":\"sys/role\"},{\"icon\":\"fa fa-th-list\",\"menuId\":4,\"name\":\"菜单管理\",\"orderNum\":3,\"parentId\":1,\"type\":1,\"url\":\"sys/menu\"},{\"icon\":\"fa fa-bug\",\"menuId\":5,\"name\":\"SQL监控\",\"orderNum\":4,\"parentId\":1,\"type\":1,\"url\":\"druid/sql.html\"},{\"icon\":\"fa fa-tasks\",\"menuId\":6,\"name\":\"定时任务\",\"orderNum\":5,\"parentId\":1,\"type\":1,\"url\":\"sys/schedule\"},{\"icon\":\"fa fa-sun-o\",\"menuId\":27,\"name\":\"参数管理\",\"orderNum\":6,\"parentId\":1,\"perms\":\"sys:config:list,sys:config:info,sys:config:save,sys:config:update,sys:config:delete\",\"type\":1,\"url\":\"sys/config\"},{\"icon\":\"fa fa-file-image-o\",\"menuId\":29,\"name\":\"文件上传\",\"orderNum\":6,\"parentId\":1,\"perms\":\"sys:oss:all\",\"type\":1,\"url\":\"sys/oss\"},{\"icon\":\"fa fa-file-text-o\",\"menuId\":28,\"name\":\"系统日志\",\"orderNum\":7,\"parentId\":1,\"perms\":\"sys:log:list\",\"type\":1,\"url\":\"sys/log\"}],\"menuId\":1,\"name\":\"系统管理\",\"orderNum\":0,\"parentId\":0,\"type\":0}],\"sysUser\":{\"createTime\":1510369871000,\"createUserId\":1,\"email\":\"magic@qqq.com\",\"mobile\":\"1234\",\"password\":\"ef338e79bc415c99e7383b82f44db35e\",\"salt\":\"4s3X1Auhexa8TJQGD/CeHw==\",\"status\":1,\"userId\":1,\"userName\":\"admin\"}}', '14', '0:0:0:0:0:0:0:1', '2018-01-03 10:50:20');
+INSERT INTO `sys_log` VALUES ('6', 'admin', '登录后台', 'com.fomagic.module.sys.controller.SysLoginController.sysIndex()', '{\"menuList\":[{\"icon\":\"fa fa-cog\",\"list\":[{\"icon\":\"fa fa-user\",\"menuId\":2,\"name\":\"管理员列表\",\"orderNum\":1,\"parentId\":1,\"type\":1,\"url\":\"sys/user\"},{\"icon\":\"fa fa-user-secret\",\"menuId\":3,\"name\":\"角色管理\",\"orderNum\":2,\"parentId\":1,\"type\":1,\"url\":\"sys/role\"},{\"icon\":\"fa fa-th-list\",\"menuId\":4,\"name\":\"菜单管理\",\"orderNum\":3,\"parentId\":1,\"type\":1,\"url\":\"sys/menu\"},{\"icon\":\"fa fa-bug\",\"menuId\":5,\"name\":\"SQL监控\",\"orderNum\":4,\"parentId\":1,\"type\":1,\"url\":\"druid/sql.html\"},{\"icon\":\"fa fa-tasks\",\"menuId\":6,\"name\":\"定时任务\",\"orderNum\":5,\"parentId\":1,\"type\":1,\"url\":\"sys/schedule\"},{\"icon\":\"fa fa-sun-o\",\"menuId\":27,\"name\":\"参数管理\",\"orderNum\":6,\"parentId\":1,\"perms\":\"sys:config:list,sys:config:info,sys:config:save,sys:config:update,sys:config:delete\",\"type\":1,\"url\":\"sys/config\"},{\"icon\":\"fa fa-file-image-o\",\"menuId\":29,\"name\":\"文件上传\",\"orderNum\":6,\"parentId\":1,\"perms\":\"sys:oss:all\",\"type\":1,\"url\":\"sys/oss\"},{\"icon\":\"fa fa-file-text-o\",\"menuId\":28,\"name\":\"系统日志\",\"orderNum\":7,\"parentId\":1,\"perms\":\"sys:log:list\",\"type\":1,\"url\":\"sys/log\"}],\"menuId\":1,\"name\":\"系统管理\",\"orderNum\":0,\"parentId\":0,\"type\":0}],\"sysUser\":{\"createTime\":1510369871000,\"createUserId\":1,\"email\":\"magic@qqq.com\",\"mobile\":\"1234\",\"password\":\"ef338e79bc415c99e7383b82f44db35e\",\"salt\":\"4s3X1Auhexa8TJQGD/CeHw==\",\"status\":1,\"userId\":1,\"userName\":\"admin\"}}', '21', '0:0:0:0:0:0:0:1', '2018-01-03 10:51:04');
+INSERT INTO `sys_log` VALUES ('7', 'admin', '删除菜单', 'com.fomagic.module.sys.controller.SysMenuController.deleteMenu()', '10001', '48', '0:0:0:0:0:0:0:1', '2018-01-03 11:12:07');
+INSERT INTO `sys_log` VALUES ('8', 'admin', '删除菜单', 'com.fomagic.module.sys.controller.SysMenuController.deleteMenu()', '30', '0', '0:0:0:0:0:0:0:1', '2018-01-30 10:32:35');
+INSERT INTO `sys_log` VALUES ('9', 'admin', '删除菜单', 'com.fomagic.module.sys.controller.SysMenuController.deleteMenu()', '30', '0', '0:0:0:0:0:0:0:1', '2018-02-08 16:52:17');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -157,11 +148,12 @@ CREATE TABLE `sys_role` (
   `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建者ID',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='角色';
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
+INSERT INTO `sys_role` VALUES ('1', '平台管理员', '平台管理员', '1', '2018-01-26 18:47:34');
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -172,11 +164,17 @@ CREATE TABLE `sys_role_menu` (
   `role_id` int(20) DEFAULT NULL COMMENT '角色ID',
   `menu_id` int(20) DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
 
 -- ----------------------------
 -- Records of sys_role_menu
 -- ----------------------------
+INSERT INTO `sys_role_menu` VALUES ('1', '1', '1');
+INSERT INTO `sys_role_menu` VALUES ('2', '1', '2');
+INSERT INTO `sys_role_menu` VALUES ('3', '1', '15');
+INSERT INTO `sys_role_menu` VALUES ('4', '1', '16');
+INSERT INTO `sys_role_menu` VALUES ('5', '1', '17');
+INSERT INTO `sys_role_menu` VALUES ('6', '1', '18');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -194,12 +192,13 @@ CREATE TABLE `sys_user` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username` (`username`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='系统管理员或用户';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='系统管理员或用户';
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', 'admin', 'ef338e79bc415c99e7383b82f44db35e', '4s3X1Auhexa8TJQGD/CeHw==', 'magic@qqq.com', '1234', '1', '1', '2017-11-11 11:11:11');
+INSERT INTO `sys_user` VALUES ('2', 'asd', '721ae1dfb3dedadc6af82fc28f3c7289', 'g3N4nLg3jcBgrk4jEt1IJA==', 'asd', '1111', '1', '1', '2018-01-26 18:47:48');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -210,8 +209,9 @@ CREATE TABLE `sys_user_role` (
   `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户与角色的对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户与角色的对应关系';
 
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
+INSERT INTO `sys_user_role` VALUES ('1', '2', '1');
