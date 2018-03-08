@@ -97,7 +97,7 @@ public class SysLoginController extends BaseController {
         	passwordToken.clear();
         	modelMap.addFlashAttribute("errMsg", errMsg);
         	modelMap.addFlashAttribute("username", username);
-            return redirect("/sys/login");
+            return redirect("/sys/login"); 
         }
 	}
 	
