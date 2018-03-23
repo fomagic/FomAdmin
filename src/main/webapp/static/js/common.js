@@ -3,7 +3,7 @@ $.jgrid.defaults.width = 1000;
 $.jgrid.defaults.guiStyle = 'bootstrap';
 
 $(window).resize(function(){
-	$("#jqGrid").jqGrid('setGridWidth', $(window).width(), true);
+	$("#jqGrid").jqGrid('setGridWidth', $(window).width()-40, true);
 });
 
 //单选

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.fomagic.common.controller.BaseController;
 import com.fomagic.common.util.PageUtil;
 import com.fomagic.common.util.QueryUtil;
@@ -58,6 +59,9 @@ public class SysLogController extends BaseController {
 		int total = sysLogService.countLog(query);
 
 		PageUtil pageUtil = new PageUtil(logList, total, query.getLimit(),query.getPage());
+		
+		System.out.println("------------------------"+JSON.toJSONString(pageUtil));
+		
 		return Result.success().put("page", pageUtil);
 	}
 
