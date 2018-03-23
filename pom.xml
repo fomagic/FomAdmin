@@ -314,7 +314,10 @@
 					<artifactId>tomcat7-maven-plugin</artifactId>
 					<version>2.2</version>
 					<!-- Config: contextPath and Port (Default - /HelloSpringMVC : 8080) -->
-					<!-- <configuration> <path>/</path> <port>8899</port> </configuration> -->
+					<configuration>
+						<path>/</path>
+						<port>8899</port>
+					</configuration>
 				</plugin>
 
 				<!-- 跳过测试 -->
@@ -341,7 +344,7 @@
 					</configuration>
 				</plugin>
 
-				<!-- 处理资源文件 -->
+				<!-- 资源文件拷贝 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
