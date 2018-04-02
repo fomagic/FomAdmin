@@ -275,7 +275,28 @@
 			<version>${jackson.version}</version>
 		</dependency>
 
+		<!-- ===========================Util============================= -->
+		
+		<!-- 图片处理 -->
+		<!-- <dependency>
+			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>0.4.8</version>
+		</dependency>  
+		
+		
+		<!-- Token -->
+		<!-- <dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>${jwt.version}</version>
+		</dependency>
+		
+		-->
+		
+		
 		<!-- ======================================================== -->
+
 
 	</dependencies>
 
