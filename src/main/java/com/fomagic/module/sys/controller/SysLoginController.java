@@ -2,6 +2,7 @@ package com.fomagic.module.sys.controller;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -18,9 +19,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fomagic.common.controller.BaseController;
+import com.fomagic.common.util.Result;
 import com.fomagic.module.sys.entity.SysMenu;
 import com.fomagic.module.sys.service.SysMenuService;
 
@@ -33,10 +35,6 @@ import com.fomagic.module.sys.service.SysMenuService;
 @Controller
 @RequestMapping("/sys")
 public class SysLoginController extends BaseController {
-
-	
-	@Autowired
-	private SysMenuService sysMenuService;
 	
 	
 	/**
@@ -45,22 +43,29 @@ public class SysLoginController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
-	public String login(String username, String password,String captcha, boolean rememberMe,RedirectAttributesModelMap modelMap) {
+	@ResponseBody
+	public Map<String,Object> login(String userName, String password,String captcha, boolean rememberMe) {
 		
 		Subject curUser = SecurityUtils.getSubject();
 		
+
+		logger.info("----userName = " + userName);
+		logger.info("----password = " + password);
+		logger.info("----captcha = " + captcha); 
+		logger.info("----rememberMe = " + rememberMe);
+		
+		
 		if (curUser.isRemembered()) {
 			logger.info("rememberMe:" + "用户已经记住");
-			return redirect("/sys/index");
+			return Result.success();
 		}
 		
-		UsernamePasswordToken passwordToken = new UsernamePasswordToken(username, password,rememberMe);
+		UsernamePasswordToken passwordToken = new UsernamePasswordToken(userName, password,rememberMe);
 		String errMsg = "";
 		String logMsg = "";
 		
 		try {
 			curUser.login(passwordToken);
-			modelMap.remove("errMsg");
 			logMsg = "登录成功: ";
 			Session session = curUser.getSession();
 			logger.info("sessionId:" + session.getId());
@@ -83,21 +88,19 @@ public class SysLoginController extends BaseController {
         	logMsg = "账户验证未通过,帐号已经禁止登录";
         	errMsg = "账户验证未通过,帐号已经禁止登录";
         } catch (AuthenticationException ae) {
-        	logMsg = "登录失败:" + username;
+        	logMsg = "登录失败:" + userName;
         	errMsg = "登录失败";
         }
 		
-		logger.info(logMsg + username);
+		logger.info(logMsg + userName);
 
 		
 		//验证是否登录成功
         if(curUser.isAuthenticated()){
-			return redirect("/sys/index");
+        	return Result.success();
         }else{
         	passwordToken.clear();
-        	modelMap.addFlashAttribute("errMsg", errMsg);
-        	modelMap.addFlashAttribute("username", username);
-            return redirect("/sys/login"); 
+        	return Result.error(errMsg);
         }
 	}
 	
@@ -121,9 +124,9 @@ public class SysLoginController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/logout")
-	public String logout(RedirectAttributesModelMap modelMap){
+	public String logout(){
 		SecurityUtils.getSubject().logout();
-    	modelMap.addFlashAttribute("errMsg", "您已安全退出");
+        logger.info("退出账号");
 		return redirect("/sys/login");
 	}
 	
@@ -146,6 +149,11 @@ public class SysLoginController extends BaseController {
         logger.info("跳转到后台首页");
 		return "sys/index";
 	}
+	
+	
+
+	@Autowired
+	SysMenuService sysMenuService;
 
 
 }

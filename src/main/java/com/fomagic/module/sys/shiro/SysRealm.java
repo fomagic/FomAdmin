@@ -1,10 +1,15 @@
 package com.fomagic.module.sys.shiro;
 
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -18,9 +23,13 @@ import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.codec.Base64;
+import org.apache.shiro.codec.Hex;
+import org.apache.shiro.crypto.AesCipherService;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fomagic.common.util.Constant;
@@ -115,17 +124,29 @@ public class SysRealm extends AuthorizingRealm {
 	 */
 	public static void main(String[] args) {
 
-		 //Object salt = "4s3X1Auhexa8TJQGD/CeHw==";
-		 String credentials = "admin";
-		
-		 //long begin = System.currentTimeMillis();
-		 String salt = ShiroUtil.randomSalt();
-		 System.out.println("盐值：" + salt);
-		 Object simpleHash = ShiroUtil.shiroMD5(credentials, salt);
-		 //long end = System.currentTimeMillis();
-		 //System.out.println("加密花费时间： " + (end-begin));
-		 System.out.println("加密前的值：" + credentials);
-		 System.out.println("加密后的值：" + simpleHash);
+		// Object salt = "4s3X1Auhexa8TJQGD/CeHw==";
+		String credentials = "admin";
+
+		// long begin = System.currentTimeMillis();
+		String salt = ShiroUtil.randomSalt();
+		System.out.println("盐值：" + salt);
+		Object simpleHash = ShiroUtil.shiroMD5(credentials, salt);
+		// long end = System.currentTimeMillis();
+		// System.out.println("加密花费时间： " + (end-begin));
+		System.out.println("加密前的值：" + credentials);
+		System.out.println("加密后的值：" + simpleHash);
+
+
+		//使用AES生成RememberMe的密钥 
+		try {
+			KeyGenerator keygen = KeyGenerator.getInstance("AES");
+			SecretKey deskey = keygen.generateKey();
+			System.out.println(Base64.encodeToString(deskey.getEncoded()));
+			
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

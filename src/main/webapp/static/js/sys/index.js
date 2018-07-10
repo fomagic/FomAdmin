@@ -8,6 +8,48 @@ $(window).on('resize', function() {
 }).resize();
 
 
+var pasData = {
+	password : "",
+	newPassword : ""
+};
+
+
+$(function() {
+	
+	
+	getMenuTree()
+	
+
+	$("#btnPassword").click(function(){
+
+		setPasData();
+		
+		if (validator()) {
+			return;
+		}
+		var data = "password="+pasData.password+"&newPassword="+pasData.newPassword;
+		
+		$.ajax({
+			type:"POST",
+			url:"sys/user/password",
+			dataType: "json",
+			data: data,
+			success:function(res){
+				if (res.code === 0) {
+					alert("修改成功");
+					$('#modal-password').modal('hide');
+					clearPasData();
+				} else {
+					alert(res.msg);
+				}
+			}
+		});
+	});
+
+	
+});
+
+
 //显示点击状态
 function loadFrame(obj) {
 	var url = obj.contentWindow.location.href;
@@ -25,10 +67,6 @@ function loadFrame(obj) {
 }
 
 
-var pasData = {
-	password : "",
-	newPassword : ""
-};
 
 function setPasData(){
 	pasData.password = $("#password").val();
@@ -39,32 +77,6 @@ function clearPasData(){
 	pasData.password = $("#password").val("");
 	pasData.newPassword = $("#newPassword").val("");
 }
-
-$("#btnPassword").click(function(){
-
-	setPasData();
-	
-	if (validator()) {
-		return;
-	}
-	var data = "password="+pasData.password+"&newPassword="+pasData.newPassword;
-	
-	$.ajax({
-		type:"POST",
-		url:"sys/user/password",
-		dataType: "json",
-		data: data,
-		success:function(res){
-			if (res.code === 0) {
-				alert("修改成功");
-				$('#modal-password').modal('hide');
-				clearPasData();
-			} else {
-				alert(res.msg);
-			}
-		}
-	});
-});
 
 //验证(demo)
 function validator(){

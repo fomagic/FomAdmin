@@ -96,6 +96,7 @@
 					<ul class="sidebar-menu" data-widget="tree">
 						<li class="header">菜单</li>
 
+						<!-- Jsp方式添加菜单 -->
 						<c:import url="menutree.jsp" />
 
 					</ul>

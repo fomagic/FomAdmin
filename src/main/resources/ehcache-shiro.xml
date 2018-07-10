@@ -10,10 +10,10 @@
 		user.home - User's home directory
 		user.dir - User's current working directory
 		java.io.tmpdir - Default temp file path -->
-		
-   <!-- 
-   		<diskStore path="java.io.tmpdir"/>
-    -->
+	<!-- 溢出到磁盘的目录 -->
+   
+   	<diskStore path="java.io.tmpdir"/>
+    
 
 
     <!--Default Cache configuration. These will applied to caches programmatically created through
@@ -48,14 +48,27 @@
                                      (specified as LFU)
     -->
 
+	<!-- maxElementsInMemory	存储最大对象数 -->
+	<!-- eternal				是否永久保存 -->
+	<!-- timeToIdleSeconds		最大空闲时间 单位：秒 -->
+	<!-- timeToLiveSeconds		存活时间 -->
+	<!-- overflowToDisk			溢出到磁盘 -->
+	<!-- maxElementsOnDisk		磁盘上最大存储的对象数 -->
+	<!-- diskPersistent			服务器重启后磁盘上的数据是否有效 -->
+	<!-- diskExpiryThreadIntervalSeconds	每隔多长时间去开启一次线程清理数据 -->
+	<!-- memoryStoreEvictionPolicy			淘汰策略 最近一段时间利用率低的会被优先清理掉 -->
+    
+
     <defaultCache
 	    maxElementsInMemory="10000"
 	    eternal="false"
 	    timeToIdleSeconds="120"
 	    timeToLiveSeconds="120"
-	    overflowToDisk="false"
+	    overflowToDisk="true"
+	    maxElementsOnDisk="10000000"
 	    diskPersistent="false"
-	    diskExpiryThreadIntervalSeconds="120"/>
+	    diskExpiryThreadIntervalSeconds="120"
+	    memoryStoreEvictionPolicy="LRU"/>
 
     <!-- We want eternal="true" (with no timeToIdle or timeToLive settings) because Shiro manages session
 expirations explicitly.  If we set it to false and then set corresponding timeToIdle and timeToLive properties,
@@ -67,15 +80,13 @@ diskPersistent=true since we want an enterprise session management feature - abi
 even after a JVM restart.  -->
     
     
-    <!-- 
-    
     <cache name="shiro-activeSessionCache"
            maxElementsInMemory="10000"
            eternal="true"
            overflowToDisk="true"
            diskPersistent="true"
            diskExpiryThreadIntervalSeconds="600"/>
-
+<!-- 
     <cache name="org.apache.shiro.realm.SimpleAccountRealm.authorization"
            maxElementsInMemory="100"
            eternal="false"

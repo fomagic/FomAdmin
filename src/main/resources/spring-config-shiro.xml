@@ -51,19 +51,27 @@
 	<!-- 自定义Realm 继承自Realm -->
 	<bean id="sysRealm" class="com.fomagic.module.sys.shiro.SysRealm" ></bean>
 	
+	<!-- Cookie的操作模版 -->
+	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">  
+	    <constructor-arg value="sid"/>  
+	    <property name="httpOnly" value="true"/>
+	    <!-- 设置Cookie的过期时间，秒为单位，默认-1表示关闭浏览器时过期Cookie -->
+	    <property name="maxAge" value="-1"/>  
+	</bean>  
+	
 	 <!-- 记住我 -->
 	<bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">  
         <constructor-arg value="rememberMe" />  
         <property name="httpOnly" value="true" />  
-        <property name="maxAge" value="604800" /><!-- 7天 -->
+        <property name="maxAge" value="#{7 * 24 * 60 * 60}" /><!-- 7天,使用 Spring EL -->
     </bean>
      
     <!-- rememberMe管理器 ,cookie加密的密钥, 默认AES算法 密钥长度(128 256 512 位) -->
     <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
     	<!-- 密钥需修改 -->
-    	<property name="cipherKey"  value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}" />
+    	<property name="cipherKey"  value="#{T(org.apache.shiro.codec.Base64).decode('WHlMIYjaAICdC4BmXL3DMg==')}" />
         <property name="cookie" ref="rememberMeCookie" />
-    </bean>  
+    </bean>
 	
 	
 	
@@ -71,6 +79,58 @@
 	<bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
         <property name="cacheManagerConfigFile" value="classpath:ehcache-shiro.xml"/>
     </bean>
+    
+    
+    <!-- 默认会话验证调度器,释放无用Session,若使用Quartz会话验证调度器,使用时需要导入shiro-quartz依赖-->
+	<bean id="sessionValidationScheduler"
+		class="org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler">
+		<property name="sessionManager" ref="sessionManager" />
+		<!-- 设置调度时间间隔，单位毫秒，默认就是1小时 -->
+		<property name="interval" value="#{30 * 60 * 1000}" />
+	</bean>
+	
+ 	<!-- <bean id="sessionValidationScheduler"
+        class="org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler">
+        设置调度时间间隔，单位毫秒
+        <property name="sessionValidationInterval" value="#{30 * 60 * 1000}"/>
+        随后还需要定义有一个会话管理器的程序类的引用
+        <property name="sessionManager" ref="sessionManager"/>
+    </bean> -->
+
+    
+    <!-- 定义Session ID生成管理器 --> 
+	<bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator" />
+    <!-- 配置Session DAO的操作处理 -->
+	<bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO"> 
+	    <!-- 设置Session缓存名字，默认shiro-activeSessionCache --> 
+	    <property name="activeSessionsCacheName" value="shiro-activeSessionCache"/> 
+	    <!-- 定义该Session DAO操作中所使用的ID生成器 --> 
+	    <property name="sessionIdGenerator" ref="sessionIdGenerator"/> 
+	</bean>
+    
+    
+    <!-- 会话管理器 -->
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <!-- 定义的是全局的session会话超时时间，此操作会覆盖web.xml文件中的超时时间配置 -->
+        <property name="globalSessionTimeout" value="#{30 * 60 * 1000}"/>
+        <!-- 删除所有无效的Session对象，此时的session被保存在了内存里面 -->
+        <property name="deleteInvalidSessions" value="true"/>
+        <!-- 定义要使用的无效的Session定时调度器 -->
+        <property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>
+        <!-- 需要让此session可以使用该定时调度器进行检测 -->
+        <property name="sessionValidationSchedulerEnabled" value="true"/>
+        <!-- 去掉shiro登录时url里的JSESSIONID -->
+        <property name="sessionIdUrlRewritingEnabled" value="false"/>
+        <!-- 定义Session可以进行序列化的工具类 -->
+        <property name="sessionDAO" ref="sessionDAO"/>
+        <!-- 将session的id设置到Cookie之中 -->
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>
+        <!-- 定义sessionIdCookie模版可以进行操作的启用 -->
+        <property name="sessionIdCookieEnabled" value="true"/>
+    </bean> 
+    
+    
+    
 
 	<!-- Shiro安全管理器 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
@@ -81,8 +141,12 @@
                 <ref bean="sysRealm"/>
             </list>
         </property> -->
-        <property name="cacheManager" ref="shiroEhcacheManager" /> 
+        <property name="cacheManager" ref="shiroEhcacheManager" />
+        <!--设置缓存管理器-->
         <property name="rememberMeManager" ref="rememberMeManager" />
+        <!-- 注入session管理器 -->
+        <property name="sessionManager" ref="sessionManager" />
+        
         <!-- 默认情况下将使用servlet容器会话。 取消注释此行以使用shiro的本地会话（请参阅JavaDoc了解更多） --> 
         <!-- <property name="sessionMode" value="native"/> -->
 	</bean>

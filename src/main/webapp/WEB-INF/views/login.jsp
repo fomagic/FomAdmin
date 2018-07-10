@@ -51,34 +51,32 @@
 		<div class="login-box-body">
 			<p class="login-box-msg">登录后台</p>
 
-			<form action="sys/login" method="post">
 				<div class="form-group has-feedback">
-					<input type="text" class="form-control" placeholder="账号" name="username"  value="${username}">
+					<input type="text" class="form-control" placeholder="账号" id="userName"><!-- name="username" -->
 					<span class="glyphicon glyphicon-envelope form-control-feedback" ></span>
 				</div>
 				<div class="form-group has-feedback">
-					<input type="password" class="form-control" placeholder="密码"  name="password" >
+					<input type="password" class="form-control" placeholder="密码"  id="password" >
 					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
 				<div class="row">
 					<div class="col-xs-8">
 						<div class="checkbox icheck">
 							<label>
-								<input type="checkbox" class="minimal" name="rememberMe" > 记住我
+								<input type="checkbox" class="minimal" id="rememberMe" > 记住我
 							</label>
 						</div>
 					</div>
 					<!-- /.col -->
 					<div class="col-xs-4">
-						<button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
+						<button id="loginBtn" class="btn btn-primary btn-block btn-flat">登录</button>
 					</div>
 					<!-- /.col -->
 				</div>
 				<div class="form-group has-error">
-					<span class="help-block">${errMsg}</span>
+					<span id="errMsg" class="help-block"></span>
 				</div>
 
-			</form>
 			
 			<!--<a href="#">忘记密码</a>&nbsp&nbsp&nbsp-->
 			<!--<a href="register.html" class="text-center">注册</a>-->
@@ -101,5 +99,9 @@
 	      radioClass   : 'iradio_minimal-blue'
 	    })
 	</script>
+	
+	
+	<script src="static/js/login.js"></script>
+	
 </body>
 </html>
