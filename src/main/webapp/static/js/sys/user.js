@@ -155,8 +155,7 @@ function deleteUser(){
 	if (userIds == null) {
 		return;
 	}
-	var ret = confirm("确定删除 "+userIds.length+ "条用户信息?");
-	if (ret==true) {
+	var ret = confirm("确定删除 "+userIds.length+ "条用户信息?",function(){
 		$.ajax({
 			type:"POST",
 			url:"sys/user/delete",
@@ -172,7 +171,7 @@ function deleteUser(){
     			}
 			}
 		});
-	}
+	});
 }
 
 //-----------------
@@ -211,7 +210,7 @@ function reloadList() {
 		page:page
 	}).trigger("reloadGrid");
 	
-	$("#jqGrid").setGridWidth($(window).width());
+	$("#jqGrid").setGridWidth($(window).width()-42);
 }
 
 //显示列表或者编辑界面

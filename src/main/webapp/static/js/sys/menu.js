@@ -285,8 +285,7 @@ function deleteMenu() {
 	if (menuId == null) {
 		return;
 	}
-	var ret = confirm("确定删除该菜单项?");
-	if (ret == true) {
+	var ret = confirm("确定删除该菜单项?",function(){
 		$.ajax({
 			type : "POST",
 			url : "sys/menu/delete",
@@ -301,7 +300,7 @@ function deleteMenu() {
 				}
 			}
 		});
-	}
+	});
 }
 
 // -----------------

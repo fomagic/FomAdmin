@@ -162,8 +162,7 @@ function deleteSchedule(){
 	if (jobIds == null) {
 		return;
 	}
-	var ret = confirm("确定删除 "+jobIds.length+ "条定时任务?");
-	if (ret==true) {
+	var ret = confirm("确定删除 "+jobIds.length+ "条定时任务?",function(){
 		$.ajax({
 			type:"POST",
 			url:"sys/schedule/delete",
@@ -179,7 +178,7 @@ function deleteSchedule(){
     			}
 			}
 		});
-	}
+	});
 }
 
 //暂停定时任务
@@ -189,8 +188,7 @@ function pauseSchedule(){
 	if (jobIds == null) {
 		return;
 	}
-	var ret = confirm("确定暂停 "+jobIds.length+ "条定时任务?");
-	if (ret==true) {
+	var ret = confirm("确定暂停 "+jobIds.length+ "条定时任务?",function(){
 		$.ajax({
 			type:"POST",
 			url:"sys/schedule/pause",
@@ -206,7 +204,7 @@ function pauseSchedule(){
     			}
 			}
 		});
-	}
+	});
 }
 
 //恢复定时任务
@@ -216,8 +214,7 @@ function resumeSchedule(){
 	if (jobIds == null) {
 		return;
 	}
-	var ret = confirm("确定恢复 "+jobIds.length+ "条定时任务?");
-	if (ret==true) {
+	var ret = confirm("确定恢复 "+jobIds.length+ "条定时任务?",function(){
 		$.ajax({
 			type:"POST",
 			url:"sys/schedule/resume",
@@ -233,7 +230,7 @@ function resumeSchedule(){
     			}
 			}
 		});
-	}
+	});
 }
 
 //立即执行定时任务
@@ -243,8 +240,7 @@ function runSchedule(){
 	if (jobIds == null) {
 		return;
 	}
-	var ret = confirm("确定立即执行 "+jobIds.length+ "条定时任务?");
-	if (ret==true) {
+	var ret = confirm("确定立即执行 "+jobIds.length+ "条定时任务?",function(){
 		$.ajax({
 			type:"POST",
 			url:"sys/schedule/run",
@@ -260,7 +256,7 @@ function runSchedule(){
     			}
 			}
 		});
-	}
+	});
 }
 
 //-----------------
@@ -298,7 +294,7 @@ function reloadList() {
 		page:page
 	}).trigger("reloadGrid");
 	
-	$("#jqGrid").setGridWidth($(window).width());
+	$("#jqGrid").setGridWidth($(window).width()-42);
 }
 
 //显示列表或者编辑界面

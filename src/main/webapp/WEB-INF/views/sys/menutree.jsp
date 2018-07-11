@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:forEach items="${menuList }" var="menuItem">
 		<c:if test="${menuItem.type == 0 }">
-			<li class="treeview">
+			<li class="treeview active">
 				<a href="javascript:;">
 					<c:if test="${ not empty menuItem.icon}">
 						<i class="${menuItem.icon }"></i>

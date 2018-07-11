@@ -76,7 +76,7 @@ function reloadList() {
 		page:1
 	}).trigger("reloadGrid");
 	
-	$("#jqGrid").setGridWidth($(window).width());
+	$("#jqGrid").setGridWidth($(window).width()-42);
 }
 
 

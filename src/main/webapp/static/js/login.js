@@ -16,7 +16,7 @@ $(function () {
 //新增或者修改用户
 function login(){
 	var url = "sys/login";
-//	var loginInfo = getPanelInfo();
+//	var loginInfo = getLoginInfo();
 	
 	var data = "userName="+$("#userName").val()+"&password="+$("#password").val()+"&rememberMe="+$('#rememberMe').prop('checked');
 	
@@ -47,7 +47,7 @@ function login(){
 
 //-----------------
 
-function getPanelInfo(){
+function getLoginInfo(){
 	
 	var loginInfo = {};
 	loginInfo.userName = $("#userName").val();

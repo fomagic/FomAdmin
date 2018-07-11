@@ -131,8 +131,8 @@
 				<!-- To the right -->
 				<div class="pull-right hidden-xs">可添加一些相关信息</div>
 				<!-- Default to the left -->
-				<strong>Copyright &copy; 2017 <a>Company</a>.
-			</strong> All rights reserved.
+				<strong>Copyright &copy; 2018 <a>Company</a>.
+				</strong> All rights reserved.
 			</footer>
 
 		</div>

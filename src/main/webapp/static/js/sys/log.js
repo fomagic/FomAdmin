@@ -15,8 +15,8 @@ $(function () {
         ],
 		viewrecords: true,
         height: 'auto',
-        rowNum: 4,
-		rowList : [4,30,50,100],
+        rowNum: 20,
+		rowList : [20,50,100],
         rownumbers: true, 
         rownumWidth: 25, 
         autowidth:true,
@@ -65,6 +65,6 @@ function reloadList() {
 		page:page
 	}).trigger("reloadGrid");
 	
-	$("#jqGrid").setGridWidth($(window).width());
+	$("#jqGrid").setGridWidth($(window).width()-42);
 }
 

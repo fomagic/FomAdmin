@@ -171,8 +171,7 @@ function deleteUser(){
 	if (roleIds == null) {
 		return;
 	}
-	var ret = confirm("确定删除 "+roleIds.length+ "条角色信息?");
-	if (ret==true) {
+	var ret = confirm("确定删除 "+roleIds.length+ "条角色信息?",function(){
 		$.ajax({
 			type:"POST",
 			url:"sys/role/delete",
@@ -189,7 +188,7 @@ function deleteUser(){
     			}
 			}
 		});
-	}
+	});
 }
 
 //-----------------
@@ -227,7 +226,7 @@ function reloadList() {
 		page:page
 	}).trigger("reloadGrid");
 	
-	$("#jqGrid").setGridWidth($(window).width());
+	$("#jqGrid").setGridWidth($(window).width()-42);
 }
 
 //显示列表或者编辑界面

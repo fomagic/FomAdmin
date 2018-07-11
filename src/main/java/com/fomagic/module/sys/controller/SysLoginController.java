@@ -37,6 +37,10 @@ import com.fomagic.module.sys.service.SysMenuService;
 public class SysLoginController extends BaseController {
 	
 	
+
+	@Autowired
+	SysMenuService sysMenuService;
+	
 	/**
 	 * 登录页面
 	 * 
@@ -146,14 +150,12 @@ public class SysLoginController extends BaseController {
 		menuList = sysMenuService.listUserMenu(getSysUserId());
 		modelMap.addAttribute("menuList",menuList);
     	modelMap.addAttribute("sysUser",getSysUser());
-        logger.info("跳转到后台首页");
+		logger.info("跳转到后台首页");
 		return "sys/index";
 	}
 	
 	
 
-	@Autowired
-	SysMenuService sysMenuService;
 
 
 }

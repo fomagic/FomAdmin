@@ -59,6 +59,18 @@ public class SysMenuController extends BaseController {
 	}
 	
 	/**
+	 * 获取用户可访问的页面左侧菜单
+	 * @return
+	 */
+	@RequestMapping("/menu")
+	@ResponseBody
+	public List<SysMenu> listUserMenu() {
+		List<SysMenu> menuList = sysMenuService.listUserMenu(getSysUserId());
+		
+		return menuList;
+	}
+	
+	/**
 	 * 保存菜单
 	 * @param sysMenu
 	 * @return
